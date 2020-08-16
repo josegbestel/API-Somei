@@ -1,6 +1,8 @@
 package com.somei.apisomei.resources;
 
-import com.somei.apisomei.models.Note;
+import com.somei.apisomei.model.Commentary;
+import com.somei.apisomei.model.Note;
+import com.somei.apisomei.repository.CommentaryRepository;
 import com.somei.apisomei.repository.NoteRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +19,9 @@ public class NoteResource {
 
     @Autowired
     NoteRepository noteRepository;
+
+    @Autowired
+    CommentaryRepository commentaryRepository;
 
     @GetMapping("/notes")
     @ApiOperation(value = "Retorna uma lista com todas as notas")
@@ -47,4 +52,18 @@ public class NoteResource {
     public void deleteNote(@PathVariable(value = "id") long id){
         noteRepository.deleteById(id);
     }
+
+    @PostMapping("/note/commentary")
+    public Commentary addCommentary(@RequestBody Commentary commentary, @RequestParam(value = "note") long id){
+        Note note = noteRepository.findById(id);
+        commentary.setNote(note);
+        return commentaryRepository.save(commentary);
+    }
+
+    @GetMapping("/note/commentaries")
+    public List<Commentary> getAllCommenties(@RequestParam(value = "note") long id){
+        Note note = noteRepository.findById(id);
+        return commentaryRepository.findByNote(note);
+    }
+
 }

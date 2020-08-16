@@ -1,7 +1,9 @@
-package com.somei.apisomei.models;
+package com.somei.apisomei.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="note")
@@ -12,10 +14,12 @@ public class Note implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String title;
     private String description;
     private int classification;
+    @OneToMany(mappedBy = "note", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Commentary> commentaries;
+
 
     public long getId() {
         return id;
@@ -41,11 +45,19 @@ public class Note implements Serializable {
         this.description = description;
     }
 
-    public int getOrder() {
+    public int getClassification() {
         return classification;
     }
 
-    public void setOrder(int classification) {
+    public void setClassification(int classification) {
         this.classification = classification;
+    }
+
+    public Set<Commentary> getCommentaries() {
+        return commentaries;
+    }
+
+    public void setCommentaries(Set<Commentary> commentaries) {
+        this.commentaries = commentaries;
     }
 }
