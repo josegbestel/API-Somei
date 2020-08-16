@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../8º Período-2020/Projeto Final 2/apisomei/src/main/java/com/somei/apisomei/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../8º Período-2020/Projeto Final 2/apisomei/src/main/java/com/somei/apisomei/config/SwaggerConfig.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../8º Período-2020/Projeto Final 2/apisomei" />
+  </component>
+  <component name="ProjectId" id="1gA31HcgvQbe15TaOkSEwQfzDfw" />
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="" />
+      <created>1597543352342</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597543352342</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
