@@ -32,7 +32,7 @@ public class SwaggerConfig {
 
         ApiInfo apiInfo = new ApiInfo(
                 "SOMEI API REST",
-                "API REST do aplicativo Somei.",
+                "API REST do aplicativo Somei",
                 "1.0",
                 "Terms of Service",
                 new Contact("Contato App Somei", "https://www.somei.app/",
