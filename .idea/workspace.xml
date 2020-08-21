@@ -2,22 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Cliente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Commentary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/CommentaryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/models/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Note.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/NoteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/NoteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resources/NoteResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resources/NoteResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissao.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="apisomei" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">

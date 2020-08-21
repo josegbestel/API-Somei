@@ -9,6 +9,7 @@ public class Cliente implements Serializable {
     private int idade;
     private String telefone;
     private String email;
+    private String avatar;
     private boolean ativo;
 
     public long getId() {
@@ -49,6 +50,14 @@ public class Cliente implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public boolean isAtivo() {
