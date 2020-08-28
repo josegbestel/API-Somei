@@ -3,14 +3,14 @@ package com.somei.apisomei.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "profissao")
+//@Entity
+//@Table(name = "profissao")
 public class Profissao implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private static final long serialVersionUID = 1L;
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String categoria;
     private String descricao;
