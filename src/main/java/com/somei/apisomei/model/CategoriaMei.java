@@ -28,7 +28,8 @@ public class CategoriaMei implements Serializable {
     private List<Profissional> profissionais;
 
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
-    private List<Orcamento> orcamentos;
+    private List<ServicoCategoriaMei> servicosCategoriaMei;
+
 
     public String getId() {
         return id;

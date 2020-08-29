@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/ServicoCategoriaMei.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

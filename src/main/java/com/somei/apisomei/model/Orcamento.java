@@ -21,8 +21,8 @@ public class Orcamento {
     private Solicitante solicitante;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "categoria_id")
-    private CategoriaMei categoria;
+    @JoinColumn(name = "ServicoCategoriaMei_id")
+    private ServicoCategoriaMei servicoCategoriaMei;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "localizacao_id")
@@ -56,12 +56,12 @@ public class Orcamento {
         this.solicitante = solicitante;
     }
 
-    public CategoriaMei getCategoria() {
-        return categoria;
+    public ServicoCategoriaMei getServicoCategoriaMei() {
+        return servicoCategoriaMei;
     }
 
-    public void setCategoria(CategoriaMei categoria) {
-        this.categoria = categoria;
+    public void setServicoCategoriaMei(ServicoCategoriaMei servicoCategoriaMei) {
+        this.servicoCategoriaMei = servicoCategoriaMei;
     }
 
     public Localizacao getLocalizacao() {
