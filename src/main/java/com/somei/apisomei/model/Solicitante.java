@@ -20,6 +20,9 @@ public class Solicitante extends Pessoa implements Serializable {
     @CPF(message = "CPF invalido")
     private String cpf;
 
+    @OneToMany(mappedBy = "solicitante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Cartao> cartoes;
+
     public String getCpf() {
         return cpf;
     }
@@ -28,4 +31,11 @@ public class Solicitante extends Pessoa implements Serializable {
         this.cpf = cpf;
     }
 
+    public List<Cartao> getCartoes() {
+        return cartoes;
+    }
+
+    public void setCartoes(List<Cartao> cartoes) {
+        this.cartoes = cartoes;
+    }
 }

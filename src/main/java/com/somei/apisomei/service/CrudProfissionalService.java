@@ -41,6 +41,14 @@ public class CrudProfissionalService {
         return profissionalResponse;
     }
 
+    //TODO: Create endereco
+
+    //TODO: Create despesa
+
+    //TODO: Create deposito
+
+    //TODO: Relatorio Financeiro
+
     //Read
     public Profissional read(Long id){
         Profissional profissional = profissionalRepository.findById(id)
@@ -60,7 +68,11 @@ public class CrudProfissionalService {
 
     }
 
-    //Read by categoria
+    //TODO: Read by categoria
+
+    //TODO: Read perfil
+
+    //TODO: Read resumo
 
 
     //Update by id

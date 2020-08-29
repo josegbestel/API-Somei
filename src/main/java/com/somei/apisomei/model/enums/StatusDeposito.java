@@ -1,8 +1,20 @@
 package com.somei.apisomei.model.enums;
 
-public enum StatusDeposito {
+import java.io.Serializable;
+
+public enum StatusDeposito implements Serializable {
 
     AGENDADO,
     REALIZADO,
-    CANCELADO
+    CANCELADO;
+
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

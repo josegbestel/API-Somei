@@ -48,6 +48,10 @@ public class CrudSolicitanteService {
         return solicitanteResponse;
     }
 
+
+    //TODO: Create cartão
+
+
     //read
     public Solicitante read(Long id){
         Solicitante solicitante = solicitanteRepository.findById(id)
@@ -66,6 +70,7 @@ public class CrudSolicitanteService {
 //        solicitante.setSenha(null);
         return solicitante;
     }
+
 
     //update
     public Solicitante update(Long id, PessoaModel pessoa){

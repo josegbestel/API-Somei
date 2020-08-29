@@ -1,5 +1,6 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
@@ -16,8 +17,13 @@ public class Profissional extends Pessoa implements Serializable {
     @NotNull
     @CNPJ
     private String cnpj;
-//    private Profissao profissao;
-//    private Financeiro financeiro;
+
+    @OneToOne(mappedBy = "profissional")
+    private Financeiro financeiro;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private CategoriaMei categoria;
 
 
     public String getCnpj() {
@@ -28,4 +34,11 @@ public class Profissional extends Pessoa implements Serializable {
         this.cnpj = cnpj;
     }
 
+    public Financeiro getFinanceiro() {
+        return financeiro;
+    }
+
+    public void setFinanceiro(Financeiro financeiro) {
+        this.financeiro = financeiro;
+    }
 }
