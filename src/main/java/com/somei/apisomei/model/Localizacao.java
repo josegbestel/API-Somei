@@ -52,10 +52,6 @@ public class Localizacao implements Serializable {
     @NotNull
     private Double latitude;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pessoa_id", nullable = false)
-    private Profissional pessoa;
-
     @OneToMany(mappedBy = "localizacao", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Orcamento> orcamentos;
 

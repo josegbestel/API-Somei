@@ -66,10 +66,6 @@ public class Pessoa implements Serializable {
     @Enumerated(EnumType.STRING)
     private AuthType authType;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Localizacao> localizacoes;
-
     public long getId() {
         return id;
     }
@@ -142,14 +138,6 @@ public class Pessoa implements Serializable {
 
     public void setDtInativo(LocalDateTime dtInativo) {
         this.dtInativo = dtInativo;
-    }
-
-    public Set<Localizacao> getLocalizacoes() {
-        return localizacoes;
-    }
-
-    public void setLocalizacoes(Set<Localizacao> localizacoes) {
-        this.localizacoes = localizacoes;
     }
 
     public static boolean validateUser(UserDetails userDetails, Pessoa pessoa){
