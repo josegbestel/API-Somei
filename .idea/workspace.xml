@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Cartao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Agenda.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/AgendaEspecifica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/RespostaOrcamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/agendaDinamica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/DiaSemana.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/StatusOrcamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/StringListConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/DepositoBancario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/DepositoBancario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Despesa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Despesa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/StatusDeposito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/StatusDeposito.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudProfissionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudProfissionalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudSolicitanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudSolicitanteService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>

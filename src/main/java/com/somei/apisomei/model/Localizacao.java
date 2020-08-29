@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "localizacao")
@@ -54,6 +55,9 @@ public class Localizacao implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pessoa_id", nullable = false)
     private Profissional pessoa;
+
+    @OneToMany(mappedBy = "localizacao", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Orcamento> orcamentos;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

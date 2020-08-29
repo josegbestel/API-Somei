@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,9 @@ public class Profissional extends Pessoa implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id", nullable = false)
     private CategoriaMei categoria;
+
+    @OneToMany(mappedBy = "profissional", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<RespostaOrcamento> respostasOrcamento;
 
 
     public String getCnpj() {

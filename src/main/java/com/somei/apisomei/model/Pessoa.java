@@ -3,9 +3,7 @@ package com.somei.apisomei.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.somei.apisomei.model.enums.AuthType;
-import com.somei.apisomei.util.View;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;

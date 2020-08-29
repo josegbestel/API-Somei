@@ -23,6 +23,9 @@ public class Solicitante extends Pessoa implements Serializable {
     @OneToMany(mappedBy = "solicitante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Cartao> cartoes;
 
+    @OneToMany(mappedBy = "solicitante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Orcamento> orcamento;
+
     public String getCpf() {
         return cpf;
     }
