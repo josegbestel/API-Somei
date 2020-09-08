@@ -2,10 +2,14 @@ package com.somei.apisomei.model.enums;
 
 import java.io.Serializable;
 
-public enum StatusDeposito implements Serializable {
+public enum StatusOrcamento implements Serializable {
 
-    AGENDADO,
-    REALIZADO,
+    NOVO,
+    SOLICITADO,
+    RESPONDIDO,
+    CONFIRMADO,
+    PENDENTE,
+    FINALIZADO,
     CANCELADO;
 
     private String status;

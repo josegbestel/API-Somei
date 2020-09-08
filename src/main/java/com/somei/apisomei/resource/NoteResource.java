@@ -1,9 +1,9 @@
-package com.somei.apisomei.resources;
+package com.somei.apisomei.resource;
 
 import com.somei.apisomei.model.Commentary;
 import com.somei.apisomei.model.Note;
-import com.somei.apisomei.service.CrudCommentaryService;
-import com.somei.apisomei.service.CrudNoteService;
+import com.somei.apisomei.service.CommentaryService;
+import com.somei.apisomei.service.NoteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,10 @@ import java.util.List;
 public class NoteResource {
 
     @Autowired
-    CrudNoteService noteService;
+    NoteService noteService;
 
     @Autowired
-    CrudCommentaryService commentaryService;
+    CommentaryService commentaryService;
 
 
     @GetMapping

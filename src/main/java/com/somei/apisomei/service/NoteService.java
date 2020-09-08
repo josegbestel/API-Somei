@@ -11,7 +11,7 @@ import java.util.Optional;
 
 //Classe usada para aplicação de regra de negócio
 @Service
-public class CrudNoteService {
+public class NoteService {
 
     @Autowired
     NoteRepository noteRepository;

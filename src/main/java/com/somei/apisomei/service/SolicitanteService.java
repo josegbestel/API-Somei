@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class CrudSolicitanteService {
+public class SolicitanteService {
 
     @Autowired
     SolicitanteRepository solicitanteRepository;
@@ -48,6 +48,10 @@ public class CrudSolicitanteService {
         return solicitanteResponse;
     }
 
+
+    //TODO: Create cartão
+
+
     //read
     public Solicitante read(Long id){
         Solicitante solicitante = solicitanteRepository.findById(id)
@@ -66,6 +70,15 @@ public class CrudSolicitanteService {
 //        solicitante.setSenha(null);
         return solicitante;
     }
+
+    //read by email
+    public Solicitante readByEmail(String email){
+        Solicitante solicitante = solicitanteRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Cliente não localizado"));
+
+        return solicitante;
+    }
+
 
     //update
     public Solicitante update(Long id, PessoaModel pessoa){

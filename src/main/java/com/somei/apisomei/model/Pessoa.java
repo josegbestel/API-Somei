@@ -1,11 +1,10 @@
 package com.somei.apisomei.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.somei.apisomei.model.enums.AuthType;
-import com.somei.apisomei.util.View;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -22,6 +21,7 @@ import java.util.Set;
 @Table(name = "pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,10 +67,6 @@ public class Pessoa implements Serializable {
     @JsonIgnore
     @Enumerated(EnumType.STRING)
     private AuthType authType;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Localizacao> localizacoes;
 
     public long getId() {
         return id;
@@ -144,14 +140,6 @@ public class Pessoa implements Serializable {
 
     public void setDtInativo(LocalDateTime dtInativo) {
         this.dtInativo = dtInativo;
-    }
-
-    public Set<Localizacao> getLocalizacoes() {
-        return localizacoes;
-    }
-
-    public void setLocalizacoes(Set<Localizacao> localizacoes) {
-        this.localizacoes = localizacoes;
     }
 
     public static boolean validateUser(UserDetails userDetails, Pessoa pessoa){
