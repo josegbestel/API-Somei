@@ -3,45 +3,53 @@ package com.somei.apisomei.service;
 
 import com.somei.apisomei.exception.DomainException;
 import com.somei.apisomei.exception.NotFoundException;
+import com.somei.apisomei.model.CategoriaMei;
 import com.somei.apisomei.model.Profissional;
 import com.somei.apisomei.model.enums.AuthType;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
+import com.somei.apisomei.model.representationModel.ProfissionalModel;
+import com.somei.apisomei.repository.CategoriaMeiRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CrudProfissionalService {
+public class ProfissionalService {
 
     @Autowired
     ProfissionalRepository profissionalRepository;
 
+    @Autowired
+    CategoriaMeiRepository categoriaMeiRepository;
+
     //Create
-    public Profissional create(Profissional profissional){
-        Optional<Profissional> profExistente = profissionalRepository.findByEmail(profissional.getEmail());
+    public Profissional create(ProfissionalModel profissionalModel){
+        Optional<Profissional> profExistente = profissionalRepository.findByEmail(profissionalModel.getEmail());
         if(profExistente.isPresent()){
             throw new DomainException("Já existe um profissional com esse email");
         }
 
-        profExistente = profissionalRepository.findByCnpj(profissional.getCnpj());
+        profExistente = profissionalRepository.findByCnpj(profissionalModel.getCnpj());
         if (profExistente.isPresent()){
             throw new DomainException("Já existe um profissional com esse CNPJ");
         }
 
+        CategoriaMei categoria = categoriaMeiRepository.findById(profissionalModel.getCategoriaId())
+                .orElseThrow(() -> new NotFoundException("Categoria não localizada"));
+
+        Profissional profissional = profissionalModel.byModel(categoria);
         profissional.setAuthType(AuthType.USUARIO);
         profissional.setAtivo(true);
         profissional.setSenha(PasswordEncoder.encode(profissional.getSenha()));
         Profissional profissionalResponse = profissionalRepository.save(profissional);
-//        profissionalResponse.setSenha(null);
 
         return profissionalResponse;
     }
-
-    //TODO: Create endereco
 
     //TODO: Create despesa
 
@@ -51,24 +59,27 @@ public class CrudProfissionalService {
 
     //Read
     public Profissional read(Long id){
-        Profissional profissional = profissionalRepository.findById(id)
+        return profissionalRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Não existe profissional com esse ID"));
-
-//        profissional.setSenha(null);
-        return profissional;
     }
 
     //Read by cnpj
     public Profissional readByCnpj(String cnpj){
-        Profissional profissional = profissionalRepository.findByCnpj(cnpj)
+        return profissionalRepository.findByCnpj(cnpj)
                 .orElseThrow(() -> new NotFoundException("Não existe profissional com esse ID"));
-
-//        profissional.setSenha(null);
-        return profissional;
-
     }
 
-    //TODO: Read by categoria
+    //read by email
+    public Profissional readByEmail(String email){
+        return profissionalRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Cliente não localizado"));
+    }
+
+    //Read by categoria
+    public List<Profissional> readByCategoria(Long categoriaId){
+        return profissionalRepository.findByCategoriaId(categoriaId)
+                .orElseThrow(() -> new NotFoundException("Profissionais não localizados nesta categoria"));
+    }
 
     //TODO: Read perfil
 

@@ -1,9 +1,9 @@
-package com.somei.apisomei.resources;
+package com.somei.apisomei.resource;
 
 import com.somei.apisomei.model.Solicitante;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
-import com.somei.apisomei.service.CrudSolicitanteService;
+import com.somei.apisomei.service.SolicitanteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,14 @@ import javax.validation.Valid;
 public class SolicitanteResource {
 
     @Autowired
-    CrudSolicitanteService solicitanteService;
+    SolicitanteService solicitanteService;
+
+    //login
+    @GetMapping("/login")
+    @ApiOperation("Fazer login: retorna as informações do solicitante a partir do usuário de autenticação")
+    public ResponseEntity<Solicitante> login(@AuthenticationPrincipal UserDetails userDetails){
+        return ResponseEntity.ok(solicitanteService.readByEmail(userDetails.getUsername()));
+    }
 
 
     //create

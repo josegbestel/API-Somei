@@ -1,27 +1,27 @@
 package com.somei.apisomei.model;
 
-import com.somei.apisomei.util.CustomDate;
+import com.somei.apisomei.model.enums.DiaSemana;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "agenda_especifica")
-public class AgendaEspecifica extends Agenda implements Serializable {
+@Table(name = "agenda_dinamica")
+public class AgendaDinamica extends Agenda implements Serializable {
 
-    private LocalDate data;
+    @Enumerated(EnumType.STRING)
+    private DiaSemana diaSemana;
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "orcamento_id")
     private Orcamento orcamento;
 
-    public CustomDate getData() {
-        return CustomDate.byLocalDate(data);
+    public DiaSemana getDiaSemana() {
+        return diaSemana;
     }
 
-    public void setData(CustomDate data) {
-        this.data = data.toLocalDate();
+    public void setDiaSemana(DiaSemana diaSemana) {
+        this.diaSemana = diaSemana;
     }
 
     private Orcamento getOrcamento() {
@@ -33,6 +33,6 @@ public class AgendaEspecifica extends Agenda implements Serializable {
     }
 
 //    public long getOrcamentoId(){
-//        return orcamento.getId();
+//        return getOrcamento().getId();
 //    }
 }

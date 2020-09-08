@@ -1,6 +1,7 @@
 package com.somei.apisomei.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.somei.apisomei.model.enums.AuthType;
@@ -20,6 +21,7 @@ import java.util.Set;
 @Table(name = "pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;

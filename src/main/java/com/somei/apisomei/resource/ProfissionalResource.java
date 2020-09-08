@@ -1,16 +1,20 @@
-package com.somei.apisomei.resources;
+package com.somei.apisomei.resource;
 
 import com.somei.apisomei.model.Profissional;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
-import com.somei.apisomei.service.CrudProfissionalService;
+import com.somei.apisomei.model.representationModel.ProfissionalModel;
+import com.somei.apisomei.service.ProfissionalService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/profissional")
@@ -19,14 +23,21 @@ import javax.validation.Valid;
 public class ProfissionalResource {
 
     @Autowired
-    CrudProfissionalService profissionalService;
+    ProfissionalService profissionalService;
+
+    //login
+    @GetMapping("/login")
+    @ApiOperation("Fazer login: retorna as informações do solicitante a partir do usuário de autenticação")
+    public ResponseEntity<Profissional> login(@AuthenticationPrincipal UserDetails userDetails){
+        return ResponseEntity.ok(profissionalService.readByEmail(userDetails.getUsername()));
+    }
 
 
     //createProfissional
     @PostMapping
     @ApiOperation("Cria um profissional")
-    public ResponseEntity<Profissional> createProfissional(@Valid @RequestBody Profissional profissional){
-        return ResponseEntity.ok(profissionalService.create(profissional));
+    public ResponseEntity<Profissional> createProfissional(@Valid @RequestBody ProfissionalModel profissionalModel){
+        return ResponseEntity.ok(profissionalService.create(profissionalModel));
     }
 
     //getById
@@ -40,12 +51,17 @@ public class ProfissionalResource {
     //getByCnpj
     @GetMapping("/cnpj/{cnpj}")
     @ApiOperation("Retorna um profissional a partir do CNPJ")
-    public  ResponseEntity<Profissional> getByCnpj(@PathVariable(value = "cnpj") String cnpj) {
+    public ResponseEntity<Profissional> getByCnpj(@PathVariable(value = "cnpj") String cnpj) {
         return ResponseEntity.ok(profissionalService.readByCnpj(cnpj));
     }
 
 
     //getByCategoria
+    @GetMapping("/categoria/{id}")
+    @ApiOperation("Retorna uma lsita de profissionais a partir do ID da categoria")
+    public ResponseEntity<List<Profissional>> getByCategoria(@PathVariable(value = "id") Long id){
+        return ResponseEntity.ok(profissionalService.readByCategoria(id));
+    }
 
 
     //edit

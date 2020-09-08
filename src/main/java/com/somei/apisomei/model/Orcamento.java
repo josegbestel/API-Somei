@@ -1,38 +1,54 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.somei.apisomei.model.enums.StatusOrcamento;
+import com.somei.apisomei.model.representationModel.OrcamentoNovoModel;
 import com.somei.apisomei.util.StringListConverter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "orcamento")
-public class Orcamento {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Orcamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "solicitante_id")
     private Solicitante solicitante;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ServicoCategoriaMei_id")
-    private ServicoCategoriaMei servicoCategoriaMei;
+    @JoinColumn(name = "categoriaMei_id")
+    private CategoriaMei categoria;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "localizacao_id")
+    @NotBlank
+    private String servico;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Localizacao localizacao;
 
-    @OneToMany(mappedBy = "orcamento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Agenda> agendas;
+//    @OneToMany(mappedBy = "orcamento", cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
+    private List<AgendaEspecifica> agendasEspecificas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "orcamento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<RespostaOrcamento> respostas;
+//    @OneToMany(mappedBy = "orcamento", cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
+    private List<AgendaDinamica> agendasDinamicas = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
+    private List<RespostaOrcamento> respostas = new ArrayList<>();
 
     @Convert(converter = StringListConverter.class)
     private List<String> fotos;
@@ -40,11 +56,13 @@ public class Orcamento {
     @Enumerated(EnumType.STRING)
     private StatusOrcamento status;
 
-    public String getId() {
+    private LocalDateTime dtInativo;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -56,12 +74,20 @@ public class Orcamento {
         this.solicitante = solicitante;
     }
 
-    public ServicoCategoriaMei getServicoCategoriaMei() {
-        return servicoCategoriaMei;
+    public CategoriaMei getCategoria() {
+        return categoria;
     }
 
-    public void setServicoCategoriaMei(ServicoCategoriaMei servicoCategoriaMei) {
-        this.servicoCategoriaMei = servicoCategoriaMei;
+    public void setCategoria(CategoriaMei categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getServico() {
+        return servico;
+    }
+
+    public void setServico(String servico) {
+        this.servico = servico;
     }
 
     public Localizacao getLocalizacao() {
@@ -72,12 +98,32 @@ public class Orcamento {
         this.localizacao = localizacao;
     }
 
-    public List<Agenda> getAgendas() {
-        return agendas;
+    public List<AgendaEspecifica> getAgendasEspecificas() {
+        return agendasEspecificas;
     }
 
-    public void setAgendas(List<Agenda> agendas) {
-        this.agendas = agendas;
+    public void setAgendasEspecificas(List<AgendaEspecifica> agendasEspecificas) {
+        agendasEspecificas.forEach(a -> a.setOrcamento(this));
+        this.agendasEspecificas = agendasEspecificas;
+    }
+
+    public void addAgendasEspecificas(List<AgendaEspecifica> agendasEspecificas){
+        agendasDinamicas.forEach(a -> a.setOrcamento(this));
+        agendasEspecificas.forEach(a -> this.agendasEspecificas.add(a));
+    }
+
+    public List<AgendaDinamica> getAgendasDinamicas() {
+        return agendasDinamicas;
+    }
+
+    public void setAgendasDinamicas(List<AgendaDinamica> agendasDinamicas) {
+        agendasEspecificas.forEach(a -> a.setOrcamento(this));
+        this.agendasDinamicas = agendasDinamicas;
+    }
+
+    public void addAgendasDinamicas(List<AgendaDinamica> agendasDinamicas){
+        agendasDinamicas.forEach(a -> a.setOrcamento(this));
+        agendasDinamicas.forEach(a -> this.agendasDinamicas.add(a));
     }
 
     public List<RespostaOrcamento> getRespostas() {
@@ -85,7 +131,18 @@ public class Orcamento {
     }
 
     public void setRespostas(List<RespostaOrcamento> respostas) {
+        respostas.forEach(r -> r.setOrcamento(this));
         this.respostas = respostas;
+    }
+
+    public void addRespostas(List<RespostaOrcamento> respostas){
+        respostas.forEach(r -> r.setOrcamento(this));
+        respostas.forEach(r -> this.respostas.add(r));
+    }
+
+    public void addResposta(RespostaOrcamento resposta){
+        resposta.setOrcamento(this);
+        this.respostas.add(resposta);
     }
 
     public List<String> getFotos() {
@@ -102,5 +159,34 @@ public class Orcamento {
 
     public void setStatus(StatusOrcamento status) {
         this.status = status;
+    }
+
+    public LocalDateTime getDtInativo() {
+        return dtInativo;
+    }
+
+    public void setDtInativo(LocalDateTime dtInativo) {
+        this.dtInativo = dtInativo;
+    }
+
+    public void inativar(){
+        this.dtInativo = LocalDateTime.now();
+        this.status = StatusOrcamento.CANCELADO;
+    }
+
+    static public Orcamento byModel(OrcamentoNovoModel orcamentoNovoModel,
+                                    Solicitante solicitante,
+                                    CategoriaMei categoria){
+        Orcamento orcamento = new Orcamento();
+        orcamento.setId(0);
+        orcamento.setLocalizacao(orcamentoNovoModel.getLocalizacao());
+//        orcamento.setAgendasEspecificas(orcamentoNovoModel.getAgendasEspecificas());
+//        orcamento.setAgendasDinamicas(orcamentoNovoModel.getAgendasDinamicas());
+        orcamento.setFotos(orcamentoNovoModel.getFotos());
+        orcamento.setServico(orcamentoNovoModel.getServico());
+        orcamento.setSolicitante(solicitante);
+        orcamento.setCategoria(categoria);
+
+        return orcamento;
     }
 }

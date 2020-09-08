@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class CrudSolicitanteService {
+public class SolicitanteService {
 
     @Autowired
     SolicitanteRepository solicitanteRepository;
@@ -68,6 +68,14 @@ public class CrudSolicitanteService {
                 .orElseThrow(() -> new NotFoundException("Não existe cliente com esse CPF"));
 
 //        solicitante.setSenha(null);
+        return solicitante;
+    }
+
+    //read by email
+    public Solicitante readByEmail(String email){
+        Solicitante solicitante = solicitanteRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Cliente não localizado"));
+
         return solicitante;
     }
 

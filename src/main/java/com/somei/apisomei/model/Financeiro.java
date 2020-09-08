@@ -61,4 +61,12 @@ public class Financeiro implements Serializable {
     public void setDepositos(List<DepositoBancario> depositos) {
         this.depositos = depositos;
     }
+
+    public Profissional getProfissional() {
+        return profissional;
+    }
+
+    public void setProfissional(Profissional profissional) {
+        this.profissional = profissional;
+    }
 }

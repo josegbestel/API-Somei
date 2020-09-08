@@ -1,10 +1,6 @@
 package com.somei.apisomei.model;
 
-import com.somei.apisomei.model.Profissional;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -16,34 +12,28 @@ public class RespostaOrcamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private long id;
 
-    @NotNull
     private LocalDateTime dtResposta;
 
-    @NotNull
     private double valor;
 
-    @NotBlank
-    @NotNull
     private String observacao;
 
-    @NotNull
     private boolean escolhida;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "profissional_id", nullable = false)
+//    @JoinColumn(name = "profissional_id", nullable = false)
     private Profissional profissional;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "orcamento_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Orcamento orcamento;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -85,5 +75,13 @@ public class RespostaOrcamento implements Serializable {
 
     public void setProfissional(Profissional profissional) {
         this.profissional = profissional;
+    }
+
+    private Orcamento getOrcamento() {
+        return orcamento;
+    }
+
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
     }
 }

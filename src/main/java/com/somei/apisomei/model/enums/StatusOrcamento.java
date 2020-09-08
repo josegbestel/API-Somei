@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public enum StatusOrcamento implements Serializable {
 
+    NOVO,
     SOLICITADO,
     RESPONDIDO,
     CONFIRMADO,

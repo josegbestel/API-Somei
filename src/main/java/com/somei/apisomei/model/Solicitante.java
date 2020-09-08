@@ -1,5 +1,6 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "solicitante")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Solicitante extends Pessoa implements Serializable {
 
     @NotNull

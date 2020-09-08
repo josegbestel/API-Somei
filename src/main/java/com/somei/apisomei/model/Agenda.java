@@ -1,9 +1,10 @@
 package com.somei.apisomei.model;
 
+import com.somei.apisomei.util.CustomTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 @Entity
@@ -17,26 +18,30 @@ public class Agenda implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private LocalDateTime horaInicio;
-    private LocalDate horaFinal;
+    private LocalTime horaInicio;
+    private LocalTime horaFinal;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "orcamento_id", nullable = false)
-    private Orcamento orcamento;
-
-    public LocalDateTime getHoraInicio() {
-        return horaInicio;
+    public long getId() {
+        return id;
     }
 
-    public void setHoraInicio(LocalDateTime horaInicio) {
-        this.horaInicio = horaInicio;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public LocalDate getHoraFinal() {
-        return horaFinal;
+    public CustomTime getHoraInicio() {
+        return CustomTime.byLocalTime(horaInicio);
     }
 
-    public void setHoraFinal(LocalDate horaFinal) {
-        this.horaFinal = horaFinal;
+    public void setHoraInicio(CustomTime horaInicio) {
+        this.horaInicio = horaInicio.toLocalTime();
+    }
+
+    public CustomTime getHoraFinal() {
+        return CustomTime.byLocalTime(horaFinal);
+    }
+
+    public void setHoraFinal(CustomTime horaFinal) {
+        this.horaFinal = horaFinal.toLocalTime();
     }
 }
