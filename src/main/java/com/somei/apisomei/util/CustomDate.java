@@ -34,15 +34,21 @@ public class CustomDate implements Serializable {
     }
 
     public LocalDate toLocalDate(){
-        return LocalDate.of(this.year, this.mounth, this.day);
+        if(this.year != 0)
+            return LocalDate.of(this.year, this.mounth, this.day);
+
+        return null;
     }
 
     static public CustomDate byLocalDate(LocalDate date){
-        CustomDate dateCustom = new CustomDate();
-        dateCustom.setMounth(date.getMonthValue());
-        dateCustom.setYear(date.getYear());
-        dateCustom.setDay(date.getDayOfMonth());
+        if(date != null){
+            CustomDate dateCustom = new CustomDate();
+            dateCustom.setMounth(date.getMonthValue());
+            dateCustom.setYear(date.getYear());
+            dateCustom.setDay(date.getDayOfMonth());
 
-        return dateCustom;
+            return dateCustom;
+        }
+        return null;
     }
 }

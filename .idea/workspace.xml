@@ -2,42 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/CategoriaMeiNovaModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/OrcamentoNovoModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/ProfissionalModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/CategoriaMeiRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/LocalizacaoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/OrcamentoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/CategoriaMeiResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/OrcamentoResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CategoriaMeiService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/OrcamentoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomDate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/RespostaOrcamentoModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/RespostaOrcamentoNovoModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/AgendaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/RespostaOrcamentoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/RespostaOrcamentoResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/RespostaOrcamentoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Agenda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Agenda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/AgendaEspecifica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/AgendaEspecifica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/AgendaDinamica.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/AgendaEspecifica.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/RespostaOrcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/RespostaOrcamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/ServicoCategoriaMei.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/agendaDinamica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/AgendaDinamica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/StatusOrcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/StatusOrcamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/ProfissionalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/ProfissionalRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resources/NoteResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/NoteResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resources/ProfissionalResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ProfissionalResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resources/SolicitanteResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/SolicitanteResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudCommentaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CommentaryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudNoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/NoteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudProfissionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ProfissionalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CrudSolicitanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/SolicitanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/OrcamentoNovoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/OrcamentoNovoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/OrcamentoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/OrcamentoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomDate.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>

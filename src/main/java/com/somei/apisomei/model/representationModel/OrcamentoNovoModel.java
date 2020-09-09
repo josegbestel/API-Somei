@@ -18,8 +18,7 @@ public class OrcamentoNovoModel implements Serializable {
 
     @NotBlank
     private String servico;
-    private List<AgendaEspecifica> agendasEspecificas;
-    private List<AgendaDinamica> agendasDinamicas;
+    private List<Agenda> agendas;
     private List<String> fotos;
     private Localizacao localizacao;
 
@@ -47,20 +46,12 @@ public class OrcamentoNovoModel implements Serializable {
         this.servico = servico;
     }
 
-    public List<AgendaEspecifica> getAgendasEspecificas() {
-        return agendasEspecificas;
+    public List<Agenda> getAgendas() {
+        return agendas;
     }
 
-    public void setAgendasEspecificas(List<AgendaEspecifica> agendasEspecificas) {
-        this.agendasEspecificas = agendasEspecificas;
-    }
-
-    public List<AgendaDinamica> getAgendasDinamicas() {
-        return agendasDinamicas;
-    }
-
-    public void setAgendasDinamicas(List<AgendaDinamica> agendasDinamicas) {
-        this.agendasDinamicas = agendasDinamicas;
+    public void setAgendas(List<Agenda> agendas) {
+        this.agendas = agendas;
     }
 
     public List<String> getFotos() {

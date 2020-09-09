@@ -39,13 +39,8 @@ public class Orcamento implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Localizacao localizacao;
 
-//    @OneToMany(mappedBy = "orcamento", cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
-    private List<AgendaEspecifica> agendasEspecificas = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "orcamento", cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
-    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
-    private List<AgendaDinamica> agendasDinamicas = new ArrayList<>();
+    private List<Agenda> agendas = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE})
     private List<RespostaOrcamento> respostas = new ArrayList<>();
@@ -98,32 +93,18 @@ public class Orcamento implements Serializable {
         this.localizacao = localizacao;
     }
 
-    public List<AgendaEspecifica> getAgendasEspecificas() {
-        return agendasEspecificas;
+    public List<Agenda> getAgendas() {
+        return agendas;
     }
 
-    public void setAgendasEspecificas(List<AgendaEspecifica> agendasEspecificas) {
-        agendasEspecificas.forEach(a -> a.setOrcamento(this));
-        this.agendasEspecificas = agendasEspecificas;
+    public void setAgendas(List<Agenda> agendas) {
+        agendas.forEach(a -> a.setOrcamento(this));
+        this.agendas = agendas;
     }
 
-    public void addAgendasEspecificas(List<AgendaEspecifica> agendasEspecificas){
-        agendasDinamicas.forEach(a -> a.setOrcamento(this));
-        agendasEspecificas.forEach(a -> this.agendasEspecificas.add(a));
-    }
-
-    public List<AgendaDinamica> getAgendasDinamicas() {
-        return agendasDinamicas;
-    }
-
-    public void setAgendasDinamicas(List<AgendaDinamica> agendasDinamicas) {
-        agendasEspecificas.forEach(a -> a.setOrcamento(this));
-        this.agendasDinamicas = agendasDinamicas;
-    }
-
-    public void addAgendasDinamicas(List<AgendaDinamica> agendasDinamicas){
-        agendasDinamicas.forEach(a -> a.setOrcamento(this));
-        agendasDinamicas.forEach(a -> this.agendasDinamicas.add(a));
+    public void addAgendas(List<Agenda> agendas){
+        agendas.forEach(a -> a.setOrcamento(this));
+        agendas.forEach(a -> this.agendas.add(a));
     }
 
     public List<RespostaOrcamento> getRespostas() {
@@ -143,6 +124,18 @@ public class Orcamento implements Serializable {
     public void addResposta(RespostaOrcamento resposta){
         resposta.setOrcamento(this);
         this.respostas.add(resposta);
+    }
+
+    public boolean existsResposta(long id){
+        for(RespostaOrcamento resposta : this.respostas){
+            if(id == resposta.getId())
+                return true;
+        }
+        return false;
+    }
+
+    public void setRespostaEscolhida(long idResposta){
+        this.respostas.forEach(r -> r.setEscolhida(r.getId() == idResposta ? true : false));
     }
 
     public List<String> getFotos() {
@@ -180,8 +173,6 @@ public class Orcamento implements Serializable {
         Orcamento orcamento = new Orcamento();
         orcamento.setId(0);
         orcamento.setLocalizacao(orcamentoNovoModel.getLocalizacao());
-//        orcamento.setAgendasEspecificas(orcamentoNovoModel.getAgendasEspecificas());
-//        orcamento.setAgendasDinamicas(orcamentoNovoModel.getAgendasDinamicas());
         orcamento.setFotos(orcamentoNovoModel.getFotos());
         orcamento.setServico(orcamentoNovoModel.getServico());
         orcamento.setSolicitante(solicitante);
