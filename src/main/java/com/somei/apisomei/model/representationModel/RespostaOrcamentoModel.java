@@ -1,38 +1,21 @@
-package com.somei.apisomei.model;
+package com.somei.apisomei.model.representationModel;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import com.somei.apisomei.model.Orcamento;
+import com.somei.apisomei.model.Profissional;
+import com.somei.apisomei.model.RespostaOrcamento;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-@Entity
-@Table(name = "resposta_orcamento")
-public class RespostaOrcamento implements Serializable {
+public class RespostaOrcamentoModel {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private LocalDateTime dtResposta;
-
     private double valor;
-
     private String observacao;
-
     private boolean escolhida;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "profissional_id", nullable = false)
     private Profissional profissional;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     private Orcamento orcamento;
-
-    @ManyToOne
-    @JoinColumn(name = "agenda_id")
-    Agenda agenda;
 
     public long getId() {
         return id;
@@ -82,13 +65,7 @@ public class RespostaOrcamento implements Serializable {
         this.profissional = profissional;
     }
 
-    private Orcamento getOrcamento() {
-        return orcamento;
-    }
-
-    public Orcamento obterOrcamentoClean() {
-        Orcamento orcamento = this.orcamento;
-        orcamento.setRespostas(new ArrayList<>());
+    public Orcamento getOrcamento() {
         return orcamento;
     }
 
@@ -96,13 +73,17 @@ public class RespostaOrcamento implements Serializable {
         this.orcamento = orcamento;
     }
 
-    public Agenda getAgenda() {
-        return agenda;
-    }
+    static public RespostaOrcamentoModel toModel(RespostaOrcamento resposta){
+        RespostaOrcamentoModel model = new RespostaOrcamentoModel();
+        model.setId(resposta.getId());
+        model.setDtResposta(resposta.getDtResposta());
+        model.setEscolhida(resposta.isEscolhida());
+        model.setValor(resposta.getValor());
+        model.setObservacao(resposta.getObservacao());
+        model.setProfissional(resposta.getProfissional());
+        model.setOrcamento(resposta.obterOrcamentoClean());
 
-    public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
+        return model;
     }
-
 
 }

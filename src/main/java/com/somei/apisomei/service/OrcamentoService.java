@@ -42,12 +42,9 @@ public class OrcamentoService {
 
         Orcamento orcamento = Orcamento.byModel(orcamentoNovo, solicitante, categoria);
         orcamento.setStatus(StatusOrcamento.NOVO);
-
         Orcamento orcamentoCriado = orcamentoRepository.save(orcamento);
 
-        orcamentoCriado.addAgendasDinamicas(orcamentoNovo.getAgendasDinamicas());
-        orcamentoCriado.addAgendasEspecificas(orcamentoNovo.getAgendasEspecificas());
-
+        orcamentoCriado.addAgendas(orcamentoNovo.getAgendas());
         return orcamentoRepository.saveAndFlush(orcamento);
     }
 
@@ -68,7 +65,6 @@ public class OrcamentoService {
 
         return orcamentos;
     }
-
 
     //disable orcamento
     public Orcamento disable(Long id){
@@ -109,9 +105,13 @@ public class OrcamentoService {
             orcamento.addResposta(resposta);
         }
 
+        orcamento.setStatus(StatusOrcamento.SOLICITADO);
         //Salva as respostas no orçamento
         return orcamentoRepository.saveAndFlush(orcamento);
     }
 
-    //TODO: Receber resposta profissional
+    //Escolher resposta
+    public void defineResposta(long idOrcamento, long idResposta){
+
+    }
 }
