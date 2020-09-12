@@ -1,6 +1,7 @@
 package com.somei.apisomei.resource;
 
 import com.somei.apisomei.model.CategoriaMei;
+import com.somei.apisomei.model.RespostaOrcamento;
 import com.somei.apisomei.model.representationModel.CategoriaMeiNovaModel;
 import com.somei.apisomei.service.CategoriaMeiService;
 import io.swagger.annotations.Api;
@@ -35,10 +36,17 @@ public class CategoriaMeiResource {
         return ResponseEntity.ok(categoriaMeiService.create(categoriaMeiNovaModels));
     }
 
-    //LER TODAS
+    //LET TODAS
     @GetMapping
     @ApiOperation("Obtém todas as categorias")
     public ResponseEntity<List<CategoriaMei>> obterTodas(){
+        return ResponseEntity.ok(categoriaMeiService.readAll());
+    }
+
+    //LER TODAS ATIVOS
+    @GetMapping("/ativos")
+    @ApiOperation("Obtém todas as categorias que possuem profissionais ativos")
+    public ResponseEntity<List<CategoriaMei>> obterTodasAtivas(){
         return ResponseEntity.ok(categoriaMeiService.readByProfissionalAtivo());
     }
 
