@@ -1,6 +1,9 @@
 package com.somei.apisomei.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -14,9 +17,21 @@ public class Note implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @NotBlank
+    @NotNull
+    @Size(max = 255)
     private String title;
+
+    @NotBlank
+    @NotNull
+    @Size(max = 255)
     private String description;
+
+    @NotBlank
+    @NotNull
     private int classification;
+
     @OneToMany(mappedBy = "note", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Commentary> commentaries;
 

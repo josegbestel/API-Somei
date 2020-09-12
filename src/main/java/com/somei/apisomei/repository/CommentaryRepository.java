@@ -5,9 +5,10 @@ import com.somei.apisomei.model.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CommentaryRepository extends JpaRepository<Commentary, Long> {
 
-    List<Commentary> findByNote(Note note);
+    Optional<List<Commentary>> findByNote(Note note);
 
 }
