@@ -1,5 +1,6 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -42,5 +43,14 @@ public class Solicitante extends Pessoa implements Serializable {
 
     public void setCartoes(List<Cartao> cartoes) {
         this.cartoes = cartoes;
+    }
+
+    private List<Orcamento> getOrcamento() {
+        return orcamento;
+    }
+
+    @JsonIgnore
+    public List<String> getTopServicos(){
+        return getTop3Servicos(this.orcamento);
     }
 }

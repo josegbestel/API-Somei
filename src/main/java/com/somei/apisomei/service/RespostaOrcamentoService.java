@@ -87,23 +87,36 @@ public class RespostaOrcamentoService {
         RespostaOrcamento resposta = respostaOrcamentoRepository.findById(idResposta)
                 .orElseThrow(() -> new NotFoundException("Resposta não localizado."));
 
-        Orcamento orcamento = orcamentoRepository.findById(resposta.obterOrcamentoClean().getId())
+        Orcamento orcamento = orcamentoRepository.findById(resposta.getOcamentoClean().getId())
                 .orElseThrow(() -> new NotFoundException("Orcamento não localizado."));
 
-        if(orcamento.existsResposta(idResposta)){
+        System.out.println("Orcamento clean id: " + resposta.getOcamentoClean().getId());
+        System.out.println("Orcamento da resposta: " + orcamento.getId());
+        System.out.println("Criador orcamento: " + orcamento.getSolicitante().getNome());
+        System.out.println(orcamento.getRespostas().size());
+        orcamento.getRespostas().forEach(r -> System.out.println(r.getProfissional().getNomeFantasia()));
+
+//        if(orcamento.existsResposta(resposta.getId())){
+            if(orcamento.getId() == resposta.getOcamentoClean().getId()){
             orcamento.setRespostaEscolhida(idResposta);
             orcamento.setStatus(StatusOrcamento.CONFIRMADO);
             orcamentoRepository.save(orcamento);
         }else {
             throw new DomainException("Esta resposta não pertence ao orçamento indicado");
         }
+
+        //(parte 2)
+        //TODO: Neste momento deverá:
+        // 1) Ser cobrado o valor do Solicitante
+        // 2) Notificar Profissional
+        // 3) Criar um serviço
     }
 
     public Orcamento obterOrcamento(long respostaId){
         RespostaOrcamento orcamento = respostaOrcamentoRepository.findById(respostaId)
                 .orElseThrow(() -> new NotFoundException("Orcamento não localizado"));
 
-        return orcamento.obterOrcamentoClean();
+        return orcamento.getOcamentoClean();
     }
 
 

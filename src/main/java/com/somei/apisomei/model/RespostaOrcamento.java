@@ -1,5 +1,7 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -86,7 +88,8 @@ public class RespostaOrcamento implements Serializable {
         return orcamento;
     }
 
-    public Orcamento obterOrcamentoClean() {
+    @JsonIgnore
+    public Orcamento getOcamentoClean() {
         Orcamento orcamento = this.orcamento;
         orcamento.setRespostas(new ArrayList<>());
         return orcamento;

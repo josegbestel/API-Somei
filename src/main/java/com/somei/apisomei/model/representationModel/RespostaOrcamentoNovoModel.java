@@ -10,9 +10,6 @@ public class RespostaOrcamentoNovoModel implements Serializable {
     private long orcamentoId;
 
     @NotNull
-    private long respostaId;
-
-    @NotNull
     private float valor;
 
     private String observacao;
@@ -26,14 +23,6 @@ public class RespostaOrcamentoNovoModel implements Serializable {
 
     public void setOrcamentoId(long orcamentoId) {
         this.orcamentoId = orcamentoId;
-    }
-
-    public long getRespostaId() {
-        return respostaId;
-    }
-
-    public void setRespostaId(long respostaId) {
-        this.respostaId = respostaId;
     }
 
     public float getValor() {

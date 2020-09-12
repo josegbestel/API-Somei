@@ -1,5 +1,6 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.somei.apisomei.model.enums.StatusOrcamento;
@@ -29,6 +30,10 @@ public class Orcamento implements Serializable {
     @JoinColumn(name = "solicitante_id")
     private Solicitante solicitante;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "profissional_id", nullable = true)
+    private Profissional profissional;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoriaMei_id")
     private CategoriaMei categoria;
@@ -53,6 +58,9 @@ public class Orcamento implements Serializable {
 
     private LocalDateTime dtInativo;
 
+    @OneToMany(mappedBy = "orcamento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
+
     public long getId() {
         return id;
     }
@@ -67,6 +75,14 @@ public class Orcamento implements Serializable {
 
     public void setSolicitante(Solicitante solicitante) {
         this.solicitante = solicitante;
+    }
+
+    public Profissional getProfissional() {
+        return profissional;
+    }
+
+    public void setProfissional(Profissional profissional) {
+        this.profissional = profissional;
     }
 
     public CategoriaMei getCategoria() {
@@ -127,7 +143,10 @@ public class Orcamento implements Serializable {
     }
 
     public boolean existsResposta(long id){
-        for(RespostaOrcamento resposta : this.respostas){
+        System.out.println(this.getRespostas());
+        System.out.println(this.getRespostas().size());
+        for(RespostaOrcamento resposta : this.getRespostas()){
+            System.out.println("orcamento_resposta_id (" + resposta.getId() + ") = " + id);
             if(id == resposta.getId())
                 return true;
         }
@@ -135,7 +154,19 @@ public class Orcamento implements Serializable {
     }
 
     public void setRespostaEscolhida(long idResposta){
-        this.respostas.forEach(r -> r.setEscolhida(r.getId() == idResposta ? true : false));
+        for(RespostaOrcamento r : this.respostas){
+            if(r.getId() == idResposta){
+                this.profissional = r.getProfissional();
+            }
+        }
+    }
+
+    public RespostaOrcamento getRespostaEscolhida(){
+        for(RespostaOrcamento resposta : this.respostas){
+            if(resposta.isEscolhida())
+                return resposta;
+        }
+        return null;
     }
 
     public List<String> getFotos() {
@@ -167,6 +198,19 @@ public class Orcamento implements Serializable {
         this.status = StatusOrcamento.CANCELADO;
     }
 
+    @JsonIgnore
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public void addAvaliacao(Avaliacao avaliacao){
+        this.avaliacoes.add(avaliacao);
+    }
+
     static public Orcamento byModel(OrcamentoNovoModel orcamentoNovoModel,
                                     Solicitante solicitante,
                                     CategoriaMei categoria){
@@ -179,5 +223,21 @@ public class Orcamento implements Serializable {
         orcamento.setCategoria(categoria);
 
         return orcamento;
+    }
+
+    public Avaliacao getAvaliacaoProfissional() {
+        for(Avaliacao a : this.avaliacoes){
+            if(a.getDestinatario().getId() == this.profissional.getId())
+                return a;
+        }
+        return null;
+    }
+
+    public Avaliacao getAvaliacaoSolicitante(){
+        for(Avaliacao a : this.avaliacoes){
+            if(a.getCriador().getId() == this.solicitante.getId())
+                return a;
+        }
+        return null;
     }
 }

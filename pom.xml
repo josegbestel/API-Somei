@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.somei</groupId>
 	<artifactId>apisomei</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>apisomei</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Banca 1 Projeto Final BSI 2</description>
 
 	<properties>
 		<java.version>1.8</java.version>

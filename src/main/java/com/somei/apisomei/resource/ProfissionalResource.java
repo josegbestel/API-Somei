@@ -4,6 +4,7 @@ import com.somei.apisomei.model.Profissional;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
 import com.somei.apisomei.model.representationModel.ProfissionalModel;
+import com.somei.apisomei.model.representationModel.ProfissionalPerfilModel;
 import com.somei.apisomei.service.ProfissionalService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,7 +42,7 @@ public class ProfissionalResource {
     }
 
     //getById
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Retorna um profissional a partir do ID")
     public ResponseEntity<Profissional> getById(@PathVariable(value = "id") Long id){
         return ResponseEntity.ok(profissionalService.read(id));
@@ -63,9 +64,16 @@ public class ProfissionalResource {
         return ResponseEntity.ok(profissionalService.readByCategoria(id));
     }
 
+    //getProfile
+    @GetMapping("/{id}/perfil")
+    @ApiOperation("Retorna o perfil do profissional a partir do ID")
+    public ResponseEntity<ProfissionalPerfilModel> getPerfil(@PathVariable(value = "id") long id){
+        return ResponseEntity.ok(profissionalService.readResumeProfile(id));
+    }
+
 
     //edit
-    @PutMapping("/id/{id}")
+    @PutMapping("/{id}")
     @ApiOperation("Edita as informações de um Profissional por ID")
     public ResponseEntity<Profissional> edit(@PathVariable(value = "id") Long id,
                                             @Valid @RequestBody PessoaModel pessoa){
@@ -75,7 +83,7 @@ public class ProfissionalResource {
 
 
     //editLogin
-    @PutMapping("login/id/{id}")
+    @PutMapping("{id}/login")
     @ApiOperation("Altera as informações de login: Email e senha")
     public ResponseEntity<PessoaLoginModel> editLogin(@PathVariable(value = "id") Long id,
                                                       @Valid @RequestBody PessoaLoginModel login){
@@ -85,7 +93,7 @@ public class ProfissionalResource {
 
 
     //remove
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("Remove um Profissional")
     public ResponseEntity<Object> remove(@PathVariable(value = "id") Long id){
         profissionalService.delete(id);

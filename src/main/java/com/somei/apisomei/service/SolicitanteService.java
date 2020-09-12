@@ -6,6 +6,7 @@ import com.somei.apisomei.model.Solicitante;
 import com.somei.apisomei.model.enums.AuthType;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
+import com.somei.apisomei.model.representationModel.SolicitantePerfilModel;
 import com.somei.apisomei.repository.SolicitanteRepository;
 import com.somei.apisomei.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class SolicitanteService {
     }
 
 
-    //TODO: Create cartão
+    //TODO: Create cartão (parte 2)
 
 
     //read
@@ -77,6 +78,14 @@ public class SolicitanteService {
                 .orElseThrow(() -> new NotFoundException("Cliente não localizado"));
 
         return solicitante;
+    }
+
+    //read perfil
+    public SolicitantePerfilModel readResumeProfile(long id){
+        Solicitante solicitante = solicitanteRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Solicitante não localizado"));
+
+        return SolicitantePerfilModel.toModel(solicitante);
     }
 
 

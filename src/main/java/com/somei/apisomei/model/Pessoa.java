@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.somei.apisomei.model.enums.AuthType;
+import com.somei.apisomei.model.enums.StatusOrcamento;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -14,8 +15,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+
+import static java.util.stream.Collectors.toMap;
 
 @Entity
 @Table(name = "pessoa")
@@ -67,6 +69,13 @@ public class Pessoa implements Serializable {
     @JsonIgnore
     @Enumerated(EnumType.STRING)
     private AuthType authType;
+
+    @OneToMany(mappedBy = "criador" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Avaliacao> avaliacoesFeitas;
+
+    @OneToMany(mappedBy = "destinatario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Avaliacao> avaliacoesRecebidas = new ArrayList<>();
+
 
     public long getId() {
         return id;
@@ -167,6 +176,29 @@ public class Pessoa implements Serializable {
         this.authType = authType;
     }
 
+    public int getRating(){
+        if(this.avaliacoesRecebidas.size() == 0 || this.avaliacoesRecebidas == null)
+            return -1;
+
+        List<Avaliacao> avaliacoes = this.avaliacoesRecebidas;
+        float somaNotas = 0;
+        for(Avaliacao avaliacao : avaliacoes){
+            somaNotas = somaNotas + avaliacao.getNota();
+        }
+
+        float rating = somaNotas/avaliacoes.size();
+        return Math.round(rating);
+    }
+
+    @JsonIgnore
+    public List<Avaliacao> getAvaliacoesRecebidas() {
+        return avaliacoesRecebidas;
+    }
+
+    public void setAvaliacoesRecebidas(List<Avaliacao> avaliacoesRecebidas) {
+        this.avaliacoesRecebidas = avaliacoesRecebidas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -178,5 +210,47 @@ public class Pessoa implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @JsonIgnore
+    protected List<String> getTop3Servicos(List<Orcamento> orcamentos){
+        HashMap<String, Integer> servicos = new HashMap<>();
+
+        //Pega todos os serviços que fez e adiciona no map
+        for (Orcamento o : orcamentos) {
+            //TODO: Habilitar esse if quando tiver o fluxo completo (2a parte)
+//            if(o.getStatus() == StatusOrcamento.FINALIZADO){
+            if(servicos.containsKey(o.getServico())){
+                servicos.put(o.getServico(), servicos.get(o.getServico())+1);
+            }else{
+                servicos.put(o.getServico(), 1);
+            }
+//            }
+        }
+
+        //Se possui pelo menos 1
+        if(servicos.size() > 0){
+            //Ordena o map
+            Map<String, Integer> mapOrdenada = servicos.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue())
+                    .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+            //Transforma o map num array com as keys
+            List<String> servicosOrdenados = new ArrayList<>();
+            mapOrdenada.entrySet().forEach((x) -> servicosOrdenados.add(x.getKey()));
+
+            //Obter os 3 primeiros
+            List<String> servicosTop3 = new ArrayList<>();
+            int max = servicosOrdenados.size() >= 3 ? 3 : servicosOrdenados.size();
+            for(int i = 1; i <= max; i++){
+                int pos = servicosOrdenados.size()-i;
+                servicosTop3.add(servicosOrdenados.get(pos));
+            }
+
+            return servicosTop3;
+        }
+
+        return null;
     }
 }

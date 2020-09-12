@@ -1,6 +1,9 @@
 package com.somei.apisomei.resource;
 
+import com.somei.apisomei.model.Avaliacao;
 import com.somei.apisomei.model.Orcamento;
+import com.somei.apisomei.model.RespostaOrcamento;
+import com.somei.apisomei.model.representationModel.AvaliacaoModel;
 import com.somei.apisomei.model.representationModel.OrcamentoNovoModel;
 import com.somei.apisomei.service.OrcamentoService;
 import io.swagger.annotations.Api;
@@ -42,7 +45,7 @@ public class OrcamentoResource {
         return ResponseEntity.ok(orcamentoService.readBySolicitante(id));
     }
 
-    //LER TODOS POR PROFISSIONAL (QUE RESPONDEU)
+    //LER TODOS POR PROFISSIONAL (QUE RESPONDERAM)
 
 
     //DESATIVAR
@@ -53,8 +56,26 @@ public class OrcamentoResource {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/enviar")
-    public ResponseEntity<Orcamento> enviar(@PathVariable(value = "id") Long id){
-        return ResponseEntity.ok(orcamentoService.enviarOrcamento(id));
+    //Escolher Resposta
+    @PutMapping("{id}/resposta/{idResposta}/escolher")
+    @ApiOperation("Escolhe uma resposta para o orçamento ser realizado")
+    public ResponseEntity<Object> escolherResposta(@PathVariable(name = "id") long id,
+                                                      @PathVariable(name = "idResposta") long idResposta){
+        orcamentoService.escolherResposta(id, idResposta);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/avaliacao/profissional")
+    @ApiOperation("Cria a avaliação do profissional")
+    public ResponseEntity<Avaliacao> criarAvaliacaoProfissional(@PathVariable(value = "id") Long id,
+                                                                @Valid @RequestBody AvaliacaoModel avaliacaoModel){
+        return ResponseEntity.ok(orcamentoService.createAvaliacaoProfissional(id, avaliacaoModel));
+    }
+
+    @PostMapping("/{id}/avaliacao/solicitante")
+    @ApiOperation("Cria a avaliação do solicitante")
+    public ResponseEntity<Avaliacao> criarAvaliacaoSolicitante(@PathVariable(value = "id") Long id,
+                                                               @Valid @RequestBody AvaliacaoModel avaliacaoModel){
+        return ResponseEntity.ok((orcamentoService.createAvaliacaoSolicitante(id, avaliacaoModel)));
     }
 }

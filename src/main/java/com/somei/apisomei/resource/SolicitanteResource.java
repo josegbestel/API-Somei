@@ -3,6 +3,7 @@ package com.somei.apisomei.resource;
 import com.somei.apisomei.model.Solicitante;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
+import com.somei.apisomei.model.representationModel.SolicitantePerfilModel;
 import com.somei.apisomei.service.SolicitanteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,7 +45,7 @@ public class SolicitanteResource {
 
     //getById
     //TODO: Como retornar somente os campos que preciso? (Retirar o campo ativo)
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Obtem um Solicitante a partir do ID")
     public ResponseEntity<Solicitante> getById(@PathVariable(value = "id") Long id){
         Solicitante solicitante = solicitanteService.read(id);
@@ -60,9 +61,16 @@ public class SolicitanteResource {
         return ResponseEntity.ok(solicitante);
     }
 
+    //getProfile
+    @GetMapping("/{id}/perfil")
+    @ApiOperation("Retorna o perfil do solicitante a partir do ID")
+    public ResponseEntity<SolicitantePerfilModel> getPerfil(@PathVariable(value = "id") long id){
+        return ResponseEntity.ok(solicitanteService.readResumeProfile(id));
+    }
+
 
     //edit
-    @PutMapping("/id/{id}")
+    @PutMapping("/{id}")
     @ApiOperation("Edita as informações de um Solicitante por ID")
     public ResponseEntity<Solicitante> edit(@PathVariable(value = "id") Long id,
                                                        @Valid @RequestBody PessoaModel pessoa){
@@ -72,7 +80,7 @@ public class SolicitanteResource {
 
 
     //editLogin
-    @PutMapping("/login/id/{id}")
+    @PutMapping("/login/{id}")
     @ApiOperation("Altera as informações de login: Email e senha")
     public ResponseEntity<PessoaLoginModel> editLogin(@PathVariable(value = "id") Long id,
                                                       @Valid @RequestBody PessoaLoginModel login){
@@ -82,7 +90,7 @@ public class SolicitanteResource {
 
 
     //remove
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("Remove um Solicitante")
     @PreAuthorize("ADMIN")
     public ResponseEntity<Object> remove(@PathVariable(value = "id") Long id,

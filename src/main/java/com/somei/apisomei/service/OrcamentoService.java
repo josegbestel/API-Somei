@@ -4,11 +4,11 @@ import com.somei.apisomei.exception.DomainException;
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.*;
 import com.somei.apisomei.model.enums.StatusOrcamento;
+import com.somei.apisomei.model.representationModel.AvaliacaoModel;
 import com.somei.apisomei.model.representationModel.OrcamentoNovoModel;
 import com.somei.apisomei.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,7 +28,10 @@ public class OrcamentoService {
     @Autowired
     ProfissionalRepository profissionalRepository;
 
-    //TODO: Tentar salvar a genda junto com o orçamento
+    @Autowired
+    RespostaOrcamentoRepository respostaOrcamentoRepository;
+
+
     //create
     public Orcamento create(OrcamentoNovoModel orcamentoNovo){
 
@@ -45,7 +48,88 @@ public class OrcamentoService {
         Orcamento orcamentoCriado = orcamentoRepository.save(orcamento);
 
         orcamentoCriado.addAgendas(orcamentoNovo.getAgendas());
-        return orcamentoRepository.saveAndFlush(orcamento);
+        return enviarOrcamento(orcamentoRepository.saveAndFlush(orcamento));
+    }
+
+    //Avaliação para o profissional
+    public Avaliacao createAvaliacaoProfissional(long idOrcamento, AvaliacaoModel avaliacaoModel){
+        Orcamento orcamento = orcamentoRepository.findById(idOrcamento)
+                .orElseThrow(() -> new NotFoundException("Orcaçamento Não localizado"));
+
+        Profissional profissional = profissionalRepository.findById(avaliacaoModel.getIdDestinatario())
+                .orElseThrow(() -> new NotFoundException("Profissional (destinatário) Não localizado"));
+
+        Solicitante solicitante = solicitanteRepository.findById(avaliacaoModel.getIdCriaddor())
+                .orElseThrow(() -> new NotFoundException("Solicitante (criador) Não localizado"));
+
+        //TODO: Habilitar com a parte 2
+//        //Validar se o orçamento já está finalizado
+//        if(orcamento.getStatus() != StatusOrcamento.FINALIZADO){
+//            throw new DomainException("Este oçamento ainda não está finalizado para poder avaliar");
+//        }
+
+        //Validar se já não existe a avaliação
+        List<Avaliacao> avaliacoesExistente = orcamento.getAvaliacoes();
+        for(Avaliacao a : avaliacoesExistente){
+            if(a.getDestinatario().getId() == avaliacaoModel.getIdDestinatario()){
+                throw new DomainException("Profissional já foi avaliado");
+            }
+        }
+
+        //Validar se o destinatário/profissional pertencem ao orçamento
+        if(avaliacaoModel.getIdDestinatario() != orcamento.getProfissional().getId()){
+            throw new DomainException("Este profissional não pertence a este orçamento");
+        }
+
+        //validar se o criador/solicitante pertencem ao orçamento
+        if(avaliacaoModel.getIdCriaddor() != orcamento.getSolicitante().getId()){
+            throw new DomainException("Este solicitante não pertence a este orçamento");
+        }
+
+        orcamento.addAvaliacao(avaliacaoModel.byModel(solicitante, profissional, orcamento));
+        orcamento = orcamentoRepository.save(orcamento);
+        return orcamento.getAvaliacaoProfissional();
+    }
+
+
+    //Create avaliacao solicitante
+    public Avaliacao createAvaliacaoSolicitante(long idOrcamento, AvaliacaoModel avaliacaoModel){
+        Orcamento orcamento = orcamentoRepository.findById(idOrcamento)
+                .orElseThrow(() -> new NotFoundException("Orcaçamento Não localizado"));
+
+        Solicitante solicitante = solicitanteRepository.findById(avaliacaoModel.getIdDestinatario())
+                .orElseThrow(() -> new NotFoundException("Solicitante (destinatário) Não localizado"));
+
+        Profissional profissional = profissionalRepository.findById(avaliacaoModel.getIdCriaddor())
+                .orElseThrow(() -> new NotFoundException("Profissional (criador) Não localizado"));
+
+        //TODO: Habilitar com a parte 2
+//        //Validar se o orçamento já está finalizado
+//        if(orcamento.getStatus() != StatusOrcamento.FINALIZADO){
+//            throw new DomainException("Este oçamento ainda não está finalizado para poder avaliar");
+//        }
+
+        //Validar se já não existe a avaliação
+        List<Avaliacao> avaliacoesExistente = orcamento.getAvaliacoes();
+        for(Avaliacao a : avaliacoesExistente){
+            if(a.getDestinatario().getId() == avaliacaoModel.getIdDestinatario()){
+                throw new DomainException("Profissional já foi avaliado");
+            }
+        }
+
+        //Validar se o criador/profissional pertencem ao orçamento
+        if(avaliacaoModel.getIdDestinatario() == orcamento.getProfissional().getId()){
+            throw new DomainException("Este profissional não pertence a este orçamento");
+        }
+
+        //validar se o solicitante/solicitante pertencem ao orçamento
+        if(avaliacaoModel.getIdCriaddor() == orcamento.getSolicitante().getId()){
+            throw new DomainException("Este solicitante não pertence a este orçamento");
+        }
+
+        orcamento.addAvaliacao(avaliacaoModel.byModel(profissional, solicitante, orcamento));
+        orcamento = orcamentoRepository.save(orcamento);
+        return orcamento.getAvaliacaoSolicitante();
     }
 
     //read
@@ -75,10 +159,8 @@ public class OrcamentoService {
         return orcamentoRepository.save(orcamento);
     }
 
-    //TODO: enviar orçamento para profissionais
-    public Orcamento enviarOrcamento(Long orcamentoId){
-        Orcamento orcamento = orcamentoRepository.findById(orcamentoId)
-                .orElseThrow(() -> new NotFoundException("Orçamento não existe"));
+    //Enviar orçamento para profissionais
+    private Orcamento enviarOrcamento(Orcamento orcamento){
         Map<Profissional, Double> mapProfissionais = new HashMap<>();
         List<Profissional> profissionais = profissionalRepository.findByCategoriaId(orcamento.getCategoria().getId())
                 .orElseThrow(() -> new NotFoundException("Nenhum profissional encontrado nessa categoria"));
@@ -110,8 +192,29 @@ public class OrcamentoService {
         return orcamentoRepository.saveAndFlush(orcamento);
     }
 
-    //Escolher resposta
-    public void defineResposta(long idOrcamento, long idResposta){
+    //update escolhida
+    public void escolherResposta(long idOrcamento, long idResposta){
+        Orcamento orcamento = orcamentoRepository.findById(idOrcamento)
+                .orElseThrow(() -> new NotFoundException("Orcaçamento não localizado"));
+
+        RespostaOrcamento resposta = respostaOrcamentoRepository.findById(idResposta)
+                .orElseThrow(() -> new NotFoundException("Resposta não localizada"));
+
+        boolean respostaLocalizada = false;
+        for(RespostaOrcamento r : orcamento.getRespostas()){
+            if(r.getId() == idResposta){
+                r.setEscolhida(true);
+                orcamento.setStatus(StatusOrcamento.RESPONDIDO);
+                orcamento.setProfissional(resposta.getProfissional());
+                respostaLocalizada = true;
+            }else{
+                r.setEscolhida(false);
+            }
+        }
+        if(respostaLocalizada)
+            orcamentoRepository.save(orcamento);
+        else
+            throw new DomainException("Esta resposta não existe no orçamento");
 
     }
 }

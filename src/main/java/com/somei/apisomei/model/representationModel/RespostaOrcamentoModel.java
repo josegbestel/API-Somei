@@ -81,7 +81,7 @@ public class RespostaOrcamentoModel {
         model.setValor(resposta.getValor());
         model.setObservacao(resposta.getObservacao());
         model.setProfissional(resposta.getProfissional());
-        model.setOrcamento(resposta.obterOrcamentoClean());
+        model.setOrcamento(resposta.getOcamentoClean());
 
         return model;
     }

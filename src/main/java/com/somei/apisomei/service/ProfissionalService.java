@@ -9,6 +9,7 @@ import com.somei.apisomei.model.enums.AuthType;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
 import com.somei.apisomei.model.representationModel.ProfissionalModel;
+import com.somei.apisomei.model.representationModel.ProfissionalPerfilModel;
 import com.somei.apisomei.repository.CategoriaMeiRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.util.PasswordEncoder;
@@ -49,6 +50,13 @@ public class ProfissionalService {
         Profissional profissionalResponse = profissionalRepository.save(profissional);
 
         return profissionalResponse;
+    }
+
+    //Read resumo perfil
+    public ProfissionalPerfilModel readResumeProfile(long id){
+        Profissional profissional = profissionalRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
+        return ProfissionalPerfilModel.toModel(profissional);
     }
 
     //TODO: Create despesa
