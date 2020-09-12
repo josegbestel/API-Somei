@@ -45,24 +45,17 @@ public class CategoriaMeiResource {
 
     //LER TODAS ATIVOS
     @GetMapping("/ativos")
-    @ApiOperation("Obtém todas as categorias que possuem profissionais ativos")
-    public ResponseEntity<List<CategoriaMei>> obterTodasAtivas(){
-        return ResponseEntity.ok(categoriaMeiService.readByProfissionalAtivo());
-    }
-
-    //BUSCAR POR TITULO
-    @GetMapping("/busca/{titulo}")
-    @ApiOperation("Obtém categorias com busca a partir do titulo")
-    public ResponseEntity<List<CategoriaMei>> buscarPorNome(@PathVariable(value = "titulo") String titulo){
-        return ResponseEntity.ok(categoriaMeiService.readByTitulo(titulo));
-    }
-
-    //OBTER BY PROFISSIONAIS ATIVOS
-    @PostMapping("/ativos")
     @ApiOperation("Obtém todas as categorias que possuem pelo menos um profissional cadastrado")
     public ResponseEntity<List<CategoriaMei>> obterAtivos(){
         return ResponseEntity.ok(categoriaMeiService.readByProfissionalAtivo());
     }
+
+//    //BUSCAR POR TITULO
+//    @GetMapping("/busca/{titulo}")
+//    @ApiOperation("Obtém categorias com busca a partir do titulo")
+//    public ResponseEntity<List<CategoriaMei>> buscarPorNome(@PathVariable(value = "titulo") String titulo){
+//        return ResponseEntity.ok(categoriaMeiService.readByTitulo(titulo));
+//    }
 
     //EDITAR
     @PutMapping("/{id}")

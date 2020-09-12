@@ -150,6 +150,16 @@ public class OrcamentoService {
         return orcamentos;
     }
 
+    //read profissional
+    public List<Orcamento> readByProfissional(Long profissionalId){
+        Profissional profissional = profissionalRepository.findById(profissionalId)
+                .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
+        List<Orcamento> orcamentos = orcamentoRepository.findByProfissionalId(profissional.getId())
+                .orElseThrow(() -> new NotFoundException("Profissional não possui orçamentos"));
+
+        return orcamentos;
+    }
+
     //disable orcamento
     public Orcamento disable(Long id){
         Orcamento orcamento = orcamentoRepository.findById(id)
