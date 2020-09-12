@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface RespostaOrcamentoRepository extends JpaRepository<RespostaOrcamento, Long> {
 
-    Optional<List<RespostaOrcamento>> findByProfissionalId(long profissionalId);
+    Optional<List<RespostaOrcamento>> findByProfissionalIdOrderByDtRespostaDesc(long profissionalId);
 
 }

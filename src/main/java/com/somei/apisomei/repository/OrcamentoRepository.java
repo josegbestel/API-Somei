@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface OrcamentoRepository extends JpaRepository<Orcamento, Long> {
 
     Optional<List<Orcamento>> findBySolicitanteId(Long solicitanteId);
+
+    Optional<List<Orcamento>> findByProfissionalId(long profissionalId);
 }

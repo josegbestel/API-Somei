@@ -46,7 +46,11 @@ public class OrcamentoResource {
     }
 
     //LER TODOS POR PROFISSIONAL (QUE RESPONDERAM)
-
+    @GetMapping("/profissional/{id}")
+    @ApiOperation("Obtém uma lista de orçamentos a partir de um profissional")
+    public ResponseEntity<List<Orcamento>> obterPorProfissional(@PathVariable(value = "id") Long id){
+        return ResponseEntity.ok(orcamentoService.readByProfissional(id));
+    }
 
     //DESATIVAR
     @PutMapping("/{id}/desativar")

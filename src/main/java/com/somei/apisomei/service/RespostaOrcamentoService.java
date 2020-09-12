@@ -47,7 +47,7 @@ public class RespostaOrcamentoService {
         if(!profissionalRepository.existsById(id)){
             throw new NotFoundException("Profissional não localizado");
         }
-        List<RespostaOrcamento> respostas = respostaOrcamentoRepository.findByProfissionalId(id)
+        List<RespostaOrcamento> respostas = respostaOrcamentoRepository.findByProfissionalIdOrderByDtRespostaDesc(id)
                 .orElseThrow(() -> new NotFoundException("Profissional não possui respostas vinculadas."));
 
         List<RespostaOrcamentoModel> models = new ArrayList<>();
