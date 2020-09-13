@@ -40,7 +40,11 @@ public class PessoaModel{
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        this.telefone = telefone
+                .replace("(", "")
+                .replace(")", "")
+                .replace(" ", "")
+                .replace("-", "");;
     }
 
     public String getAvatar() {

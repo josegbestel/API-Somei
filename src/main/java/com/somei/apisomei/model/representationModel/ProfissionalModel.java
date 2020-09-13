@@ -77,11 +77,19 @@ public class ProfissionalModel implements Serializable {
     }
 
     public String getTelefone() {
-        return telefone;
+        return telefone
+                .replace("(", "")
+                .replace(")", "")
+                .replace(" ", "")
+                .replace("-", "");
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        this.telefone = telefone
+                .replace("(", "")
+                .replace(")", "")
+                .replace(" ", "")
+                .replace("-", "");
     }
 
     public String getSenha() {
