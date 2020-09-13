@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class ProfissionalModel implements Serializable {
@@ -27,6 +28,7 @@ public class ProfissionalModel implements Serializable {
     private String cnpj;
 
     @NotBlank
+    @Size(max = 11, min=10)
     private String telefone;
 
     @NotBlank
