@@ -38,7 +38,7 @@ public class ProfissionalModel implements Serializable {
     private int anoNascimento;
 
     @NotNull
-    private long categoriaId;
+    private String categoriaTitulo;
 
     private Localizacao localizacao;
 
@@ -106,12 +106,12 @@ public class ProfissionalModel implements Serializable {
         this.anoNascimento = anoNascimento;
     }
 
-    public long getCategoriaId() {
-        return categoriaId;
+    public String getCategoriaTitulo() {
+        return categoriaTitulo;
     }
 
-    public void setCategoriaId(long categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setCategoriaTitulo(String categoriaTitulo) {
+        this.categoriaTitulo = categoriaTitulo;
     }
 
     public Localizacao getLocalizacao() {

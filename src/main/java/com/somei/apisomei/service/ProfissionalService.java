@@ -40,7 +40,7 @@ public class ProfissionalService {
             throw new DomainException("Já existe um profissional com esse CNPJ");
         }
 
-        CategoriaMei categoria = categoriaMeiRepository.findById(profissionalModel.getCategoriaId())
+        CategoriaMei categoria = categoriaMeiRepository.findByTitulo(profissionalModel.getCategoriaTitulo())
                 .orElseThrow(() -> new NotFoundException("Categoria não localizada"));
 
         Profissional profissional = profissionalModel.byModel(categoria);
