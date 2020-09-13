@@ -44,14 +44,6 @@ public class RespostaOrcamentoResource {
         return ResponseEntity.ok(respostaOrcamentoService.updateResposta(id, respostaModel));
     }
 
-//    //Definir escolhida
-//    @PutMapping("/{id}/escolher")
-//    @ApiOperation("Define a resposta indicada como a escolhida pelo solicitante")
-//    public ResponseEntity<Object> definirEscolhida(@PathVariable(value = "id") long id){
-//        respostaOrcamentoService.updateEscolhida(id);
-//        return ResponseEntity.noContent().build();
-//    }
-
     @GetMapping("/{id}/orcamento")
     @ApiOperation("Obtem um orçamento a partir de uma resposta")
     public ResponseEntity<Orcamento> obterOrcamento(@PathVariable(value = "id") long id){

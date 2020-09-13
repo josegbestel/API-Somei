@@ -13,8 +13,8 @@ public class OrcamentoNovoModel implements Serializable {
     @NotNull
     private long solicitanteId;
 
-    @NotNull
-    private long categoriaMeiId;
+    @NotBlank
+    private String categoriaMeiTitulo;
 
     @NotBlank
     private String servico;
@@ -30,12 +30,12 @@ public class OrcamentoNovoModel implements Serializable {
         this.solicitanteId = solicitanteId;
     }
 
-    public long getCategoriaMeiId() {
-        return categoriaMeiId;
+    public String getCategoriaMeiTitulo() {
+        return categoriaMeiTitulo;
     }
 
-    public void setCategoriaMeiId(long categoriaId) {
-        this.categoriaMeiId = categoriaId;
+    public void setCategoriaMeiTitulo(String categoriaMeiTitulo) {
+        this.categoriaMeiTitulo = categoriaMeiTitulo;
     }
 
     public String getServico() {

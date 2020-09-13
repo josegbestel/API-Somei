@@ -37,9 +37,11 @@ public class OrcamentoService {
 
         Solicitante solicitante = solicitanteRepository.findById(orcamentoNovo.getSolicitanteId())
                 .orElseThrow(() -> new NotFoundException("Solicitante não localizado"));
-        CategoriaMei categoria = categoriaMeiRepository.findById(orcamentoNovo.getCategoriaMeiId())
+        CategoriaMei categoria = categoriaMeiRepository.findByTitulo(orcamentoNovo.getCategoriaMeiTitulo())
                 .orElseThrow(() -> new NotFoundException("Serviço não localizado"));
-        if(!profissionalRepository.existsByCategoriaId(orcamentoNovo.getCategoriaMeiId())){
+
+        //Verifica se existem profissionais nessa categoria
+        if(!profissionalRepository.existsByCategoriaId(categoria.getId())){
             throw new NotFoundException("Não existem profissionais nesta categoria");
         }
 
@@ -202,7 +204,7 @@ public class OrcamentoService {
         return orcamentoRepository.saveAndFlush(orcamento);
     }
 
-    //update escolhida
+    //Escolher resposta de um profissional
     public void escolherResposta(long idOrcamento, long idResposta){
         Orcamento orcamento = orcamentoRepository.findById(idOrcamento)
                 .orElseThrow(() -> new NotFoundException("Orcaçamento não localizado"));
@@ -214,9 +216,15 @@ public class OrcamentoService {
         for(RespostaOrcamento r : orcamento.getRespostas()){
             if(r.getId() == idResposta){
                 r.setEscolhida(true);
-                orcamento.setStatus(StatusOrcamento.RESPONDIDO);
+                orcamento.setStatus(StatusOrcamento.CONFIRMADO);
                 orcamento.setProfissional(resposta.getProfissional());
                 respostaLocalizada = true;
+
+                //(parte 2)
+                //TODO: Neste momento deverá:
+                // 1) Ser cobrado o valor do Solicitante
+                // 2) Notificar Profissional
+                // 3) Criar um serviço com este orçamento
             }else{
                 r.setEscolhida(false);
             }
