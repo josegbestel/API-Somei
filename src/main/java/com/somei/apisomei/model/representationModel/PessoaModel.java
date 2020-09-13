@@ -14,9 +14,9 @@ public class PessoaModel{
     private Integer anoNascimento;
 
     @NotBlank
-    @NotNull
     @Size(max = 11, min=10)
     private String telefone;
+
     private String avatar;
 
     public String getNome() {

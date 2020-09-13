@@ -41,12 +41,10 @@ public class Pessoa implements Serializable {
     private int anoNascimento;
 
     @NotBlank
-    @NotNull
     @Size(max = 11, min=10)
     private String telefone;
 
     @NotBlank
-    @NotNull
     @Email
     @Column(unique = true)
     private String email;
@@ -62,7 +60,6 @@ public class Pessoa implements Serializable {
     private LocalDateTime dtAtivo;
 
     @NotBlank
-    @NotNull
     @Size(min=8)
     private String senha;
 
