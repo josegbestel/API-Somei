@@ -17,4 +17,6 @@ public interface CategoriaMeiRepository extends JpaRepository<CategoriaMei, Long
     Optional<List<CategoriaMei>> findByTituloContains(String titulo);
 
     List<CategoriaMei> findByTituloContainsIgnoreCase(String titulo);
+
+    Optional<CategoriaMei> findByTitulo(String categoriaTitulo);
 }
