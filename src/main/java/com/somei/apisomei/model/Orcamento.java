@@ -124,7 +124,15 @@ public class Orcamento implements Serializable {
     }
 
     public List<RespostaOrcamento> getRespostas() {
-        return respostas;
+        List<RespostaOrcamento> respondidas = new ArrayList<>();
+
+        for(RespostaOrcamento r : this.respostas){
+            if(r.getDtResposta() != null){
+                respondidas.add(r);
+            }
+        }
+
+        return respondidas.size() > 0 ? respostas : null;
     }
 
     public void setRespostas(List<RespostaOrcamento> respostas) {
