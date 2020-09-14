@@ -58,6 +58,30 @@ public class Orcamento implements Serializable {
 
     private LocalDateTime dtInativo;
 
+    //TODO: AUTORIA
+    private float valorMinimo;
+    private float valorMaximo;
+
+    public float getValorMinimo() {
+        return valorMinimo;
+    }
+    public void setValorMinimo(float valorMinimo) {
+        this.valorMinimo = valorMinimo;
+    }
+
+    public float getValorMaximo() {
+        return valorMaximo;
+    }
+    public void setValorMaximo(float valorMaximo) {
+        this.valorMaximo = valorMaximo;
+    }
+
+    public float getMediaValor(){
+        return (valorMaximo+valorMinimo)/2;
+    }
+
+    // ==============================
+
     @OneToMany(mappedBy = "orcamento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
 
@@ -229,6 +253,13 @@ public class Orcamento implements Serializable {
         orcamento.setServico(orcamentoNovoModel.getServico());
         orcamento.setSolicitante(solicitante);
         orcamento.setCategoria(categoria);
+
+        orcamento.setValorMaximo(orcamentoNovoModel.getValorMaximo());
+        orcamento.setValorMinimo(orcamentoNovoModel.getValorMinimo());
+
+        System.out.println("minimo: " + orcamento.valorMinimo);
+        System.out.println("maximo: " + orcamento.valorMaximo);
+
 
         return orcamento;
     }
