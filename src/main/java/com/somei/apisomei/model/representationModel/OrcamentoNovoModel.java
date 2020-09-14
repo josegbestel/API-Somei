@@ -22,6 +22,27 @@ public class OrcamentoNovoModel implements Serializable {
     private List<String> fotos;
     private Localizacao localizacao;
 
+    //TODO: AUTORIA
+    private float valorMinimo;
+    private float valorMaximo;
+
+    public float getValorMinimo() {
+        return valorMinimo;
+    }
+    public void setValorMinimo(float valorMinimo) {
+        this.valorMinimo = valorMinimo;
+    }
+
+    public float getValorMaximo() {
+        return valorMaximo;
+    }
+
+    public void setValorMaximo(float valorMaximo) {
+        this.valorMaximo = valorMaximo;
+    }
+
+    // ==============================
+
     public long getSolicitanteId() {
         return solicitanteId;
     }
@@ -79,7 +100,6 @@ public class OrcamentoNovoModel implements Serializable {
         orcamento.setServico(this.servico);
         orcamento.setSolicitante(solicitante);
         orcamento.setCategoria(categoria);
-
         return orcamento;
 
     }
