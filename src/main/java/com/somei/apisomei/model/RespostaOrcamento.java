@@ -30,7 +30,7 @@ public class RespostaOrcamento implements Serializable {
     private Profissional profissional;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Orcamento orcamento;
+    private Servico servico;
 
     @ManyToOne
     @JoinColumn(name = "agenda_id")
@@ -84,19 +84,19 @@ public class RespostaOrcamento implements Serializable {
         this.profissional = profissional;
     }
 
-    private Orcamento getOrcamento() {
-        return orcamento;
+    private Servico getOrcamento() {
+        return servico;
     }
 
     @JsonIgnore
-    public Orcamento getOcamentoClean() {
-        Orcamento orcamento = this.orcamento;
-        orcamento.setRespostas(new ArrayList<>());
-        return orcamento;
+    public Servico getOcamentoClean() {
+        Servico servico = this.servico;
+        servico.setRespostas(new ArrayList<>());
+        return servico;
     }
 
-    public void setOrcamento(Orcamento orcamento) {
-        this.orcamento = orcamento;
+    public void setOrcamento(Servico servico) {
+        this.servico = servico;
     }
 
     public Agenda getAgenda() {

@@ -1,23 +1,22 @@
 package com.somei.apisomei.model.representationModel;
 
 import com.somei.apisomei.model.*;
-import com.somei.apisomei.model.enums.StatusOrcamento;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-public class OrcamentoNovoModel implements Serializable {
+public class ServicoNovoModel implements Serializable {
 
     @NotNull
     private long solicitanteId;
 
-    @NotNull
-    private long categoriaMeiId;
+    @NotBlank
+    private String categoriaMeiTitulo;
 
     @NotBlank
-    private String servico;
+    private String descricao;
     private List<Agenda> agendas;
     private List<String> fotos;
     private Localizacao localizacao;
@@ -30,20 +29,20 @@ public class OrcamentoNovoModel implements Serializable {
         this.solicitanteId = solicitanteId;
     }
 
-    public long getCategoriaMeiId() {
-        return categoriaMeiId;
+    public String getCategoriaMeiTitulo() {
+        return categoriaMeiTitulo;
     }
 
-    public void setCategoriaMeiId(long categoriaId) {
-        this.categoriaMeiId = categoriaId;
+    public void setCategoriaMeiTitulo(String categoriaMeiTitulo) {
+        this.categoriaMeiTitulo = categoriaMeiTitulo;
     }
 
-    public String getServico() {
-        return servico;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setServico(String servico) {
-        this.servico = servico;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public List<Agenda> getAgendas() {
@@ -70,17 +69,16 @@ public class OrcamentoNovoModel implements Serializable {
         this.localizacao = localizacao;
     }
 
-    public Orcamento byModel(Solicitante solicitante, CategoriaMei categoria){
-        Orcamento orcamento = new Orcamento();
-        orcamento.setLocalizacao(this.localizacao);
+    public Servico byModel(Solicitante solicitante, CategoriaMei categoria){
+        Servico servico = new Servico();
+        servico.setLocalizacao(this.localizacao);
 //        orcamento.setAgendasEspecificas(this.agendasEspecificas);
 //        orcamento.setAgendasDinamicas(this.agendasDinamicas);
-        orcamento.setFotos(this.fotos);
-        orcamento.setServico(this.servico);
-        orcamento.setSolicitante(solicitante);
-        orcamento.setCategoria(categoria);
-
-        return orcamento;
+        servico.setFotos(this.fotos);
+        servico.setDescricao(this.descricao);
+        servico.setSolicitante(solicitante);
+        servico.setCategoria(categoria);
+        return servico;
 
     }
 }

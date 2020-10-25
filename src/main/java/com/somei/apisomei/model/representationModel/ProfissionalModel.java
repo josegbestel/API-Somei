@@ -5,6 +5,7 @@ import com.somei.apisomei.model.Localizacao;
 import com.somei.apisomei.model.Profissional;
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -39,10 +40,14 @@ public class ProfissionalModel implements Serializable {
     @NotNull
     private int anoNascimento;
 
-    @NotNull
+    @NotBlank
     private String categoriaTitulo;
 
+    @NotNull
     private Localizacao localizacao;
+
+    @NotNull
+    private float metaMensal;
 
     public String getNome() {
         return nome;
@@ -77,11 +82,19 @@ public class ProfissionalModel implements Serializable {
     }
 
     public String getTelefone() {
-        return telefone;
+        return telefone
+                .replace("(", "")
+                .replace(")", "")
+                .replace(" ", "")
+                .replace("-", "");
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        this.telefone = telefone
+                .replace("(", "")
+                .replace(")", "")
+                .replace(" ", "")
+                .replace("-", "");
     }
 
     public String getSenha() {
@@ -122,6 +135,14 @@ public class ProfissionalModel implements Serializable {
 
     public void setLocalizacao(Localizacao localizacao) {
         this.localizacao = localizacao;
+    }
+
+    public float getMetaMensal() {
+        return metaMensal;
+    }
+
+    public void setMetaMensal(float metaMensal) {
+        this.metaMensal = metaMensal;
     }
 
     public Profissional byModel(CategoriaMei categoriaMei){

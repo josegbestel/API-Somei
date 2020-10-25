@@ -1,6 +1,5 @@
 package com.somei.apisomei.repository;
 
-import com.somei.apisomei.model.Orcamento;
 import com.somei.apisomei.model.RespostaOrcamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
