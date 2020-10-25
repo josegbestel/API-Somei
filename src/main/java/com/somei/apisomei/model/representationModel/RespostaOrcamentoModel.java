@@ -1,11 +1,10 @@
 package com.somei.apisomei.model.representationModel;
 
-import com.somei.apisomei.model.Orcamento;
+import com.somei.apisomei.model.Servico;
 import com.somei.apisomei.model.Profissional;
 import com.somei.apisomei.model.RespostaOrcamento;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class RespostaOrcamentoModel {
 
@@ -15,7 +14,7 @@ public class RespostaOrcamentoModel {
     private String observacao;
     private boolean escolhida;
     private Profissional profissional;
-    private Orcamento orcamento;
+    private Servico servico;
 
     public long getId() {
         return id;
@@ -65,12 +64,12 @@ public class RespostaOrcamentoModel {
         this.profissional = profissional;
     }
 
-    public Orcamento getOrcamento() {
-        return orcamento;
+    public Servico getOrcamento() {
+        return servico;
     }
 
-    public void setOrcamento(Orcamento orcamento) {
-        this.orcamento = orcamento;
+    public void setOrcamento(Servico servico) {
+        this.servico = servico;
     }
 
     static public RespostaOrcamentoModel toModel(RespostaOrcamento resposta){

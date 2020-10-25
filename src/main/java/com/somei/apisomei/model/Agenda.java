@@ -37,7 +37,7 @@ public class Agenda implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "orcamento_id")
-    private Orcamento orcamento;
+    private Servico servico;
 
     @OneToMany(mappedBy = "agenda")
     private List<RespostaOrcamento> respostas;
@@ -90,11 +90,11 @@ public class Agenda implements Serializable {
         this.dinamica = dinamica;
     }
 
-    private Orcamento getOrcamento() {
-        return orcamento;
+    private Servico getOrcamento() {
+        return servico;
     }
 
-    public void setOrcamento(Orcamento orcamento) {
-        this.orcamento = orcamento;
+    public void setOrcamento(Servico servico) {
+        this.servico = servico;
     }
 }

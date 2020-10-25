@@ -1,6 +1,6 @@
 package com.somei.apisomei.resource;
 
-import com.somei.apisomei.model.Orcamento;
+import com.somei.apisomei.model.Servico;
 import com.somei.apisomei.model.RespostaOrcamento;
 import com.somei.apisomei.model.representationModel.RespostaOrcamentoModel;
 import com.somei.apisomei.model.representationModel.RespostaOrcamentoNovoModel;
@@ -31,7 +31,7 @@ public class RespostaOrcamentoResource {
 
     //Obter por profissional
     @GetMapping("/profissional/{id}")
-    @ApiOperation("Obtem todas as respostas designadas a um determinado profissional")
+    @ApiOperation("Obtem todas as solicitações designadas a um determinado profissional")
     public ResponseEntity<List<RespostaOrcamentoModel>> obterPorProfissional(@PathVariable(value = "id") long id){
         return ResponseEntity.ok(respostaOrcamentoService.readByProfissional(id));
     }
@@ -46,7 +46,7 @@ public class RespostaOrcamentoResource {
 
     @GetMapping("/{id}/orcamento")
     @ApiOperation("Obtem um orçamento a partir de uma resposta")
-    public ResponseEntity<Orcamento> obterOrcamento(@PathVariable(value = "id") long id){
+    public ResponseEntity<Servico> obterOrcamento(@PathVariable(value = "id") long id){
         return ResponseEntity.ok(respostaOrcamentoService.obterOrcamento(id));
     }
 }

@@ -3,12 +3,92 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:github.com" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:heroku" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:remote" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/NotaFiscal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/AddressNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/BorrowerNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/CityNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/CompaniesListNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/CompaniesNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/CompanyNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/ProviderNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/dto/ServiceInvoiceNfeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/StatusServico.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinalizacaoServicoModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/FinanceiroRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/NotaFiscalRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/ServicoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/FinanceiroResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/NfeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/OrcamentoNovoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/OrcamentoNovoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Agenda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Agenda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Avaliacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Avaliacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/CategoriaMei.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Commentary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Localizacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Note.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Orcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Servico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/RespostaOrcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/RespostaOrcamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/StatusOrcamento.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/AvaliacaoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/AvaliacaoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/OrcamentoNovoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/ServicoNovoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/ProfissionalModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/ProfissionalModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/RespostaOrcamentoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/RespostaOrcamentoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/RespostaOrcamentoNovoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/RespostaOrcamentoNovoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/CommentaryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/NoteRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/OrcamentoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/RespostaOrcamentoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/RespostaOrcamentoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/NoteResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/OrcamentoResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ServicoResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ProfissionalResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ProfissionalResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/RespostaOrcamentoResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/RespostaOrcamentoResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/CommentaryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/NoteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/OrcamentoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ServicoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ProfissionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ProfissionalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/RespostaOrcamentoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/RespostaOrcamentoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomTime.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +99,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -52,6 +132,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.somei.apisomei.model.dto" />
       <recent name="com.somei.apisomei.model.representationModel" />
       <recent name="com.somei.apisomei.model" />
       <recent name="com.somei.apisomei.model.enum" />
@@ -108,30 +189,71 @@
       <screen x="0" y="23" width="1440" height="807" />
     </state>
     <state x="208" y="23" key="#Project_Structure/0.23.1440.807@0.23.1440.807" timestamp="1600067060806" />
-    <state x="533" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1600121326722">
-      <screen x="0" y="23" width="1440" height="807" />
+    <state x="533" y="117" width="374" height="698" key="#com.intellij.ide.util.MemberChooser" timestamp="1603666227632">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state x="533" y="117" key="#com.intellij.ide.util.MemberChooser/0.23.1440.807@0.23.1440.807" timestamp="1600121326722" />
-    <state width="1398" height="207" key="GridCell.Tab.0.bottom" timestamp="1600121796874">
-      <screen x="0" y="23" width="1440" height="807" />
+    <state x="533" y="117" width="374" height="698" key="#com.intellij.ide.util.MemberChooser/0.23.1440.811@0.23.1440.811" timestamp="1603666227632" />
+    <state x="160" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603668271101">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
-    <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.807@0.23.1440.807" timestamp="1600121796874" />
-    <state width="1398" height="207" key="GridCell.Tab.0.center" timestamp="1600121796873">
-      <screen x="0" y="23" width="1440" height="807" />
+    <state x="160" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.811@0.23.1440.811" timestamp="1603668271101" />
+    <state x="458" y="182" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603580882074">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
-    <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.807@0.23.1440.807" timestamp="1600121796873" />
-    <state width="1398" height="207" key="GridCell.Tab.0.left" timestamp="1600121796873">
-      <screen x="0" y="23" width="1440" height="807" />
+    <state x="458" y="182" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.811@0.23.1440.811" timestamp="1603580882074" />
+    <state width="1398" height="208" key="GridCell.Tab.0.bottom" timestamp="1603668049978">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
-    <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.807@0.23.1440.807" timestamp="1600121796873" />
-    <state width="1398" height="207" key="GridCell.Tab.0.right" timestamp="1600121796874">
-      <screen x="0" y="23" width="1440" height="807" />
+    <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.807@0.23.1440.807" timestamp="1600169654343" />
+    <state width="1398" height="208" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1603668049978" />
+    <state width="1398" height="208" key="GridCell.Tab.0.center" timestamp="1603668049977">
+      <screen x="0" y="23" width="1440" height="811" />
     </state>
-    <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.807@0.23.1440.807" timestamp="1600121796874" />
+    <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.807@0.23.1440.807" timestamp="1600169654342" />
+    <state width="1398" height="208" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1603668049977" />
+    <state width="1398" height="208" key="GridCell.Tab.0.left" timestamp="1603668049976">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.807@0.23.1440.807" timestamp="1600169654341" />
+    <state width="1398" height="208" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1603668049976" />
+    <state width="1398" height="208" key="GridCell.Tab.0.right" timestamp="1603668049977">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.807@0.23.1440.807" timestamp="1600169654342" />
+    <state width="1398" height="208" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1603668049977" />
+    <state width="1398" height="259" key="GridCell.Tab.1.bottom" timestamp="1603073451852">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="259" key="GridCell.Tab.1.bottom/0.23.1440.811@0.23.1440.811" timestamp="1603073451852" />
+    <state width="1398" height="259" key="GridCell.Tab.1.center" timestamp="1603073451852">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="259" key="GridCell.Tab.1.center/0.23.1440.811@0.23.1440.811" timestamp="1603073451852" />
+    <state width="1398" height="259" key="GridCell.Tab.1.left" timestamp="1603073451851">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="259" key="GridCell.Tab.1.left/0.23.1440.811@0.23.1440.811" timestamp="1603073451851" />
+    <state width="1398" height="259" key="GridCell.Tab.1.right" timestamp="1603073451852">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state width="1398" height="259" key="GridCell.Tab.1.right/0.23.1440.811@0.23.1440.811" timestamp="1603073451852" />
+    <state x="258" y="90" key="Maven.ArtifactSearchDialog" timestamp="1603036633189">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state x="258" y="90" key="Maven.ArtifactSearchDialog/0.23.1440.811@0.23.1440.811" timestamp="1603036633189" />
     <state x="245" y="169" width="950" height="617" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1600075980273">
       <screen x="0" y="23" width="1440" height="807" />
     </state>
     <state x="245" y="169" width="950" height="617" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1440.807@0.23.1440.807" timestamp="1600075980273" />
+    <state x="417" y="183" width="604" height="490" key="find.popup" timestamp="1603066329261">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state x="417" y="183" width="604" height="490" key="find.popup/0.23.1440.811@0.23.1440.811" timestamp="1603066329261" />
+    <state x="385" y="158" width="670" height="676" key="search.everywhere.popup" timestamp="1603037193134">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state x="385" y="158" width="670" height="676" key="search.everywhere.popup/0.23.1440.811@0.23.1440.811" timestamp="1603037193134" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class RespostaOrcamentoNovoModel implements Serializable {
 
     @NotNull
-    private long orcamentoId;
+    private long servicoId;
 
     @NotNull
     private float valor;
@@ -17,12 +17,12 @@ public class RespostaOrcamentoNovoModel implements Serializable {
     @NotNull
     private long AgendaId;
 
-    public long getOrcamentoId() {
-        return orcamentoId;
+    public long getServicoId() {
+        return servicoId;
     }
 
-    public void setOrcamentoId(long orcamentoId) {
-        this.orcamentoId = orcamentoId;
+    public void setServicoId(long servicoId) {
+        this.servicoId = servicoId;
     }
 
     public float getValor() {

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.somei.apisomei.model.enums.AuthType;
-import com.somei.apisomei.model.enums.StatusOrcamento;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -210,25 +209,25 @@ public class Pessoa implements Serializable {
     }
 
     @JsonIgnore
-    protected List<String> getTop3Servicos(List<Orcamento> orcamentos){
-        HashMap<String, Integer> servicos = new HashMap<>();
+    protected List<String> getTop3Servicos(List<Servico> orcamentos){
+        HashMap<String, Integer> servicosMap = new HashMap<>();
 
         //Pega todos os serviços que fez e adiciona no map
-        for (Orcamento o : orcamentos) {
+        for (Servico o : orcamentos) {
             //TODO: Habilitar esse if quando tiver o fluxo completo (2a parte)
 //            if(o.getStatus() == StatusOrcamento.FINALIZADO){
-            if(servicos.containsKey(o.getServico())){
-                servicos.put(o.getServico(), servicos.get(o.getServico())+1);
+            if(servicosMap.containsKey(o.getDescricao())){
+                servicosMap.put(o.getDescricao(), servicosMap.get(o.getDescricao())+1);
             }else{
-                servicos.put(o.getServico(), 1);
+                servicosMap.put(o.getDescricao(), 1);
             }
 //            }
         }
 
         //Se possui pelo menos 1
-        if(servicos.size() > 0){
+        if(servicosMap.size() > 0){
             //Ordena o map
-            Map<String, Integer> mapOrdenada = servicos.entrySet()
+            Map<String, Integer> mapOrdenada = servicosMap.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
                     .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));

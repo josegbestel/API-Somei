@@ -1,10 +1,12 @@
 package com.somei.apisomei.resource;
 
 import com.somei.apisomei.model.Profissional;
+import com.somei.apisomei.model.dto.CompaniesNfeDTO;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
 import com.somei.apisomei.model.representationModel.ProfissionalModel;
 import com.somei.apisomei.model.representationModel.ProfissionalPerfilModel;
+import com.somei.apisomei.service.NfeService;
 import com.somei.apisomei.service.ProfissionalService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +28,15 @@ public class ProfissionalResource {
     @Autowired
     ProfissionalService profissionalService;
 
+    @Autowired
+    NfeService nfeService;
+
+    //teste NFE.io
+//    @GetMapping("/teste")
+//    public ResponseEntity<CompaniesNfeDTO> teste(){
+//        return ResponseEntity.ok(nfeService.consultarEmpresa());
+//    }
+
     //login
     @GetMapping("/login")
     @ApiOperation("Fazer login: retorna as informações do solicitante a partir do usuário de autenticação")
@@ -37,7 +48,7 @@ public class ProfissionalResource {
     //createProfissional
     @PostMapping
     @ApiOperation("Cria um profissional")
-    public ResponseEntity<Profissional> createProfissional(@Valid @RequestBody ProfissionalModel profissionalModel){
+    public ResponseEntity<Profissional> createProfissional(@RequestBody @Valid ProfissionalModel profissionalModel){
         return ResponseEntity.ok(profissionalService.create(profissionalModel));
     }
 
