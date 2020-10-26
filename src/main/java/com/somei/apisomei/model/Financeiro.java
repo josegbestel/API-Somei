@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,12 +18,11 @@ public class Financeiro implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank
     @NotNull
     private float metaMensal;
 
     @OneToMany(mappedBy = "financeiro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Despesa> despesas;
+    private List<Lancamento> lancamentos = new ArrayList<>();
 
     @OneToMany(mappedBy = "financeiro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DepositoBancario> depositos;
@@ -46,12 +46,17 @@ public class Financeiro implements Serializable {
         this.metaMensal = metaMensal;
     }
 
-    public List<Despesa> getDespesas() {
-        return despesas;
+    public List<Lancamento> getLancamentos() {
+        return lancamentos;
     }
 
-    public void setDespesas(List<Despesa> despesas) {
-        this.despesas = despesas;
+    public void setLancamentos(List<Lancamento> lancamentos) {
+        this.lancamentos = lancamentos;
+    }
+
+    public void addLancamento(Lancamento lancamento){
+        lancamento.setFinanceiro(this);
+        this.lancamentos.add(lancamento);
     }
 
     public List<DepositoBancario> getDepositos() {

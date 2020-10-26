@@ -4,13 +4,16 @@ package com.somei.apisomei.service;
 import com.somei.apisomei.exception.DomainException;
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.CategoriaMei;
+import com.somei.apisomei.model.Financeiro;
 import com.somei.apisomei.model.Profissional;
+import com.somei.apisomei.model.dto.CompanyNfeDTO;
 import com.somei.apisomei.model.enums.AuthType;
 import com.somei.apisomei.model.representationModel.PessoaModel;
 import com.somei.apisomei.model.representationModel.PessoaLoginModel;
 import com.somei.apisomei.model.representationModel.ProfissionalModel;
 import com.somei.apisomei.model.representationModel.ProfissionalPerfilModel;
 import com.somei.apisomei.repository.CategoriaMeiRepository;
+import com.somei.apisomei.repository.FinanceiroRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,12 @@ public class ProfissionalService {
 
     @Autowired
     CategoriaMeiRepository categoriaMeiRepository;
+
+    @Autowired
+    FinanceiroRepository financeiroRepository;
+
+    @Autowired
+    NfeService nfeService;
 
     //Create
     public Profissional create(ProfissionalModel profissionalModel){
@@ -47,9 +56,27 @@ public class ProfissionalService {
         profissional.setAuthType(AuthType.USUARIO);
         profissional.setAtivo(true);
         profissional.setSenha(PasswordEncoder.encode(profissional.getSenha()));
-        Profissional profissionalResponse = profissionalRepository.save(profissional);
 
-        return profissionalResponse;
+        //Salvar empresa no NFe.io
+        CompanyNfeDTO companyNfe = nfeService.obterEmpresa(new CompanyNfeDTO(profissional));
+
+        //Referenciar ID NFe.io no Profisisonal
+        profissional.setIdNfe(companyNfe.getId());
+
+        //Cria um financeiro
+        Financeiro financeiro = new Financeiro();
+        financeiro.setProfissional(profissional);
+        financeiro.setMetaMensal(profissionalModel.getMetaMensal());
+
+        //Salvar profissional no BD
+        profissional = profissionalRepository.save(profissional);
+
+        //Vincular financeiro com o profissional
+        financeiro = financeiroRepository.save(financeiro);
+        profissional.setFinanceiro(financeiro);
+        profissional = profissionalRepository.save(profissional);
+
+        return profissional;
     }
 
     //Read resumo perfil

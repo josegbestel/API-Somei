@@ -38,7 +38,19 @@ public class Avaliacao implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "orcamento_id", nullable = false)
-    private Orcamento orcamento;
+    private Servico servico;
+
+    public Avaliacao() {
+    }
+
+    public Avaliacao(Pessoa criador, Pessoa destinatario, Servico servico, int nota, String comentario){
+        this.criador = criador;
+        this.destinatario = destinatario;
+        this.setServico(servico);
+        this.nota = nota;
+        this.comentario = comentario;
+        this.dtCriacao = LocalDateTime.now();
+    }
 
     public long getId() {
         return id;
@@ -88,11 +100,11 @@ public class Avaliacao implements Serializable {
         this.destinatario = destinatario;
     }
 
-    private Orcamento getOrcamento() {
-        return orcamento;
+    private Servico getServico() {
+        return servico;
     }
 
-    public void setOrcamento(Orcamento orcamento) {
-        this.orcamento = orcamento;
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 }

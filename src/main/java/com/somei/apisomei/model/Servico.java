@@ -3,28 +3,29 @@ package com.somei.apisomei.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.somei.apisomei.model.enums.StatusOrcamento;
-import com.somei.apisomei.model.representationModel.OrcamentoNovoModel;
+import com.somei.apisomei.model.enums.StatusServico;
+import com.somei.apisomei.model.representationModel.ServicoNovoModel;
 import com.somei.apisomei.util.StringListConverter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orcamento")
+@Table(name = "servico")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Orcamento implements Serializable {
+public class Servico implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    private String descricao;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "solicitante_id")
@@ -37,9 +38,6 @@ public class Orcamento implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoriaMei_id")
     private CategoriaMei categoria;
-
-    @NotBlank
-    private String servico;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Localizacao localizacao;
@@ -54,36 +52,20 @@ public class Orcamento implements Serializable {
     private List<String> fotos;
 
     @Enumerated(EnumType.STRING)
-    private StatusOrcamento status;
+    private StatusServico status;
 
     private LocalDateTime dtInativo;
 
-    //TODO: AUTORIA
-    private float valorMinimo;
-    private float valorMaximo;
-
-    public float getValorMinimo() {
-        return valorMinimo;
-    }
-    public void setValorMinimo(float valorMinimo) {
-        this.valorMinimo = valorMinimo;
-    }
-
-    public float getValorMaximo() {
-        return valorMaximo;
-    }
-    public void setValorMaximo(float valorMaximo) {
-        this.valorMaximo = valorMaximo;
-    }
-
-    public float getMediaValor(){
-        return (valorMaximo+valorMinimo)/2;
-    }
-
-    // ==============================
-
-    @OneToMany(mappedBy = "orcamento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "servico", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
+
+    //Informações que o profissional insere no final
+    private float custoExecucao;
+    private String codigoServicoMunicipal;
+
+    //TODO: Relacionar NF e Pagamento
+    @OneToOne(mappedBy = "servico")
+    private NotaFiscal notaFiscal;
 
     public long getId() {
         return id;
@@ -91,6 +73,14 @@ public class Orcamento implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Solicitante getSolicitante() {
@@ -115,14 +105,6 @@ public class Orcamento implements Serializable {
 
     public void setCategoria(CategoriaMei categoria) {
         this.categoria = categoria;
-    }
-
-    public String getServico() {
-        return servico;
-    }
-
-    public void setServico(String servico) {
-        this.servico = servico;
     }
 
     public Localizacao getLocalizacao() {
@@ -209,11 +191,11 @@ public class Orcamento implements Serializable {
         this.fotos = fotos;
     }
 
-    public StatusOrcamento getStatus() {
+    public StatusServico getStatus() {
         return status;
     }
 
-    public void setStatus(StatusOrcamento status) {
+    public void setStatus(StatusServico status) {
         this.status = status;
     }
 
@@ -227,7 +209,7 @@ public class Orcamento implements Serializable {
 
     public void inativar(){
         this.dtInativo = LocalDateTime.now();
-        this.status = StatusOrcamento.CANCELADO;
+        this.status = StatusServico.CANCELADO;
     }
 
     @JsonIgnore
@@ -243,30 +225,29 @@ public class Orcamento implements Serializable {
         this.avaliacoes.add(avaliacao);
     }
 
-    static public Orcamento byModel(OrcamentoNovoModel orcamentoNovoModel,
-                                    Solicitante solicitante,
-                                    CategoriaMei categoria){
-        Orcamento orcamento = new Orcamento();
-        orcamento.setId(0);
-        orcamento.setLocalizacao(orcamentoNovoModel.getLocalizacao());
-        orcamento.setFotos(orcamentoNovoModel.getFotos());
-        orcamento.setServico(orcamentoNovoModel.getServico());
-        orcamento.setSolicitante(solicitante);
-        orcamento.setCategoria(categoria);
+    public NotaFiscal getNotaFiscal() {
+        return notaFiscal;
+    }
 
-        orcamento.setValorMaximo(orcamentoNovoModel.getValorMaximo());
-        orcamento.setValorMinimo(orcamentoNovoModel.getValorMinimo());
+    public void setNotaFiscal(NotaFiscal notaFiscal) {
+        this.notaFiscal = notaFiscal;
+    }
 
-        System.out.println("minimo: " + orcamento.valorMinimo);
-        System.out.println("maximo: " + orcamento.valorMaximo);
+    static public Servico byModel(ServicoNovoModel servicoNovoModel, Solicitante solicitante, CategoriaMei categoria){
+        Servico servico = new Servico();
+        servico.setId(0);
+        servico.setLocalizacao(servicoNovoModel.getLocalizacao());
+        servico.setFotos(servicoNovoModel.getFotos());
+        servico.setDescricao(servicoNovoModel.getDescricao());
+        servico.setSolicitante(solicitante);
+        servico.setCategoria(categoria);
 
-
-        return orcamento;
+        return servico;
     }
 
     public Avaliacao getAvaliacaoProfissional() {
         for(Avaliacao a : this.avaliacoes){
-            if(a.getDestinatario().getId() == this.profissional.getId())
+            if(a.getCriador().getId() == this.profissional.getId())
                 return a;
         }
         return null;
@@ -278,5 +259,21 @@ public class Orcamento implements Serializable {
                 return a;
         }
         return null;
+    }
+
+    public float getCustoExecucao() {
+        return custoExecucao;
+    }
+
+    public void setCustoExecucao(float custoExecucao) {
+        this.custoExecucao = custoExecucao;
+    }
+
+    public String getCodigoServicoMunicipal() {
+        return codigoServicoMunicipal;
+    }
+
+    public void setCodigoServicoMunicipal(String codigoServicoMunicipal) {
+        this.codigoServicoMunicipal = codigoServicoMunicipal;
     }
 }

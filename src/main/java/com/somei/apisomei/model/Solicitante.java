@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -27,10 +26,18 @@ public class Solicitante extends Pessoa implements Serializable {
     private List<Cartao> cartoes;
 
     @OneToMany(mappedBy = "solicitante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Orcamento> orcamento;
+    private List<Servico> servico;
 
     public String getCpf() {
         return cpf;
+    }
+
+    @JsonIgnore
+    public long getCpfNumber(){
+        String cpfNumber = cpf.replace(".", "");
+        cpfNumber = cpfNumber.replace("-", "");
+
+        return Long.parseLong(cpfNumber);
     }
 
     public void setCpf(String cpf) {
@@ -45,12 +52,12 @@ public class Solicitante extends Pessoa implements Serializable {
         this.cartoes = cartoes;
     }
 
-    private List<Orcamento> getOrcamento() {
-        return orcamento;
+    private List<Servico> getOrcamento() {
+        return servico;
     }
 
     @JsonIgnore
     public List<String> getTopServicos(){
-        return getTop3Servicos(this.orcamento);
+        return getTop3Servicos(this.servico);
     }
 }

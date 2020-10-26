@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class CategoriaMei implements Serializable {
     private List<Profissional> profissionais;
 
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
-    private List<Orcamento> orcamentos;
+    private List<Servico> servicos;
 
 
     public long getId() {

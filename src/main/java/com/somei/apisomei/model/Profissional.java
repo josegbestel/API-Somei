@@ -2,19 +2,15 @@ package com.somei.apisomei.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.somei.apisomei.model.enums.StatusOrcamento;
 import com.somei.apisomei.util.StringListConverter;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.Map.Entry.comparingByKey;
-import static java.util.stream.Collectors.*;
 
 @Entity
 @Table(name = "profissional")
@@ -22,7 +18,6 @@ import static java.util.stream.Collectors.*;
 public class Profissional extends Pessoa implements Serializable {
 
     @NotBlank
-    @NotNull
     @CNPJ
     private String cnpj;
 
@@ -47,11 +42,22 @@ public class Profissional extends Pessoa implements Serializable {
     private Localizacao localizacao;
 
     @OneToMany(mappedBy = "profissional", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Orcamento> orcamento;
+    private List<Servico> servico;
+
+    private String idNfe;
 
 
     public String getCnpj() {
         return cnpj;
+    }
+
+    @JsonIgnore
+    public long getCnpjNumber(){
+        String cnpjClean = cnpj.replace(".", "");
+        cnpjClean = cnpjClean.replace("-", "");
+        cnpjClean = cnpjClean.replace("/", "");
+
+        return Long.parseLong(cnpjClean);
     }
 
     public void setCnpj(String cnpj) {
@@ -90,12 +96,31 @@ public class Profissional extends Pessoa implements Serializable {
         this.localizacao = localizacao;
     }
 
-    private List<Orcamento> getOrcamento() {
-        return orcamento;
+    private List<Servico> getOrcamento() {
+        return servico;
+    }
+
+    @JsonIgnore
+    public Financeiro getFinanceiro() {
+        return financeiro;
+    }
+
+    public void setFinanceiro(Financeiro financeiro) {
+        this.financeiro = financeiro;
+    }
+
+    @JsonIgnore
+    public String getIdNfe() {
+        return idNfe;
+    }
+
+    @JsonIgnore
+    public void setIdNfe(String idNfe) {
+        this.idNfe = idNfe;
     }
 
     @JsonIgnore
     public List<String> getTopServicos(){
-        return getTop3Servicos(this.orcamento);
+        return getTop3Servicos(this.servico);
     }
 }

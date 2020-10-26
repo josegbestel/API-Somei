@@ -40,6 +40,11 @@ public class CustomDate implements Serializable {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "CustomDate{" + day + "/" + mounth + "/" + year +'}';
+    }
+
     static public CustomDate byLocalDate(LocalDate date){
         if(date != null){
             CustomDate dateCustom = new CustomDate();

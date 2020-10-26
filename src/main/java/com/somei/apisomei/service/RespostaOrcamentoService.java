@@ -1,15 +1,14 @@
 package com.somei.apisomei.service;
 
-import com.somei.apisomei.exception.DomainException;
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.Agenda;
-import com.somei.apisomei.model.Orcamento;
+import com.somei.apisomei.model.Servico;
 import com.somei.apisomei.model.RespostaOrcamento;
-import com.somei.apisomei.model.enums.StatusOrcamento;
+import com.somei.apisomei.model.enums.StatusServico;
 import com.somei.apisomei.model.representationModel.RespostaOrcamentoModel;
 import com.somei.apisomei.model.representationModel.RespostaOrcamentoNovoModel;
 import com.somei.apisomei.repository.AgendaRepository;
-import com.somei.apisomei.repository.OrcamentoRepository;
+import com.somei.apisomei.repository.ServicoRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.repository.RespostaOrcamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class RespostaOrcamentoService {
     ProfissionalRepository profissionalRepository;
 
     @Autowired
-    OrcamentoRepository orcamentoRepository;
+    ServicoRepository servicoRepository;
 
     //Ler por id
     public RespostaOrcamentoModel read(long id){
@@ -65,12 +64,12 @@ public class RespostaOrcamentoService {
                 .orElseThrow(() -> new NotFoundException("Agenda não localizada"));
 
         //Definir no orçamento status respondida
-        Orcamento orcamento = orcamentoRepository.findById(respostaModel.getOrcamentoId())
-                .orElseThrow(() -> new NotFoundException("Orçamento não localizado"));
+        Servico servico = servicoRepository.findById(respostaModel.getServicoId())
+                .orElseThrow(() -> new NotFoundException("Serviço não localizado"));
 
         //Alterar status do orcamento como RESPONDIDO
-        orcamento.setStatus(StatusOrcamento.RESPONDIDO);
-        orcamentoRepository.save(orcamento);
+        servico.setStatus(StatusServico.RESPONDIDO);
+        servicoRepository.save(servico);
 
         //Definir agenda como escolhida
         respostaOrcamento.setAgenda(agenda);
@@ -83,7 +82,7 @@ public class RespostaOrcamentoService {
     }
 
 
-    public Orcamento obterOrcamento(long respostaId){
+    public Servico obterOrcamento(long respostaId){
         RespostaOrcamento orcamento = respostaOrcamentoRepository.findById(respostaId)
                 .orElseThrow(() -> new NotFoundException("Orcamento não localizado"));
 
