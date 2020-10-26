@@ -1,5 +1,6 @@
 package com.somei.apisomei.service;
 
+import com.somei.apisomei.exception.DomainException;
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.Agenda;
 import com.somei.apisomei.model.Servico;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RespostaOrcamentoService {
@@ -49,6 +51,9 @@ public class RespostaOrcamentoService {
         List<RespostaOrcamento> respostas = respostaOrcamentoRepository.findByProfissionalIdOrderByDtRespostaDesc(id)
                 .orElseThrow(() -> new NotFoundException("Profissional não possui respostas vinculadas."));
 
+        //Filtrar apenas não respondidos
+        respostas = respostas.stream().filter(r -> r.getDtResposta() == null).collect(Collectors.toList());
+
         List<RespostaOrcamentoModel> models = new ArrayList<>();
         respostas.forEach(r -> models.add(RespostaOrcamentoModel.toModel(r)));
 
@@ -59,6 +64,10 @@ public class RespostaOrcamentoService {
     public RespostaOrcamento updateResposta(long idResposta, RespostaOrcamentoNovoModel respostaModel){
         RespostaOrcamento respostaOrcamento = respostaOrcamentoRepository.findById(idResposta)
                 .orElseThrow(() -> new NotFoundException("Resposta não localizada"));
+
+        //Verificar se já foi respondida
+        if(respostaOrcamento.getDtResposta() != null)
+            throw new DomainException("Esta solicitação já foi respondida");
 
         Agenda agenda = agendaRepository.findById(respostaModel.getAgendaId())
                 .orElseThrow(() -> new NotFoundException("Agenda não localizada"));

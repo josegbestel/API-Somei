@@ -11,6 +11,4 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 
     Optional<List<Lancamento>> findByFinanceiroIdAndDtVencimentoBetween(long financeiroId, LocalDate start, LocalDate end);
 
-
-    Optional<List<Lancamento>> findByDtVencimentoBetween(LocalDate start, LocalDate end);
 }

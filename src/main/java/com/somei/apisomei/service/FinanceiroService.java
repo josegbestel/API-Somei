@@ -3,18 +3,14 @@ package com.somei.apisomei.service;
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.Lancamento;
 import com.somei.apisomei.model.Profissional;
-import com.somei.apisomei.repository.FinanceiroRepository;
 import com.somei.apisomei.repository.LancamentoRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.util.CustomDate;
-import com.somei.apisomei.util.CustomDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FinanceiroService {
