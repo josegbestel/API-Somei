@@ -58,10 +58,10 @@ public class ProfissionalService {
         profissional.setSenha(PasswordEncoder.encode(profissional.getSenha()));
 
         //Salvar empresa no NFe.io
-//        CompanyNfeDTO companyNfe = nfeService.obterEmpresa(new CompanyNfeDTO(profissional));
+        CompanyNfeDTO companyNfe = nfeService.obterEmpresa(new CompanyNfeDTO(profissional));
 
         //Referenciar ID NFe.io no Profisisonal
-//        profissional.setIdNfe(companyNfe.getId());
+        profissional.setIdNfe(companyNfe.getId());
 
         //Cria um financeiro
         Financeiro financeiro = new Financeiro();
