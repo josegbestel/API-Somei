@@ -1,15 +1,20 @@
 package com.somei.apisomei.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.somei.apisomei.util.CustomDate;
+import com.somei.apisomei.util.CustomDateTime;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "despesa")
-public class Despesa implements Serializable {
+@Table(name = "lancamento")
+public class Lancamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +31,7 @@ public class Despesa implements Serializable {
     private boolean fixa;
 
     @NotNull
-    private LocalDateTime dtVencimento;
+    private LocalDate dtVencimento;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "financeiro_id", nullable = false)
@@ -64,11 +69,21 @@ public class Despesa implements Serializable {
         this.fixa = fixa;
     }
 
-    public LocalDateTime getDtVencimento() {
-        return dtVencimento;
+    public CustomDate getDtVencimento() {
+        return CustomDate.byLocalDate(dtVencimento);
     }
 
-    public void setDtVencimento(LocalDateTime dtVencimento) {
-        this.dtVencimento = dtVencimento;
+    public void setDtVencimento(CustomDate dtVencimento) {
+        this.dtVencimento = dtVencimento.toLocalDate();
+    }
+
+    @JsonIgnore
+    public Financeiro getFinanceiro() {
+        return financeiro;
+    }
+
+    @JsonIgnore
+    public void setFinanceiro(Financeiro financeiro) {
+        this.financeiro = financeiro;
     }
 }

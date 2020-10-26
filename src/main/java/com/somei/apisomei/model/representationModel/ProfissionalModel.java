@@ -46,7 +46,6 @@ public class ProfissionalModel implements Serializable {
     @NotNull
     private Localizacao localizacao;
 
-    @NotNull
     private float metaMensal;
 
     public String getNome() {
