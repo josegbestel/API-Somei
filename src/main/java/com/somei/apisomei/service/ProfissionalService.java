@@ -63,16 +63,16 @@ public class ProfissionalService {
         //Referenciar ID NFe.io no Profisisonal
 //        profissional.setIdNfe(companyNfe.getId());
 
-        //Salvar profissional no BD
-        profissional = profissionalRepository.save(profissional);
-
         //Cria um financeiro
         Financeiro financeiro = new Financeiro();
         financeiro.setProfissional(profissional);
         financeiro.setMetaMensal(profissionalModel.getMetaMensal());
-        financeiro = financeiroRepository.save(financeiro);
+
+        //Salvar profissional no BD
+        profissional = profissionalRepository.save(profissional);
 
         //Vincular financeiro com o profissional
+        financeiro = financeiroRepository.save(financeiro);
         profissional.setFinanceiro(financeiro);
         profissional = profissionalRepository.save(profissional);
 
