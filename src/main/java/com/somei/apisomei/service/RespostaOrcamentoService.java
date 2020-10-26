@@ -54,6 +54,9 @@ public class RespostaOrcamentoService {
         //Filtrar apenas não respondidos
         respostas = respostas.stream().filter(r -> r.getDtResposta() == null).collect(Collectors.toList());
 
+        if(respostas.size() == 0)
+            throw new NotFoundException("Profissional não possui respostas vinculadas.");
+
         List<RespostaOrcamentoModel> models = new ArrayList<>();
         respostas.forEach(r -> models.add(RespostaOrcamentoModel.toModel(r)));
 
