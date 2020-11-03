@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,10 +21,10 @@ public class DepositoBancario implements Serializable {
     private float valor;
 
     @NotNull
-    private LocalDateTime dataPrevista;
+    private LocalDate dtPrevista;
 
     @NotNull
-    private LocalDateTime dataDeposito;
+    private LocalDateTime dtDeposito;
 
     @Enumerated(EnumType.STRING)
     private StatusDeposito status;
@@ -48,20 +49,20 @@ public class DepositoBancario implements Serializable {
         this.valor = valor;
     }
 
-    public LocalDateTime getDataPrevista() {
-        return dataPrevista;
+    public LocalDate getDtPrevista() {
+        return dtPrevista;
     }
 
-    public void setDataPrevista(LocalDateTime dataPrevista) {
-        this.dataPrevista = dataPrevista;
+    public void setDtPrevista(LocalDate dtPrevista) {
+        this.dtPrevista = dtPrevista;
     }
 
-    public LocalDateTime getDataDeposito() {
-        return dataDeposito;
+    public LocalDateTime getDtDeposito() {
+        return dtDeposito;
     }
 
-    public void setDataDeposito(LocalDateTime dataDeposito) {
-        this.dataDeposito = dataDeposito;
+    public void setDtDeposito(LocalDateTime dtDeposito) {
+        this.dtDeposito = dtDeposito;
     }
 
     public StatusDeposito getStatus() {

@@ -12,6 +12,7 @@ import com.somei.apisomei.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -129,6 +130,7 @@ public class ServicoService {
         //Se já houver avaliação do solicitante, finalizar
         if(servico.getAvaliacaoSolicitante() != null){
             servico.setStatus(StatusServico.FINALIZADO);
+            servico.setDtConcluido(LocalDateTime.now());
             servico = this.emitirNFSe(servico);
         }
 
