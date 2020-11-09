@@ -1,5 +1,6 @@
 package com.somei.apisomei.service;
 
+import com.somei.apisomei.exception.DomainException;
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.Agenda;
 import com.somei.apisomei.model.Servico;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RespostaOrcamentoService {
@@ -49,6 +51,12 @@ public class RespostaOrcamentoService {
         List<RespostaOrcamento> respostas = respostaOrcamentoRepository.findByProfissionalIdOrderByDtRespostaDesc(id)
                 .orElseThrow(() -> new NotFoundException("Profissional não possui respostas vinculadas."));
 
+        //Filtrar apenas não respondidos
+        respostas = respostas.stream().filter(r -> r.getDtResposta() == null).collect(Collectors.toList());
+
+        if(respostas.size() == 0)
+            throw new NotFoundException("Profissional não possui respostas vinculadas.");
+
         List<RespostaOrcamentoModel> models = new ArrayList<>();
         respostas.forEach(r -> models.add(RespostaOrcamentoModel.toModel(r)));
 
@@ -60,12 +68,29 @@ public class RespostaOrcamentoService {
         RespostaOrcamento respostaOrcamento = respostaOrcamentoRepository.findById(idResposta)
                 .orElseThrow(() -> new NotFoundException("Resposta não localizada"));
 
+        //Verificar se já foi respondida
+        if(respostaOrcamento.getDtResposta() != null)
+            throw new DomainException("Esta solicitação já foi respondida");
+
         Agenda agenda = agendaRepository.findById(respostaModel.getAgendaId())
                 .orElseThrow(() -> new NotFoundException("Agenda não localizada"));
 
         //Definir no orçamento status respondida
         Servico servico = servicoRepository.findById(respostaModel.getServicoId())
                 .orElseThrow(() -> new NotFoundException("Serviço não localizado"));
+
+        //Verificar se existe esta resposta no serviço
+        if(servico.getRespostas() != null){
+            boolean respostaInOrcamento = false;
+            for (RespostaOrcamento resposta : servico.getRespostas()) {
+                System.out.println("Entrou no for");
+                if (resposta.getId() == idResposta)
+                    respostaInOrcamento = true;
+            }
+            if(respostaInOrcamento)
+                throw new DomainException("Esta resposta não pertence a este serviço");
+
+        }
 
         //Alterar status do orcamento como RESPONDIDO
         servico.setStatus(StatusServico.RESPONDIDO);

@@ -31,7 +31,7 @@ public class RespostaOrcamentoResource {
 
     //Obter por profissional
     @GetMapping("/profissional/{id}")
-    @ApiOperation("Obtem todas as solicitações designadas a um determinado profissional")
+    @ApiOperation("Obtem todas as solicitações não respondidas designadas a um determinado profissional")
     public ResponseEntity<List<RespostaOrcamentoModel>> obterPorProfissional(@PathVariable(value = "id") long id){
         return ResponseEntity.ok(respostaOrcamentoService.readByProfissional(id));
     }

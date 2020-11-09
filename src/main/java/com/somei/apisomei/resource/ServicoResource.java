@@ -3,6 +3,7 @@ package com.somei.apisomei.resource;
 import com.somei.apisomei.model.Avaliacao;
 import com.somei.apisomei.model.Servico;
 import com.somei.apisomei.model.representationModel.AvaliacaoModel;
+import com.somei.apisomei.model.representationModel.CartaoModel;
 import com.somei.apisomei.model.representationModel.FinalizacaoServicoModel;
 import com.somei.apisomei.model.representationModel.ServicoNovoModel;
 import com.somei.apisomei.service.ServicoService;
@@ -64,8 +65,9 @@ public class ServicoResource {
     @PutMapping("{id}/resposta/{idResposta}/escolher")
     @ApiOperation("Escolhe uma resposta para o serviço ser realizado")
     public ResponseEntity<Object> escolherResposta(@PathVariable(name = "id") long id,
-                                                      @PathVariable(name = "idResposta") long idResposta){
-        servicoService.escolherResposta(id, idResposta);
+                                                   @PathVariable(name = "idResposta") long idResposta,
+                                                   @RequestBody @Valid CartaoModel cartaoModel){
+        servicoService.escolherResposta(id, idResposta, cartaoModel);
         return ResponseEntity.noContent().build();
     }
 

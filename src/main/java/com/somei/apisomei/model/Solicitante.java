@@ -60,4 +60,14 @@ public class Solicitante extends Pessoa implements Serializable {
     public List<String> getTopServicos(){
         return getTop3Servicos(this.servico);
     }
+
+    @JsonIgnore
+    public Cartao getCartaoByNumero(String numeroCartao) {
+        for (Cartao c : this.getCartoes()){
+            if(c.getNumeroCartao().equals(numeroCartao))
+                return c;
+        }
+
+        return null;
+    }
 }

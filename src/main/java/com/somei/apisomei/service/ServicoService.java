@@ -6,12 +6,14 @@ import com.somei.apisomei.model.*;
 import com.somei.apisomei.model.dto.ServiceInvoiceNfeDTO;
 import com.somei.apisomei.model.enums.StatusServico;
 import com.somei.apisomei.model.representationModel.AvaliacaoModel;
+import com.somei.apisomei.model.representationModel.CartaoModel;
 import com.somei.apisomei.model.representationModel.FinalizacaoServicoModel;
 import com.somei.apisomei.model.representationModel.ServicoNovoModel;
 import com.somei.apisomei.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -60,32 +62,6 @@ public class ServicoService {
         return enviarOrcamento(servicoRepository.saveAndFlush(servico));
     }
 
-    private Servico emitirNFSe(Servico servico){
-        //Enviar NF
-        ServiceInvoiceNfeDTO serviceInvoice = nfeService.criarNFSe(servico);
-
-        //Transformar NF p/ o Domain e definir NF no orçamento
-        NotaFiscal nf = new NotaFiscal(serviceInvoice);
-        nf.setServico(servico);
-        nf = notaFiscalRepository.save(nf);
-        servico.setNotaFiscal(nf);
-
-        return servicoRepository.save(servico);
-    }
-
-    private void validServicoStatus(Servico servico){
-        switch (servico.getStatus()){
-            case NOVO:
-                throw new DomainException("Este serviço ainda não foi enviado para os profissionais");
-            case RESPONDIDO:
-                throw new DomainException("Este serviço precisa ter uma resposta escolhida");
-            case FINALIZADO:
-                throw new DomainException("Este serviço já foi finalizado");
-            case CANCELADO:
-                throw new DomainException("Este serviço está cancelado");
-        }
-    }
-
     //Finalização por parte do profissional
     public Avaliacao finalizarServicoProfissional(long idServico, long idProfissional, FinalizacaoServicoModel finalizacao){
         AvaliacaoModel avaliacaoModel = finalizacao.getAvaliacao();
@@ -129,6 +105,7 @@ public class ServicoService {
         //Se já houver avaliação do solicitante, finalizar
         if(servico.getAvaliacaoSolicitante() != null){
             servico.setStatus(StatusServico.FINALIZADO);
+            servico.setDtConcluido(LocalDateTime.now());
             servico = this.emitirNFSe(servico);
         }
 
@@ -255,9 +232,9 @@ public class ServicoService {
     }
 
     //Escolher resposta de um profissional
-    public void escolherResposta(long idOrcamento, long idResposta){
-        Servico servico = servicoRepository.findById(idOrcamento)
-                .orElseThrow(() -> new NotFoundException("Orcaçamento não localizado"));
+    public void escolherResposta(long idServico, long idResposta, CartaoModel cartaoModel){
+        Servico servico = servicoRepository.findById(idServico)
+                .orElseThrow(() -> new NotFoundException("Serviço não localizado"));
 
         RespostaOrcamento resposta = respostaOrcamentoRepository.findById(idResposta)
                 .orElseThrow(() -> new NotFoundException("Resposta não localizada"));
@@ -270,10 +247,11 @@ public class ServicoService {
                 servico.setProfissional(resposta.getProfissional());
                 respostaLocalizada = true;
 
-                //(parte 2)
-                //TODO: Neste momento deverá:
-                // 1) Ser cobrado o valor do Solicitante
-                // 2) Notificar Profissional
+
+                //TODO: Cobrar valor do Solicitante
+                this.cobrarServicoJuno(servico, cartaoModel);
+
+
             }else{
                 r.setEscolhida(false);
             }
@@ -284,4 +262,54 @@ public class ServicoService {
             throw new DomainException("Esta resposta não existe no orçamento");
 
     }
+
+    // [interna] Emitir Nota Fiscal de Serviço
+    private Servico emitirNFSe(Servico servico){
+        //Enviar NF
+        ServiceInvoiceNfeDTO serviceInvoice = nfeService.criarNFSe(servico);
+
+        //Transformar NF p/ o Domain e definir NF no orçamento
+        NotaFiscal nf = new NotaFiscal(serviceInvoice);
+        nf.setServico(servico);
+        nf = notaFiscalRepository.save(nf);
+        servico.setNotaFiscal(nf);
+
+        return servicoRepository.save(servico);
+    }
+
+    // [interna] Validar o Status do Serviço
+    private void validServicoStatus(Servico servico){
+        switch (servico.getStatus()){
+            case NOVO:
+                throw new DomainException("Este serviço ainda não foi enviado para os profissionais");
+            case RESPONDIDO:
+                throw new DomainException("Este serviço precisa ter uma resposta escolhida");
+            case FINALIZADO:
+                throw new DomainException("Este serviço já foi finalizado");
+            case CANCELADO:
+                throw new DomainException("Este serviço está cancelado");
+        }
+    }
+
+    // [interna] Gerar cobrança na Juno
+    private void cobrarServicoJuno(Servico servico, CartaoModel cartaoModel){
+        //TODO: Obter chave de autenticação na Juno
+
+        //TODO: Criar conta digital na Juno se solicitante não tiver
+
+        Cartao cartao = servico.getSolicitante().getCartaoByNumero(cartaoModel.getNumeroCartao());
+
+        //Se o solicitante não tiver esse cartão, cadastrar um novo na Juno
+        if(cartao == null){
+            //TODO: Cadastrar cartão na Juno
+
+        }
+
+        //TODO: Criar cobrança na Juno
+
+        //TODO: Pagar cobrança
+
+    }
+
+
 }

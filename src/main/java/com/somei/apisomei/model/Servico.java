@@ -55,6 +55,7 @@ public class Servico implements Serializable {
     private StatusServico status;
 
     private LocalDateTime dtInativo;
+    private LocalDateTime dtConcluido;
 
     @OneToMany(mappedBy = "servico", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
@@ -212,6 +213,14 @@ public class Servico implements Serializable {
         this.status = StatusServico.CANCELADO;
     }
 
+    public LocalDateTime getDtConcluido() {
+        return dtConcluido;
+    }
+
+    public void setDtConcluido(LocalDateTime dtConcluido) {
+        this.dtConcluido = dtConcluido;
+    }
+
     @JsonIgnore
     public List<Avaliacao> getAvaliacoes() {
         return avaliacoes;
@@ -275,5 +284,12 @@ public class Servico implements Serializable {
 
     public void setCodigoServicoMunicipal(String codigoServicoMunicipal) {
         this.codigoServicoMunicipal = codigoServicoMunicipal;
+    }
+
+    public double getValorContratado(){
+        if(this.getRespostaEscolhida() != null)
+            return this.getRespostaEscolhida().getValor();
+
+        return 0.0;
     }
 }

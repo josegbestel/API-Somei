@@ -65,4 +65,15 @@ public class CustomDateTime implements Serializable {
 
         return custom;
     }
+
+    @Override
+    public String toString() {
+        return "CustomDateTime{" +
+                (day < 10 ? "0"+day : day) +
+                "/" + (mounth < 10 ? "0"+mounth : mounth) +
+                "/" + year +
+                " " + (hour < 10 ? "0"+hour : hour) +
+                ":" + (minute < 10 ? "0"+minute : minute) +
+                '}';
+    }
 }

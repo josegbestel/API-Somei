@@ -1,6 +1,7 @@
 package com.somei.apisomei.resource;
 
 import com.somei.apisomei.model.Lancamento;
+import com.somei.apisomei.model.representationModel.FinanceiroModel;
 import com.somei.apisomei.service.FinanceiroService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,5 +44,12 @@ public class FinanceiroResource {
     @ApiOperation("Obtem todos os lançamentos dentro do mês a partir do id do profissional")
     public ResponseEntity<List<Lancamento>> lancamentosMes(@PathVariable(value = "idProfissional") Long idProfissional){
         return ResponseEntity.ok(financeiroService.readMonthByProfissional(idProfissional));
+    }
+
+    //Obtem o relatório financeiro
+    @GetMapping("/relatorio")
+    @ApiOperation("Retorna todas as informações para preencher o relatório do profissional")
+    public ResponseEntity<FinanceiroModel> relatorioFinanceiro(@PathVariable(value = "idProfissional") Long idProfissional){
+        return ResponseEntity.ok(financeiroService.abstractMonth(idProfissional));
     }
 }
