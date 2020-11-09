@@ -1,7 +1,10 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,6 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "financeiro")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Financeiro implements Serializable {
 
 
@@ -29,6 +34,9 @@ public class Financeiro implements Serializable {
 
     @OneToOne
     private Profissional profissional;
+
+    @OneToOne(mappedBy = "financeiro")
+    private ContaBanco contaBanco;
 
     public long getId() {
         return id;
@@ -67,11 +75,21 @@ public class Financeiro implements Serializable {
         this.depositos = depositos;
     }
 
+    @JsonIgnore
     public Profissional getProfissional() {
         return profissional;
     }
 
+    @JsonIgnore
     public void setProfissional(Profissional profissional) {
         this.profissional = profissional;
+    }
+
+    public ContaBanco getContaBanco() {
+        return contaBanco;
+    }
+
+    public void setContaBanco(ContaBanco contaBanco) {
+        this.contaBanco = contaBanco;
     }
 }

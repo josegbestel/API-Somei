@@ -2,6 +2,7 @@ package com.somei.apisomei.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.somei.apisomei.util.StringListConverter;
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -15,6 +16,7 @@ import static java.util.Map.Entry.comparingByKey;
 @Entity
 @Table(name = "profissional")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profissional extends Pessoa implements Serializable {
 
     @NotBlank
@@ -100,7 +102,6 @@ public class Profissional extends Pessoa implements Serializable {
         return servico;
     }
 
-    @JsonIgnore
     public Financeiro getFinanceiro() {
         return financeiro;
     }
