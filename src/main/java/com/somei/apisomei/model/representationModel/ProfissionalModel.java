@@ -1,6 +1,7 @@
 package com.somei.apisomei.model.representationModel;
 
 import com.somei.apisomei.model.CategoriaMei;
+import com.somei.apisomei.model.ContaBanco;
 import com.somei.apisomei.model.Localizacao;
 import com.somei.apisomei.model.Profissional;
 import org.hibernate.validator.constraints.br.CNPJ;
@@ -47,6 +48,8 @@ public class ProfissionalModel implements Serializable {
     private Localizacao localizacao;
 
     private float metaMensal;
+
+    private ContaBanco contaBanco;
 
     public String getNome() {
         return nome;
@@ -142,6 +145,14 @@ public class ProfissionalModel implements Serializable {
 
     public void setMetaMensal(float metaMensal) {
         this.metaMensal = metaMensal;
+    }
+
+    public ContaBanco getContaBanco() {
+        return contaBanco;
+    }
+
+    public void setContaBanco(ContaBanco contaBanco) {
+        this.contaBanco = contaBanco;
     }
 
     public Profissional byModel(CategoriaMei categoriaMei){

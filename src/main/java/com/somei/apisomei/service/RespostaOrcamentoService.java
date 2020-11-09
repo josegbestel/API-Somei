@@ -79,6 +79,19 @@ public class RespostaOrcamentoService {
         Servico servico = servicoRepository.findById(respostaModel.getServicoId())
                 .orElseThrow(() -> new NotFoundException("Serviço não localizado"));
 
+        //Verificar se existe esta resposta no serviço
+        if(servico.getRespostas() != null){
+            boolean respostaInOrcamento = false;
+            for (RespostaOrcamento resposta : servico.getRespostas()) {
+                System.out.println("Entrou no for");
+                if (resposta.getId() == idResposta)
+                    respostaInOrcamento = true;
+            }
+            if(respostaInOrcamento)
+                throw new DomainException("Esta resposta não pertence a este serviço");
+
+        }
+
         //Alterar status do orcamento como RESPONDIDO
         servico.setStatus(StatusServico.RESPONDIDO);
         servicoRepository.save(servico);

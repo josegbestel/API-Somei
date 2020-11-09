@@ -4,6 +4,7 @@ package com.somei.apisomei.service;
 import com.somei.apisomei.exception.DomainException;
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.CategoriaMei;
+import com.somei.apisomei.model.ContaBanco;
 import com.somei.apisomei.model.Financeiro;
 import com.somei.apisomei.model.Profissional;
 import com.somei.apisomei.model.dto.CompanyNfeDTO;
@@ -13,6 +14,7 @@ import com.somei.apisomei.model.representationModel.PessoaLoginModel;
 import com.somei.apisomei.model.representationModel.ProfissionalModel;
 import com.somei.apisomei.model.representationModel.ProfissionalPerfilModel;
 import com.somei.apisomei.repository.CategoriaMeiRepository;
+import com.somei.apisomei.repository.ContaBancoRepository;
 import com.somei.apisomei.repository.FinanceiroRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.util.PasswordEncoder;
@@ -33,6 +35,9 @@ public class ProfissionalService {
 
     @Autowired
     FinanceiroRepository financeiroRepository;
+
+    @Autowired
+    ContaBancoRepository contaBancoRepository;
 
     @Autowired
     NfeService nfeService;
@@ -57,23 +62,28 @@ public class ProfissionalService {
         profissional.setAtivo(true);
         profissional.setSenha(PasswordEncoder.encode(profissional.getSenha()));
 
-        //Salvar empresa no NFe.io
+        //Obter empresa no NFE
         CompanyNfeDTO companyNfe = nfeService.obterEmpresa(new CompanyNfeDTO(profissional));
-
-        //Referenciar ID NFe.io no Profisisonal
         profissional.setIdNfe(companyNfe.getId());
-
-        //Cria um financeiro
-        Financeiro financeiro = new Financeiro();
-        financeiro.setProfissional(profissional);
-        financeiro.setMetaMensal(profissionalModel.getMetaMensal());
 
         //Salvar profissional no BD
         profissional = profissionalRepository.save(profissional);
 
         //Vincular financeiro com o profissional
+        Financeiro financeiro = new Financeiro();
+        financeiro.setMetaMensal(profissionalModel.getMetaMensal());
+        financeiro.setProfissional(profissional);
         financeiro = financeiroRepository.save(financeiro);
+
+        //Vincular contaBanco com o financeiro
+        ContaBanco contaBanco = profissionalModel.getContaBanco();
+        contaBanco.setFinanceiro(financeiro);
+        contaBanco = contaBancoRepository.save(contaBanco);
+
+        //Salvar td pra finalizar
+        financeiro.setContaBanco(contaBanco);
         profissional.setFinanceiro(financeiro);
+        financeiro = financeiroRepository.save(financeiro);
         profissional = profissionalRepository.save(profissional);
 
         return profissional;
@@ -85,12 +95,6 @@ public class ProfissionalService {
                 .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
         return ProfissionalPerfilModel.toModel(profissional);
     }
-
-    //TODO: Create despesa
-
-    //TODO: Create deposito
-
-    //TODO: Relatorio Financeiro
 
     //Read
     public Profissional read(Long id){
@@ -116,10 +120,6 @@ public class ProfissionalService {
                 .orElseThrow(() -> new NotFoundException("Profissionais não localizados nesta categoria"));
     }
 
-    //TODO: Read perfil
-
-    //TODO: Read resumo
-
 
     //Update by id
     public Profissional update(Long id, PessoaModel pessoa){
@@ -139,7 +139,6 @@ public class ProfissionalService {
     }
 
     //Update Login
-    //TODO: Aprimorar método: deixar mais seguro, poder trocar com e sem senha antiga, com codigo por sms ou email
     public PessoaLoginModel updateLogin(Long id, PessoaLoginModel login) {
         Profissional profissional = profissionalRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Não existe profissional com esse ID"));
