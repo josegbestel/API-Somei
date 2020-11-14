@@ -21,6 +21,7 @@ import com.somei.apisomei.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,6 +97,17 @@ public class ProfissionalService {
         return ProfissionalPerfilModel.toModel(profissional);
     }
 
+    //Inserir foto portfolio
+    public ProfissionalPerfilModel addPortfolioProfile(long idProfissional, String foto){
+        Profissional profissional = profissionalRepository.findById(idProfissional)
+                .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
+        profissional.addPortfolio(foto);
+        System.out.println(profissional.getPortfolio());
+        profissional = profissionalRepository.save(profissional);
+
+        return ProfissionalPerfilModel.toModel(profissional);
+    }
+
     //Read
     public Profissional read(Long id){
         return profissionalRepository.findById(id)
@@ -120,7 +132,6 @@ public class ProfissionalService {
                 .orElseThrow(() -> new NotFoundException("Profissionais não localizados nesta categoria"));
     }
 
-
     //Update by id
     public Profissional update(Long id, PessoaModel pessoa){
         Profissional profissional = profissionalRepository.findById(id)
@@ -128,7 +139,7 @@ public class ProfissionalService {
 
         //Altera as informações requiridas
         profissional.setNome(pessoa.getNome());
-        profissional.setAnoNascimento(pessoa.getAnoNascimento());
+        profissional.setDtNascimento(pessoa.getDtNascimento());
         profissional.setTelefone(pessoa.getTelefone());
         profissional.setAvatar(pessoa.getAvatar());
 
@@ -161,5 +172,29 @@ public class ProfissionalService {
         }
 
         profissionalRepository.deleteById(id);
+    }
+
+    //[temp] função para salvar as infos da juno caso ressete o bd
+    public void updateInfosBancoJuno(Long idProfissional, String account, String token){
+
+        Profissional profissional = profissionalRepository.findById(idProfissional)
+                .orElseThrow(() -> new NotFoundException("profissional não localizado"));
+
+        profissional.setIdAccountJuno(account);
+        profissional.setResourceTokenJuno(token);
+
+        profissionalRepository.save(profissional);
+    }
+
+    //[temp] função para obter as infos da juno para deixar salvo
+    public List<String> obterInfosBancoJuno(long idProfissional){
+        Profissional profissional = profissionalRepository.findById(idProfissional)
+                .orElseThrow(() -> new NotFoundException("profissional não localizado"));
+
+        List<String> infos = new ArrayList<>();
+        infos.add(profissional.getIdAccountJuno());
+        infos.add(profissional.getResourceTokenJuno());
+
+        return infos;
     }
 }

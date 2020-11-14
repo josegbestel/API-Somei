@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.somei.apisomei.model.enums.AuthType;
+import com.somei.apisomei.util.CustomDate;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -13,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -36,8 +39,8 @@ public class Pessoa implements Serializable {
     @Size(max = 255)
     private String nome;
 
-    @Column(name = "ano_nascimento")
-    private int anoNascimento;
+    @NotNull
+    private LocalDate dtNascimento;
 
     @NotBlank
     @Size(max = 11, min=10)
@@ -61,6 +64,10 @@ public class Pessoa implements Serializable {
     @NotBlank
     @Size(min=8)
     private String senha;
+
+    @Column(unique = true)
+    @CPF(message = "CPF invalido")
+    private String cpf;
 
     @JsonIgnore
     @Enumerated(EnumType.STRING)
@@ -89,12 +96,12 @@ public class Pessoa implements Serializable {
         this.nome = nome;
     }
 
-    public int getAnoNascimento() {
-        return anoNascimento;
+    public CustomDate getDtNascimento() {
+        return CustomDate.byLocalDate(dtNascimento);
     }
 
-    public void setAnoNascimento(int anoNascimento) {
-        this.anoNascimento = anoNascimento;
+    public void setDtNascimento(CustomDate dtNascimento) {
+        this.dtNascimento = dtNascimento.toLocalDate();
     }
 
     public String getTelefone() {
@@ -137,6 +144,22 @@ public class Pessoa implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    @JsonIgnore
+    public long getCpfNumber(){
+        String cpfNumber = cpf.replace(".", "");
+        cpfNumber = cpfNumber.replace("-", "");
+
+        return Long.parseLong(cpfNumber);
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public LocalDateTime getDtInativo() {

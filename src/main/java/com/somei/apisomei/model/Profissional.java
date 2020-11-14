@@ -28,7 +28,7 @@ public class Profissional extends Pessoa implements Serializable {
 
     @JsonIgnore
     @Convert(converter = StringListConverter.class)
-    List<String> portfolio;
+    List<String> portfolio = new ArrayList<>();
 
     @OneToOne(mappedBy = "profissional")
     private Financeiro financeiro;
@@ -47,6 +47,8 @@ public class Profissional extends Pessoa implements Serializable {
     private List<Servico> servico;
 
     private String idNfe;
+    private String idAccountJuno;
+    private String resourceTokenJuno;
 
 
     public String getCnpj() {
@@ -78,8 +80,17 @@ public class Profissional extends Pessoa implements Serializable {
         return portfolio;
     }
 
-    public void setPortfolio(List<String> portfolio) {
-        this.portfolio = portfolio;
+    public void setPortfolio(List<String> fotos) {
+        this.portfolio = fotos;
+    }
+
+    public void addPortfolio(String foto){
+        List<String> fotos = new ArrayList<>();
+        if(this.portfolio != null)
+            fotos = new ArrayList<>(this.getPortfolio());
+
+        fotos.add(foto);
+        this.setPortfolio(fotos);
     }
 
     public CategoriaMei getCategoria() {
@@ -118,6 +129,26 @@ public class Profissional extends Pessoa implements Serializable {
     @JsonIgnore
     public void setIdNfe(String idNfe) {
         this.idNfe = idNfe;
+    }
+
+    @JsonIgnore
+    public String getIdAccountJuno() {
+        return idAccountJuno;
+    }
+
+    @JsonIgnore
+    public void setIdAccountJuno(String idAccountJuno) {
+        this.idAccountJuno = idAccountJuno;
+    }
+
+    @JsonIgnore
+    public String getResourceTokenJuno() {
+        return resourceTokenJuno;
+    }
+
+    @JsonIgnore
+    public void setResourceTokenJuno(String resourceTokenJuno) {
+        this.resourceTokenJuno = resourceTokenJuno;
     }
 
     @JsonIgnore

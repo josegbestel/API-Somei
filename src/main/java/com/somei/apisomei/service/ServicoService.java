@@ -10,6 +10,10 @@ import com.somei.apisomei.model.representationModel.CartaoModel;
 import com.somei.apisomei.model.representationModel.FinalizacaoServicoModel;
 import com.somei.apisomei.model.representationModel.ServicoNovoModel;
 import com.somei.apisomei.repository.*;
+import com.somei.apisomei.service.juno.response.ChargeResponse;
+import com.somei.apisomei.service.juno.response.DigitalAccountResponse;
+import com.somei.apisomei.service.juno.response.PaymentResponse;
+import com.somei.apisomei.service.juno.response.PaymentsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +38,9 @@ public class ServicoService {
 
     @Autowired
     RespostaOrcamentoRepository respostaOrcamentoRepository;
+
+    @Autowired
+    PagamentoRepository pagamentoRepository;
 
     @Autowired
     NfeService nfeService;
@@ -247,11 +254,8 @@ public class ServicoService {
                 servico.setProfissional(resposta.getProfissional());
                 respostaLocalizada = true;
 
-
                 //TODO: Cobrar valor do Solicitante
                 this.cobrarServicoJuno(servico, cartaoModel);
-
-
             }else{
                 r.setEscolhida(false);
             }
@@ -293,23 +297,50 @@ public class ServicoService {
 
     // [interna] Gerar cobrança na Juno
     private void cobrarServicoJuno(Servico servico, CartaoModel cartaoModel){
-        //TODO: Obter chave de autenticação na Juno
+        JunoService junoService = new JunoService();
+
+        //Obter chave de autenticação na Juno
+        junoService.gerarTokenAcesso();
+
 
         //TODO: Criar conta digital na Juno se solicitante não tiver
-
-        Cartao cartao = servico.getSolicitante().getCartaoByNumero(cartaoModel.getNumeroCartao());
-
-        //Se o solicitante não tiver esse cartão, cadastrar um novo na Juno
-        if(cartao == null){
-            //TODO: Cadastrar cartão na Juno
-
+        if(servico.getProfissional().getIdAccountJuno() == null){
+            Profissional profissional = servico.getProfissional();
+            DigitalAccountResponse accountResponse = junoService.criarContaDigital(profissional);
+            profissional.setIdAccountJuno(accountResponse.getId());
+            profissional.setResourceTokenJuno(accountResponse.getResourceToken());
+            profissionalRepository.save(profissional);
         }
 
         //TODO: Criar cobrança na Juno
+        if(servico.getPagamento() == null){
+            ChargeResponse chargeResponse = junoService.gerarCobranca(servico);
+            //Instanciar pagamento
+            Pagamento pagamento = new Pagamento();
+            pagamento.setIdCobranca(chargeResponse.getId());
+            pagamento.setServico(servico);
+            pagamento = pagamentoRepository.save(pagamento);
+            servico.setPagamento(pagamento);
+            servico = servicoRepository.save(servico);
+        }
 
         //TODO: Pagar cobrança
-
+        if(servico.getPagamento().getIdPagamento() == null){
+            Pagamento pagamento = servico.getPagamento();
+            PaymentsResponse paymentsResponse = junoService.efetuarPagamento(servico, cartaoModel.getHashCartao());
+            PaymentResponse payment = paymentsResponse.getPayments().get(0);
+            pagamento.setIdTransacao(paymentsResponse.getTransactionId());
+            pagamento.setIdPagamento(payment.getId());
+            pagamento.setDtRealizado(payment.getDate());
+            pagamento.setDtLancamento(payment.getReleaseDate());
+            pagamento.setValor(payment.getAmount());
+            pagamento.setTaxa(payment.getFee());
+            pagamentoRepository.save(pagamento);
+        }
     }
+
+
+
 
 
 }
