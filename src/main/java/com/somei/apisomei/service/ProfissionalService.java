@@ -97,6 +97,17 @@ public class ProfissionalService {
         return ProfissionalPerfilModel.toModel(profissional);
     }
 
+    //Inserir foto portfolio
+    public ProfissionalPerfilModel addPortfolioProfile(long idProfissional, String foto){
+        Profissional profissional = profissionalRepository.findById(idProfissional)
+                .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
+        profissional.addPortfolio(foto);
+        System.out.println(profissional.getPortfolio());
+        profissional = profissionalRepository.save(profissional);
+
+        return ProfissionalPerfilModel.toModel(profissional);
+    }
+
     //Read
     public Profissional read(Long id){
         return profissionalRepository.findById(id)
@@ -120,7 +131,6 @@ public class ProfissionalService {
         return profissionalRepository.findByCategoriaId(categoriaId)
                 .orElseThrow(() -> new NotFoundException("Profissionais não localizados nesta categoria"));
     }
-
 
     //Update by id
     public Profissional update(Long id, PessoaModel pessoa){

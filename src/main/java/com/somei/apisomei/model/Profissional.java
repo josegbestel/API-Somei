@@ -28,7 +28,7 @@ public class Profissional extends Pessoa implements Serializable {
 
     @JsonIgnore
     @Convert(converter = StringListConverter.class)
-    List<String> portfolio;
+    List<String> portfolio = new ArrayList<>();
 
     @OneToOne(mappedBy = "profissional")
     private Financeiro financeiro;
@@ -80,8 +80,17 @@ public class Profissional extends Pessoa implements Serializable {
         return portfolio;
     }
 
-    public void setPortfolio(List<String> portfolio) {
-        this.portfolio = portfolio;
+    public void setPortfolio(List<String> fotos) {
+        this.portfolio = fotos;
+    }
+
+    public void addPortfolio(String foto){
+        List<String> fotos = new ArrayList<>();
+        if(this.portfolio != null)
+            fotos = new ArrayList<>(this.getPortfolio());
+
+        fotos.add(foto);
+        this.setPortfolio(fotos);
     }
 
     public CategoriaMei getCategoria() {

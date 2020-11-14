@@ -17,16 +17,18 @@ public class StringListConverter implements AttributeConverter<List<String>, Str
         if(stringList != null)
             return String.join(SPLIT_CHAR, stringList);
         else{
-            List<String> list = new ArrayList<>();
-            list.add("");
-            return String.join(SPLIT_CHAR, list);
+//            List<String> list = new ArrayList<>();
+//            list.add("nula");
+//            return String.join(SPLIT_CHAR, list);
+
+            return null;
         }
     }
 
     @Override
     public List<String> convertToEntityAttribute(String string) {
         if(string == null){
-            return Arrays.asList("".split(SPLIT_CHAR));
+            return null;
         }else{
             return Arrays.asList(string.split(SPLIT_CHAR));
         }
