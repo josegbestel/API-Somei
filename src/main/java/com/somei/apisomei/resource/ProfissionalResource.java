@@ -102,12 +102,25 @@ public class ProfissionalResource {
         return ResponseEntity.ok(loginNovo);
     }
 
-
     //remove
     @DeleteMapping("/{id}")
     @ApiOperation("Remove um Profissional")
     public ResponseEntity<Object> remove(@PathVariable(value = "id") Long id){
         profissionalService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("tmp/{id}/infos-juno")
+    public ResponseEntity<List<String>> obterInfosJuno(@PathVariable(value = "id") Long id){
+        return ResponseEntity.ok(profissionalService.obterInfosBancoJuno(id));
+    }
+
+    @PutMapping("tmp/{id}/infos-juno")
+    public ResponseEntity<Object> updateInfosJuno(@PathVariable(value = "id") Long id,
+                                                  @RequestParam(value = "token") String token,
+                                                  @RequestParam(value = "account") String account){
+        profissionalService.updateInfosBancoJuno(id, account, token);
+
         return ResponseEntity.noContent().build();
     }
 

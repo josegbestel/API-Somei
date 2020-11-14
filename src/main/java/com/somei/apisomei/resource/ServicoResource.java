@@ -25,14 +25,6 @@ public class ServicoResource {
     @Autowired
     ServicoService servicoService;
 
-    //Teste
-    @GetMapping("/teste")
-    public ResponseEntity<Object> teste(){
-        servicoService.teste();
-
-        return ResponseEntity.noContent().build();
-    }
-
     //CRIAR
     @PostMapping
     @ApiOperation("Cria um serviço")

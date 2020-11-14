@@ -178,7 +178,7 @@ public class ProfissionalModel implements Serializable {
         profissional.setNomeFantasia(this.nomeFantasia);
         profissional.setEmail(this.email);
         profissional.setSenha(this.senha);
-        profissional.setDataNascimento(this.getDtNascimento());
+        profissional.setDtNascimento(this.getDtNascimento());
         profissional.setAvatar(this.avatar);
         profissional.setTelefone(this.telefone);
         profissional.setCategoria(categoriaMei);

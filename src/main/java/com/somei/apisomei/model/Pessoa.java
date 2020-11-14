@@ -39,8 +39,8 @@ public class Pessoa implements Serializable {
     @Size(max = 255)
     private String nome;
 
-    @Column(name = "data_nascimento")
-    private LocalDate dataNascimento;
+    @NotNull
+    private LocalDate dtNascimento;
 
     @NotBlank
     @Size(max = 11, min=10)
@@ -96,12 +96,12 @@ public class Pessoa implements Serializable {
         this.nome = nome;
     }
 
-    public CustomDate getDataNascimento() {
-        return CustomDate.byLocalDate(dataNascimento);
+    public CustomDate getDtNascimento() {
+        return CustomDate.byLocalDate(dtNascimento);
     }
 
-    public void setDataNascimento(CustomDate dataNascimento) {
-        this.dataNascimento = dataNascimento.toLocalDate();
+    public void setDtNascimento(CustomDate dtNascimento) {
+        this.dtNascimento = dtNascimento.toLocalDate();
     }
 
     public String getTelefone() {

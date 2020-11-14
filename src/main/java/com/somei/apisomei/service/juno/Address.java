@@ -20,10 +20,12 @@ public class Address implements Serializable {
     }
 
     public Address(Localizacao localizacao){
-        this.postCode = localizacao.getCep();
+        this.postCode = localizacao.getCep()
+                .replaceAll("-", "")
+                .replaceAll("\\.", "");
         this.street = localizacao.getLogradouro();
         this.number = String.valueOf(localizacao.getNumero());
-        this.complement = localizacao.getComplemento();
+        this.complement = localizacao.getComplemento() == null ? "-" : localizacao.getComplemento();
         this.neighborhood = localizacao.getBairro();
         this.city = localizacao.getCidade();
         this.state = localizacao.getUf();

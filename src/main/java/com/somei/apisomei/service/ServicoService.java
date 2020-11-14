@@ -254,11 +254,8 @@ public class ServicoService {
                 servico.setProfissional(resposta.getProfissional());
                 respostaLocalizada = true;
 
-
                 //TODO: Cobrar valor do Solicitante
                 this.cobrarServicoJuno(servico, cartaoModel);
-
-
             }else{
                 r.setEscolhida(false);
             }
@@ -305,10 +302,10 @@ public class ServicoService {
         //Obter chave de autenticação na Juno
         junoService.gerarTokenAcesso();
 
+
         //TODO: Criar conta digital na Juno se solicitante não tiver
         if(servico.getProfissional().getIdAccountJuno() == null){
             Profissional profissional = servico.getProfissional();
-            String cpf = profissional.getCpf();
             DigitalAccountResponse accountResponse = junoService.criarContaDigital(profissional);
             profissional.setIdAccountJuno(accountResponse.getId());
             profissional.setResourceTokenJuno(accountResponse.getResourceToken());
@@ -322,28 +319,27 @@ public class ServicoService {
             Pagamento pagamento = new Pagamento();
             pagamento.setIdCobranca(chargeResponse.getId());
             pagamento.setServico(servico);
-//            pagamento = pagamentoRepository.save(pagamento);
+            pagamento = pagamentoRepository.save(pagamento);
             servico.setPagamento(pagamento);
-//            servico = servicoRepository.save(servico);
+            servico = servicoRepository.save(servico);
         }
 
         //TODO: Pagar cobrança
-        Pagamento pagamento = servico.getPagamento();
-        PaymentsResponse paymentsResponse = junoService.efetuarPagamento(servico, cartaoModel.getHashCartao());
-        PaymentResponse payment = paymentsResponse.getPayments().get(0);
-        pagamento.setIdTransacao(paymentsResponse.getTransactionId());
-        pagamento.setIdPagamento(payment.getId());
-        pagamento.setDtRealizado(payment.getDate());
-        pagamento.setDtLancamento(payment.getReleaseDate());
-        pagamento.setValor(payment.getAmount());
-        pagamento.setTaxa(payment.getFee());
-//        pagamentoRepository.save(pagamento);
+        if(servico.getPagamento().getIdPagamento() == null){
+            Pagamento pagamento = servico.getPagamento();
+            PaymentsResponse paymentsResponse = junoService.efetuarPagamento(servico, cartaoModel.getHashCartao());
+            PaymentResponse payment = paymentsResponse.getPayments().get(0);
+            pagamento.setIdTransacao(paymentsResponse.getTransactionId());
+            pagamento.setIdPagamento(payment.getId());
+            pagamento.setDtRealizado(payment.getDate());
+            pagamento.setDtLancamento(payment.getReleaseDate());
+            pagamento.setValor(payment.getAmount());
+            pagamento.setTaxa(payment.getFee());
+            pagamentoRepository.save(pagamento);
+        }
     }
 
-    public void teste(){
-        JunoService junoService = new JunoService();
-        junoService.gerarTokenAcesso();
-    }
+
 
 
 

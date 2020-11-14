@@ -32,7 +32,7 @@ public class BillingChargesRequest implements Serializable {
                 .replaceAll("-", "")
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "");
-        this.birthDate = solicitante.getDataNascimento().toString();
+        this.birthDate = solicitante.getDtNascimento().toString();
         this.notify = false;
     }
 

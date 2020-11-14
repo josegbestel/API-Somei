@@ -25,15 +25,15 @@ public class JunoService {
     private static final String API_VERSION = "2";
     private String ACCESS_TOKEN = "";
     private static final String ENDPOINT_API = ApplicationConfig.ENDPOINT_GATEWAY_PAGAMENTO;
-    private static final String RESOURCE_TOKEN = ApplicationConfig.TOKEN_JUNO_PUBLIC;
+    private static final String RESOURCE_TOKEN = ApplicationConfig.TOKEN_JUNO_PRIVATE;
 
     public JunoService() {
     }
 
     private HttpHeaders createHeaders(){
         return new HttpHeaders(){{
-            add( "Authorization", ACCESS_TOKEN );
-            add("Content-Type", "application/json;charset=UTF-8");
+            add( "Authorization", "Bearer " + ACCESS_TOKEN );
+            add("Content-Type", "application/json");
             add("Accept", "application/json");
             add("Keep-Alive", "true");
         }};
@@ -95,7 +95,8 @@ public class JunoService {
         try {
             HttpEntity<PaymentRequest> entity = new HttpEntity<PaymentRequest>(paymentRequest, headers);
             response = template.exchange(request, method, entity, PaymentsResponse.class);
-
+            System.out.println("Transaction ID: " + response.getBody().getTransactionId());
+            System.out.println("Payment ID: " + response.getBody().getPayments().get(0).getId());
             return response.getBody();
         }catch (Exception e){
             throw new DomainException("erro ao efetuar pagamento: " + e.getMessage());
@@ -118,7 +119,7 @@ public class JunoService {
         try {
             HttpEntity<ChargesRequest> entity = new HttpEntity<>(chargesRequest, headers);
             response = template.exchange(request, method, entity, ChargesResponse.class);
-            System.out.println("Charge id: " + response.getBody()
+            System.out.println("Charge ID: " + response.getBody()
                     .getEmbedded()
                     .getCharges()
                     .get(0)
@@ -146,6 +147,7 @@ public class JunoService {
             HttpEntity<DigitalAccountRequest> entity = new HttpEntity<>(digitalAccountRequest, headers);
             response = template.exchange(request, method, entity, DigitalAccountResponse.class);
             System.out.println("DigitalAccount ID: " + response.getBody().getId());
+            System.out.println("DigitalAccount Token: " + response.getBody().getResourceToken());
 
             return response.getBody();
         }catch (Exception e){
@@ -180,10 +182,13 @@ public class JunoService {
             HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(map, headers);
             response = template.exchange(request, method, entity, TokenResponse.class);
             this.ACCESS_TOKEN = response.getBody().getAccessToken();
+            System.out.println("Token acesso: " + this.ACCESS_TOKEN);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        this.ACCESS_TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqb3NlZ2Jlc3RlbEBnbWFpbC5jb20iLCJzY29wZSI6WyJhbGwiXSwiZXhwIjoxNjA1MDU3MTQ5LCJqdGkiOiJmMzU5MTQxYy1kYjI0LTQzMWItYmFkNi0zMzk2MDk2YjlmODEiLCJjbGllbnRfaWQiOiI2ZDR0a2NsZDFZcmloSzdIIn0.nZ_ub30MueupgLGzvvuybEUzBH5cGp7gLppj0O38eAld6q_Fhuu_qE4mklmgOa695ma5sVsAEpI7rOyxOlva4kX0ZS6BPzWV7QhV9DjSywEQlh0oclmn_Ud99tQ_UpmBUfEAJSlEspEAcddsIYtOrElg52wuRFch5gDQJtSawzu4eGk20l2YhVpnokrBJukvOyC6V_XbSwtxHceUnSQUG1bB3e8QpQ6P89QrV03WZYYklOnuZO-G_wY3TxPCzTa3-ztwGq5r4AzOdZtgXNYPMoO2EvTc12WwDT5Cq-PhYcaR2cP_KtogjvBANf6Iw-CsOMlMSfGKvsKD3SjDJd9aPA";
+//        this.ACCESS_TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJqb3NlZ2Jlc3RlbEBnbWFpbC5jb20iLCJzY29wZSI6WyJhbGwiXSwiZXhwIjoxNjA1MDU3MTQ5LCJqdGkiOiJmMzU5MTQxYy1kYjI0LTQzMWItYmFkNi0zMzk2MDk2YjlmODEiLCJjbGllbnRfaWQiOiI2ZDR0a2NsZDFZcmloSzdIIn0.nZ_ub30MueupgLGzvvuybEUzBH5cGp7gLppj0O38eAld6q_Fhuu_qE4mklmgOa695ma5sVsAEpI7rOyxOlva4kX0ZS6BPzWV7QhV9DjSywEQlh0oclmn_Ud99tQ_UpmBUfEAJSlEspEAcddsIYtOrElg52wuRFch5gDQJtSawzu4eGk20l2YhVpnokrBJukvOyC6V_XbSwtxHceUnSQUG1bB3e8QpQ6P89QrV03WZYYklOnuZO-G_wY3TxPCzTa3-ztwGq5r4AzOdZtgXNYPMoO2EvTc12WwDT5Cq-PhYcaR2cP_KtogjvBANf6Iw-CsOMlMSfGKvsKD3SjDJd9aPA";
+
+        System.out.println(this.ACCESS_TOKEN);
     }
 
 

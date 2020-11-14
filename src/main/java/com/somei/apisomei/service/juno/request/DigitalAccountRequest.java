@@ -1,12 +1,16 @@
 package com.somei.apisomei.service.juno.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.somei.apisomei.model.Pessoa;
 import com.somei.apisomei.model.Profissional;
 import com.somei.apisomei.service.juno.Address;
+import com.somei.apisomei.service.juno.BankAccount;
 import com.somei.apisomei.service.juno.LegalRepresentative;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DigitalAccountRequest implements Serializable {
@@ -22,12 +26,19 @@ public class DigitalAccountRequest implements Serializable {
     private String companyType;
     private LegalRepresentative legalRepresentative;
     private Address address;
+    private BankAccount bankAccount;
+    private boolean emailOptOut;
+    private boolean autoApprove;
+    private boolean autoTransfer;
 
     public DigitalAccountRequest(Profissional profissional) {
         //Default infos
         this.type = "PAYMENT";
         this.companyType = "MEI";
         this.businessArea = 2033;
+        this.emailOptOut = false;
+        this.autoApprove = false;
+        this.autoTransfer = false;
 
         this.name = profissional.getNome();
         this.document = profissional.getCnpj()
@@ -35,7 +46,7 @@ public class DigitalAccountRequest implements Serializable {
                 .replaceAll("-", "")
                 .replaceAll("/", "");
         this.email = profissional.getEmail();
-        this.birthDate = profissional.getDataNascimento().toString();
+        this.birthDate = profissional.getDtNascimento().toString();
         this.phone = profissional.getTelefone()
                 .replaceAll("\\.", "")
                 .replaceAll("-", "")
@@ -44,6 +55,7 @@ public class DigitalAccountRequest implements Serializable {
         this.linesOfBusiness = profissional.getCategoria().getTitulo();
         this.legalRepresentative = new LegalRepresentative(profissional);
         this.address = new Address(profissional.getLocalizacao());
+        this.bankAccount = new BankAccount(profissional);
     }
 
     public String getType() {
@@ -132,5 +144,53 @@ public class DigitalAccountRequest implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public boolean isEmailOptOut() {
+        return emailOptOut;
+    }
+
+    public void setEmailOptOut(boolean emailOptOut) {
+        this.emailOptOut = emailOptOut;
+    }
+
+    public boolean isAutoApprove() {
+        return autoApprove;
+    }
+
+    public void setAutoApprove(boolean autoApprove) {
+        this.autoApprove = autoApprove;
+    }
+
+    public boolean isAutoTransfer() {
+        return autoTransfer;
+    }
+
+    public void setAutoTransfer(boolean autoTransfer) {
+        this.autoTransfer = autoTransfer;
+    }
+
+    public String toJson(){
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            String jsonString = mapper.writeValueAsString(this);
+
+            System.out.println("Json de DigitalAccountRequest: \n" + jsonString);
+            return jsonString;
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

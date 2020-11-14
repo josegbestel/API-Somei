@@ -18,6 +18,7 @@ public class LegalRepresentative implements Serializable {
     public LegalRepresentative(Pessoa pessoa) {
         this.name = pessoa.getNome();
         this.document = String.valueOf(pessoa.getCpfNumber());
+        this.birthDate = pessoa.getDtNascimento().toString();
     }
 
 
