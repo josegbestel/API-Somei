@@ -10,6 +10,7 @@ import com.somei.apisomei.repository.DepositoBancarioRepository;
 import com.somei.apisomei.repository.LancamentoRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.repository.ServicoRepository;
+import com.somei.apisomei.service.juno.response.BalanceResponse;
 import com.somei.apisomei.util.CustomDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,6 +103,11 @@ public class FinanceiroService {
         }
 
         //DEPÓSITOS BANCÁRIOS
+        //Obtem o saldo na conta do profissional
+        JunoService junoService = new JunoService();
+        junoService.gerarTokenAcesso();
+        BalanceResponse saldoConta = junoService.consultarSaldo(profissional);
+
         //Obtém todos os depósitos do profissional no mês
         Optional<List<DepositoBancario>> depositosMesOpt = depositoBancarioRepository
                 .findByFinanceiroIdAndDtDepositoGreaterThan(profissional.getFinanceiro().getId(),
@@ -109,7 +115,12 @@ public class FinanceiroService {
 
         if(depositosMesOpt.isPresent()){
             List<DepositoBancario> depositosMes = depositosMesOpt.get();
-            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(depositosMes);
+            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(depositosMes, saldoConta.getTransferableBalance(), saldoConta.getWithheldBalance());
+
+            //Define os depósitos no model do relatório
+            financeiroModel.setDepositosBancarios(depositosModel);
+        }else{List<DepositoBancario> depositosMes = depositosMesOpt.get();
+            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(null, saldoConta.getTransferableBalance(), saldoConta.getWithheldBalance());
 
             //Define os depósitos no model do relatório
             financeiroModel.setDepositosBancarios(depositosModel);

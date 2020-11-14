@@ -11,32 +11,35 @@ import java.util.stream.Collectors;
 
 public class FinanceiroDepositosModel {
 
-    private FinanceiroDepositoModel proximo;
+    private FinanceiroDepositoSaldoModel saldoConta;
     private List<FinanceiroDepositoModel> historico = new ArrayList<>();
 
     public FinanceiroDepositosModel() {
     }
 
-    public FinanceiroDepositosModel(List<DepositoBancario> depositosMes) {
+    public FinanceiroDepositosModel(List<DepositoBancario> depositosMes, float saldoDisponivel, float saldoLiberar) {
 
-        //Definir proximo depósito
-        DepositoBancario proximoDeposito = depositosMes.stream().filter(d -> d.getDtPrevista().isAfter(LocalDate.now())).collect(Collectors.toList()).get(0);
-        this.proximo = new FinanceiroDepositoModel(proximoDeposito);
+        //Saldo na conta
+        FinanceiroDepositoSaldoModel saldoModel = new FinanceiroDepositoSaldoModel();
+        saldoModel.setSaldoDisponivel(saldoDisponivel);
+        saldoModel.setSaldoALiberar(saldoLiberar);
 
-        //Definir histórico
-        List<DepositoBancario> historicoDepositos = depositosMes.stream().filter(d -> d.getDtDeposito() != null).collect(Collectors.toList());
-        historicoDepositos = historicoDepositos.stream().filter(d  -> d.getDtDeposito().isBefore(LocalDateTime.now())).collect(Collectors.toList());
-        for (DepositoBancario hd : historicoDepositos) {
-            this.historico.add(new FinanceiroDepositoModel(hd));
+        //Definir histórico\
+        if(depositosMes != null){
+            List<DepositoBancario> historicoDepositos = depositosMes.stream().filter(d -> d.getDtDeposito() != null).collect(Collectors.toList());
+            historicoDepositos = historicoDepositos.stream().filter(d  -> d.getDtDeposito().isBefore(LocalDateTime.now())).collect(Collectors.toList());
+            for (DepositoBancario hd : historicoDepositos) {
+                this.historico.add(new FinanceiroDepositoModel(hd));
+            }
         }
     }
 
-    public FinanceiroDepositoModel getProximo() {
-        return proximo;
+    public FinanceiroDepositoSaldoModel getSaldoConta() {
+        return saldoConta;
     }
 
-    public void setProximo(FinanceiroDepositoModel proximo) {
-        this.proximo = proximo;
+    public void setSaldoConta(FinanceiroDepositoSaldoModel saldoConta) {
+        this.saldoConta = saldoConta;
     }
 
     public List<FinanceiroDepositoModel> getHistorico() {

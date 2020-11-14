@@ -52,4 +52,6 @@ public class FinanceiroResource {
     public ResponseEntity<FinanceiroModel> relatorioFinanceiro(@PathVariable(value = "idProfissional") Long idProfissional){
         return ResponseEntity.ok(financeiroService.abstractMonth(idProfissional));
     }
+
+    //TODO: Realizar transferência
 }
