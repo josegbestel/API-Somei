@@ -7,31 +7,32 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BalanceResponse implements Serializable {
 
-    private float balance;
-    private float withheldBalance;
-    private float transferableBalance;
+    private Float balance;
+    private Float withheldBalance;
+    private Float transferableBalance;
 
-    public float getBalance() {
+    public Float getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(Float balance) {
         this.balance = balance;
     }
 
-    public float getWithheldBalance() {
+    public Float getWithheldBalance() {
         return withheldBalance;
     }
 
-    public void setWithheldBalance(float withheldBalance) {
+    public void setWithheldBalance(Float withheldBalance) {
         this.withheldBalance = withheldBalance;
     }
 
-    public float getTransferableBalance() {
+    public Float getTransferableBalance() {
         return transferableBalance;
     }
 
-    public void setTransferableBalance(float transferableBalance) {
+    public void setTransferableBalance(Float transferableBalance) {
         this.transferableBalance = transferableBalance;
     }
+
 }

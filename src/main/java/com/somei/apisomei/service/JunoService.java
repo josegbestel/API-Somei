@@ -42,7 +42,7 @@ public class JunoService {
     public TransferResponse efetuarTransferencia(Profissional profissional, float valor){
 
         //String request = ENDPOINT_API + "/api-integration/transfers";
-        String request = "https://run.mocky.io/v3/a6bd907e-5a69-489c-be3a-d09908d11324";
+        String request = "https://run.mocky.io/v3/f9071fb9-9357-4fd3-ac65-bda37b3372a2";
         RestTemplate template = new RestTemplate();
         HttpMethod method = HttpMethod.POST;
         ResponseEntity<TransferResponse> response;
@@ -51,6 +51,7 @@ public class JunoService {
         headers.add("X-Resource-Token", profissional.getResourceTokenJuno());
 
         TransferRequest transferRequest = new TransferRequest(valor);
+        transferRequest.toJson();
 
         try {
             HttpEntity<TransferRequest> entity = new HttpEntity<TransferRequest>(transferRequest, headers);
@@ -63,7 +64,7 @@ public class JunoService {
     }
 
     public BalanceResponse consultarSaldo(Profissional profissional){
-        String request = ENDPOINT_API + "/api-integration/digital-accounts/" + profissional.getIdAccountJuno();
+        String request = ENDPOINT_API + "/api-integration/balance";
         RestTemplate template = new RestTemplate();
         HttpMethod method = HttpMethod.GET;
         ResponseEntity<BalanceResponse> response;
@@ -74,7 +75,6 @@ public class JunoService {
         try {
             HttpEntity<Object> entity = new HttpEntity(headers);
             response = template.exchange(request, method, entity, BalanceResponse.class);
-
             return response.getBody();
         }catch (Exception e){
             throw new DomainException("erro ao consultar saldo: " + e.getMessage());
@@ -115,6 +115,7 @@ public class JunoService {
         headers.add("X-Resource-Token", RESOURCE_TOKEN);
 
         ChargesRequest chargesRequest = new ChargesRequest(servico);
+        chargesRequest.toJson();
 
         try {
             HttpEntity<ChargesRequest> entity = new HttpEntity<>(chargesRequest, headers);

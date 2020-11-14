@@ -30,7 +30,7 @@ public class Financeiro implements Serializable {
     private List<Lancamento> lancamentos = new ArrayList<>();
 
     @OneToMany(mappedBy = "financeiro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<DepositoBancario> depositos;
+    private List<DepositoBancario> depositos = new ArrayList<>();
 
     @OneToOne
     private Profissional profissional;
@@ -73,6 +73,10 @@ public class Financeiro implements Serializable {
 
     public void setDepositos(List<DepositoBancario> depositos) {
         this.depositos = depositos;
+    }
+
+    public void addDeposito(DepositoBancario deposito){
+        this.depositos.add(deposito);
     }
 
     @JsonIgnore

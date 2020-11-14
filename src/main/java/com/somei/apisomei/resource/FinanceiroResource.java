@@ -1,6 +1,7 @@
 package com.somei.apisomei.resource;
 
 import com.somei.apisomei.model.Lancamento;
+import com.somei.apisomei.model.representationModel.FinanceiroDepositosModel;
 import com.somei.apisomei.model.representationModel.FinanceiroModel;
 import com.somei.apisomei.service.FinanceiroService;
 import io.swagger.annotations.Api;
@@ -53,5 +54,12 @@ public class FinanceiroResource {
         return ResponseEntity.ok(financeiroService.abstractMonth(idProfissional));
     }
 
-    //TODO: Realizar transferência
+    //Realizar transferência
+    @PostMapping("/transferir")
+    @ApiOperation("Transfere o valor da conta virtual para a conta bancária do profissional")
+    public ResponseEntity<FinanceiroDepositosModel> transferirSaldo(@PathVariable(value = "idProfissional") Long idProfissional,
+                                                                    @RequestParam(value = "valor")Float valor){
+        return ResponseEntity.ok(financeiroService.transferValue(idProfissional, valor));
+    }
+
 }

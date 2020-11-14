@@ -1,6 +1,7 @@
 package com.somei.apisomei.model.representationModel;
 
 import com.somei.apisomei.model.DepositoBancario;
+import com.somei.apisomei.service.juno.response.BalanceResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,12 +18,13 @@ public class FinanceiroDepositosModel {
     public FinanceiroDepositosModel() {
     }
 
-    public FinanceiroDepositosModel(List<DepositoBancario> depositosMes, float saldoDisponivel, float saldoLiberar) {
+    public FinanceiroDepositosModel(List<DepositoBancario> depositosMes, BalanceResponse balanceResponse) {
 
         //Saldo na conta
         FinanceiroDepositoSaldoModel saldoModel = new FinanceiroDepositoSaldoModel();
-        saldoModel.setSaldoDisponivel(saldoDisponivel);
-        saldoModel.setSaldoALiberar(saldoLiberar);
+        saldoModel.setSaldoDisponivel(balanceResponse.getTransferableBalance());
+        saldoModel.setSaldoALiberar(balanceResponse.getWithheldBalance());
+        this.saldoConta = saldoModel;
 
         //Definir histórico\
         if(depositosMes != null){
