@@ -33,9 +33,6 @@ public class FinanceiroService {
     @Autowired
     DepositoBancarioRepository depositoBancarioRepository;
 
-    private final LocalDateTime inicioMes = this.getInicioMes();
-    private final LocalDateTime finalMes = this.getFinalMes();
-
     public void editMetaMensal(Long profissionalId, Float meta){
         Profissional profissional = profissionalRepository.findById(profissionalId)
                 .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
@@ -93,12 +90,12 @@ public class FinanceiroService {
         //RESULTADO MÊS
         //Obtem todos os serviços do profissional desde o início do mês
         Optional<List<Servico>> servicosMesOpt = servicoRepository
-                .findByProfissionalIdAndDtConcluidoGreaterThan(idProfissional, inicioMes);
+                .findByProfissionalIdAndDtConcluidoGreaterThan(idProfissional, this.getInicioMes());
 
         if(servicosMesOpt.isPresent()){
             List<Servico> servicosMes = servicosMesOpt.get();
             FinanceiroResultadoMesModel resultadoMesModel =
-                    new FinanceiroResultadoMesModel(servicosMes, profissional, finalMes);
+                    new FinanceiroResultadoMesModel(servicosMes, profissional, this.getFinalMes());
 
             //Define os resultados no model do relatório
             financeiroModel.setResultadoMes(resultadoMesModel);
@@ -108,7 +105,7 @@ public class FinanceiroService {
         //Obtém todos os depósitos do profissional no mês
         Optional<List<DepositoBancario>> depositosMesOpt = depositoBancarioRepository
                 .findByFinanceiroIdAndDtDepositoGreaterThan(profissional.getFinanceiro().getId(),
-                        inicioMes);
+                        this.getInicioMes());
 
         if(depositosMesOpt.isPresent()){
             List<DepositoBancario> depositosMes = depositosMesOpt.get();
@@ -123,7 +120,9 @@ public class FinanceiroService {
 
     private List<Lancamento> readLancamentosByMonth(long financeiroId){
         return lancamentoRepository
-                        .findByFinanceiroIdAndDtVencimentoBetween(financeiroId, inicioMes.toLocalDate(), finalMes.toLocalDate());
+                        .findByFinanceiroIdAndDtVencimentoBetween(financeiroId,
+                                this.getInicioMes().toLocalDate(),
+                                this.getFinalMes().toLocalDate());
     }
 
     private LocalDateTime getFinalMes() {

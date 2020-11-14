@@ -47,6 +47,8 @@ public class Profissional extends Pessoa implements Serializable {
     private List<Servico> servico;
 
     private String idNfe;
+    private String idAccountJuno;
+    private String resourceTokenJuno;
 
 
     public String getCnpj() {
@@ -118,6 +120,26 @@ public class Profissional extends Pessoa implements Serializable {
     @JsonIgnore
     public void setIdNfe(String idNfe) {
         this.idNfe = idNfe;
+    }
+
+    @JsonIgnore
+    public String getIdAccountJuno() {
+        return idAccountJuno;
+    }
+
+    @JsonIgnore
+    public void setIdAccountJuno(String idAccountJuno) {
+        this.idAccountJuno = idAccountJuno;
+    }
+
+    @JsonIgnore
+    public String getResourceTokenJuno() {
+        return resourceTokenJuno;
+    }
+
+    @JsonIgnore
+    public void setResourceTokenJuno(String resourceTokenJuno) {
+        this.resourceTokenJuno = resourceTokenJuno;
     }
 
     @JsonIgnore

@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 public class NfeService {
 
     private static final String TOKEN = ApplicationConfig.TOKEN_NFE_IO;
-    private static final String END_POINT = "https://api.nfe.io/v1/";
+    private static final String END_POINT = ApplicationConfig.ENDPOINT_NFE;
 
     public NfeService() {
     }

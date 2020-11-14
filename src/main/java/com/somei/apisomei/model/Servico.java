@@ -68,6 +68,9 @@ public class Servico implements Serializable {
     @OneToOne(mappedBy = "servico")
     private NotaFiscal notaFiscal;
 
+    @OneToOne(mappedBy = "servico")
+    private Pagamento pagamento;
+
     public long getId() {
         return id;
     }
@@ -284,6 +287,16 @@ public class Servico implements Serializable {
 
     public void setCodigoServicoMunicipal(String codigoServicoMunicipal) {
         this.codigoServicoMunicipal = codigoServicoMunicipal;
+    }
+
+    @JsonIgnore
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    @JsonIgnore
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
     public double getValorContratado(){

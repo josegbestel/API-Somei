@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -53,6 +54,12 @@ public class RespostaOrcamento implements Serializable {
     }
 
     public double getValor() {
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+
+        String number = df.format(this.valor);
+        number = number.replaceAll("\\.", "");
+        number = number.replaceAll(",", ".");
         return valor;
     }
 

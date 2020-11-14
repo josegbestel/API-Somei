@@ -16,41 +16,9 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Solicitante extends Pessoa implements Serializable {
 
-    @NotNull
-    @NotBlank
-    @Column(unique = true)
-    @CPF(message = "CPF invalido")
-    private String cpf;
-
-    @OneToMany(mappedBy = "solicitante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Cartao> cartoes;
 
     @OneToMany(mappedBy = "solicitante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Servico> servico;
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    @JsonIgnore
-    public long getCpfNumber(){
-        String cpfNumber = cpf.replace(".", "");
-        cpfNumber = cpfNumber.replace("-", "");
-
-        return Long.parseLong(cpfNumber);
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public List<Cartao> getCartoes() {
-        return cartoes;
-    }
-
-    public void setCartoes(List<Cartao> cartoes) {
-        this.cartoes = cartoes;
-    }
 
     private List<Servico> getOrcamento() {
         return servico;
@@ -59,15 +27,5 @@ public class Solicitante extends Pessoa implements Serializable {
     @JsonIgnore
     public List<String> getTopServicos(){
         return getTop3Servicos(this.servico);
-    }
-
-    @JsonIgnore
-    public Cartao getCartaoByNumero(String numeroCartao) {
-        for (Cartao c : this.getCartoes()){
-            if(c.getNumeroCartao().equals(numeroCartao))
-                return c;
-        }
-
-        return null;
     }
 }

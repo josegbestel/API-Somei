@@ -96,7 +96,7 @@ public class SolicitanteService {
 
         //Altera as informações requiridas
         solicitante.setNome(pessoa.getNome());
-        solicitante.setAnoNascimento(pessoa.getAnoNascimento());
+        solicitante.setDtNascimento(pessoa.getDtNascimento());
         solicitante.setTelefone(pessoa.getTelefone());
         solicitante.setAvatar(pessoa.getAvatar());
 
