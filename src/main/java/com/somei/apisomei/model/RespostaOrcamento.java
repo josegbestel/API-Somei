@@ -60,7 +60,7 @@ public class RespostaOrcamento implements Serializable {
         String number = df.format(this.valor);
         number = number.replaceAll("\\.", "");
         number = number.replaceAll(",", ".");
-        return valor;
+        return Double.parseDouble(number);
     }
 
     public void setValor(double valor) {

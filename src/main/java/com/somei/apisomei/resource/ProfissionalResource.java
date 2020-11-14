@@ -83,6 +83,14 @@ public class ProfissionalResource {
     }
 
 
+    //Inserir foto portfólio
+    @PostMapping("/{id}/porftolio")
+    @ApiOperation("Adiciona uma foto no poftfólio do profissional")
+    public ResponseEntity<ProfissionalPerfilModel> updatePortfolio(@PathVariable(value = "id") long id,
+                                                                   @RequestParam(value = "foto") String foto){
+        return ResponseEntity.ok(profissionalService.addPortfolioProfile(id, foto));
+    }
+
     //edit
     @PutMapping("/{id}")
     @ApiOperation("Edita as informações de um Profissional por ID")
@@ -91,7 +99,6 @@ public class ProfissionalResource {
         Profissional profissional = profissionalService.update(id, pessoa);
         return ResponseEntity.ok(profissional);
     }
-
 
     //editLogin
     @PutMapping("{id}/login")

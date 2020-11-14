@@ -2,6 +2,7 @@ package com.somei.apisomei.service;
 
 import com.somei.apisomei.exception.NotFoundException;
 import com.somei.apisomei.model.*;
+import com.somei.apisomei.model.enums.StatusDeposito;
 import com.somei.apisomei.model.representationModel.FinanceiroDepositosModel;
 import com.somei.apisomei.model.representationModel.FinanceiroMargemLucroModel;
 import com.somei.apisomei.model.representationModel.FinanceiroModel;
@@ -10,11 +11,15 @@ import com.somei.apisomei.repository.DepositoBancarioRepository;
 import com.somei.apisomei.repository.LancamentoRepository;
 import com.somei.apisomei.repository.ProfissionalRepository;
 import com.somei.apisomei.repository.ServicoRepository;
+import com.somei.apisomei.service.juno.response.BalanceResponse;
+import com.somei.apisomei.service.juno.response.TransferResponse;
 import com.somei.apisomei.util.CustomDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,12 +67,6 @@ public class FinanceiroService {
         Profissional profissional = profissionalRepository.findById(idProfissional)
                 .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
 
-        /*
-        TODO:
-         - Cadastrar serviços
-         - Cadastrar depósitos
-         */
-
         FinanceiroModel financeiroModel = new FinanceiroModel();
 
         //Serviços realizados nos ultimos 30 dias
@@ -102,6 +101,14 @@ public class FinanceiroService {
         }
 
         //DEPÓSITOS BANCÁRIOS
+        //Obtem o saldo na conta do profissional
+        JunoService junoService = new JunoService();
+        junoService.gerarTokenAcesso();
+        BalanceResponse saldoConta = junoService.consultarSaldo(profissional);
+        System.out.println("balance: " + saldoConta.getBalance()
+                + "\nwithheldBalance: " + saldoConta.getWithheldBalance()
+                + "\ntransferableBalance: " + saldoConta.getTransferableBalance());
+
         //Obtém todos os depósitos do profissional no mês
         Optional<List<DepositoBancario>> depositosMesOpt = depositoBancarioRepository
                 .findByFinanceiroIdAndDtDepositoGreaterThan(profissional.getFinanceiro().getId(),
@@ -109,7 +116,12 @@ public class FinanceiroService {
 
         if(depositosMesOpt.isPresent()){
             List<DepositoBancario> depositosMes = depositosMesOpt.get();
-            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(depositosMes);
+            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(depositosMes, saldoConta);
+
+            //Define os depósitos no model do relatório
+            financeiroModel.setDepositosBancarios(depositosModel);
+        }else{
+            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(null, saldoConta);
 
             //Define os depósitos no model do relatório
             financeiroModel.setDepositosBancarios(depositosModel);
@@ -123,6 +135,47 @@ public class FinanceiroService {
                         .findByFinanceiroIdAndDtVencimentoBetween(financeiroId,
                                 this.getInicioMes().toLocalDate(),
                                 this.getFinalMes().toLocalDate());
+    }
+
+    public FinanceiroDepositosModel transferValue(Long idProfissional,Float valor){
+
+        Profissional profissional = profissionalRepository.findById(idProfissional)
+                .orElseThrow(() -> new NotFoundException("Profissional não localizado"));
+
+        JunoService junoService = new JunoService();
+        junoService.gerarTokenAcesso();
+
+        TransferResponse transferResponse = junoService.efetuarTransferencia(profissional, valor);
+        BalanceResponse balanceResponse = junoService.consultarSaldo(profissional);
+
+        DepositoBancario deposito = new DepositoBancario();
+        deposito.setValor(transferResponse.getAmount());
+        deposito.setStatus(StatusDeposito.AGENDADO);
+        deposito.setFinanceiro(profissional.getFinanceiro());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dtDpt = LocalDateTime.parse(transferResponse.getCreationDate(), formatter);
+        deposito.setDtDeposito(dtDpt);
+        LocalDateTime dtPrv = LocalDateTime.parse(transferResponse.getTransferDate(), formatter);
+        deposito.setDtPrevista(dtPrv.toLocalDate());
+
+        deposito = depositoBancarioRepository.save(deposito);
+        Financeiro financeiro = profissional.getFinanceiro();
+        financeiro.addDeposito(deposito);
+        profissional.setFinanceiro(financeiro);
+        profissionalRepository.save(profissional);
+
+        Optional<List<DepositoBancario>> depositosMesOpt = depositoBancarioRepository
+                .findByFinanceiroIdAndDtDepositoGreaterThan(profissional.getFinanceiro().getId(),
+                        this.getInicioMes());
+
+        if(depositosMesOpt.isPresent()){
+            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(depositosMesOpt.get(), balanceResponse);
+            return depositosModel;
+        }else {
+            FinanceiroDepositosModel depositosModel = new FinanceiroDepositosModel(null, balanceResponse);
+            return depositosModel;
+        }
     }
 
     private LocalDateTime getFinalMes() {
