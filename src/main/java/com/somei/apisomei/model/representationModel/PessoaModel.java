@@ -1,9 +1,12 @@
 package com.somei.apisomei.model.representationModel;
 
+import com.somei.apisomei.util.CustomDate;
+
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 public class PessoaModel{
 
@@ -11,7 +14,7 @@ public class PessoaModel{
     private long id;
 
     private String nome;
-    private Integer anoNascimento;
+    private LocalDate dtNascimento;
 
     @NotBlank
     @Size(max = 11, min=10)
@@ -27,12 +30,12 @@ public class PessoaModel{
         this.nome = nome;
     }
 
-    public Integer getAnoNascimento() {
-        return anoNascimento;
+    public CustomDate getDtNascimento() {
+        return CustomDate.byLocalDate(dtNascimento);
     }
 
-    public void setAnoNascimento(Integer anoNascimento) {
-        this.anoNascimento = anoNascimento;
+    public void setDtNascimento(CustomDate dtNascimento) {
+        this.dtNascimento = dtNascimento.toLocalDate();
     }
 
     public String getTelefone() {

@@ -38,20 +38,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/ContaBanco.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/enums/TipoConta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/CartaoModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/ContaBancoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pagamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/repository/PagamentoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/JunoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/AccountHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/AccountType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/BankAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/LegalRepresentative.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/Split.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/BillingChargesRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/BillingPaymentRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/ChargeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/ChargesRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/CreditCardDetailsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/DigitalAccountRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/PaymentRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/TransferRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/BalanceResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/ChargeResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/ChargesResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/DigitalAccountResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/EmbeddedResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/PaymentResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/PaymentsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/TokenResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/TransferResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CryptoUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Cartao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Cartao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Cartao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Pessoa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Profissional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/RespostaOrcamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/RespostaOrcamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Servico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Servico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Solicitante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/CartaoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/CartaoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/PessoaModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/PessoaModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/ProfissionalModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/ProfissionalModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ServicoResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ServicoResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/NfeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/NfeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ProfissionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ProfissionalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/RespostaOrcamentoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/RespostaOrcamentoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ServicoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ServicoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/SolicitanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/SolicitanteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/CustomDate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +93,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="JavaFXApplication" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -153,63 +185,78 @@
       <screen x="0" y="23" width="1440" height="807" />
     </state>
     <state x="208" y="23" key="#Project_Structure/0.23.1440.807@0.23.1440.807" timestamp="1600067060806" />
-    <state x="533" y="117" width="535" height="698" key="#com.intellij.ide.util.MemberChooser" timestamp="1604885005307">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state x="533" y="118" width="374" height="544" key="#com.intellij.ide.util.MemberChooser" timestamp="1605315673209">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state x="533" y="117" key="#com.intellij.ide.util.MemberChooser/0.23.1440.807@0.23.1440.807" timestamp="1600121326722" />
-    <state x="533" y="117" width="535" height="698" key="#com.intellij.ide.util.MemberChooser/0.23.1440.811@0.23.1440.811" timestamp="1604885005307" />
-    <state x="160" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603672391617">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state x="533" y="117" width="535" height="698" key="#com.intellij.ide.util.MemberChooser/0.23.1440.811@0.23.1440.811" timestamp="1605284078272" />
+    <state x="533" y="118" width="374" height="544" key="#com.intellij.ide.util.MemberChooser/0.25.1440.804@0.25.1440.804" timestamp="1605315673209" />
+    <state x="0" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605298733098">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state x="160" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.811@0.23.1440.811" timestamp="1603672391617" />
-    <state x="458" y="182" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603580882074">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state x="0" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.25.1440.804@0.25.1440.804" timestamp="1605298733098" />
+    <state x="458" y="183" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605309313257">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
-    <state x="458" y="182" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.811@0.23.1440.811" timestamp="1603580882074" />
+    <state x="458" y="182" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.811@0.23.1440.811" timestamp="1605281058778" />
+    <state x="458" y="183" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1440.804@0.25.1440.804" timestamp="1605309313257" />
     <state x="100" y="123" width="1240" height="611" key="DiffContextDialog" timestamp="1604351016959">
       <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state x="100" y="123" width="1240" height="611" key="DiffContextDialog/0.23.1440.811@0.23.1440.811" timestamp="1604351016959" />
-    <state width="1398" height="208" key="GridCell.Tab.0.bottom" timestamp="1604885819169">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="253" key="GridCell.Tab.0.bottom" timestamp="1605317569587">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.807@0.23.1440.807" timestamp="1600169654343" />
-    <state width="1398" height="208" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1604885819169" />
-    <state width="1398" height="208" key="GridCell.Tab.0.center" timestamp="1604885819168">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="208" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1605099823940" />
+    <state width="1398" height="253" key="GridCell.Tab.0.bottom/0.25.1440.804@0.25.1440.804" timestamp="1605317569587" />
+    <state width="1398" height="253" key="GridCell.Tab.0.center" timestamp="1605317569586">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.807@0.23.1440.807" timestamp="1600169654342" />
-    <state width="1398" height="208" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1604885819168" />
-    <state width="1398" height="208" key="GridCell.Tab.0.left" timestamp="1604885819167">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="208" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1605099823940" />
+    <state width="1398" height="253" key="GridCell.Tab.0.center/0.25.1440.804@0.25.1440.804" timestamp="1605317569586" />
+    <state width="1398" height="253" key="GridCell.Tab.0.left" timestamp="1605317569585">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.807@0.23.1440.807" timestamp="1600169654341" />
-    <state width="1398" height="208" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1604885819167" />
-    <state width="1398" height="208" key="GridCell.Tab.0.right" timestamp="1604885819168">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="208" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1605099823939" />
+    <state width="1398" height="253" key="GridCell.Tab.0.left/0.25.1440.804@0.25.1440.804" timestamp="1605317569585" />
+    <state width="1398" height="253" key="GridCell.Tab.0.right" timestamp="1605317569586">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.807@0.23.1440.807" timestamp="1600169654342" />
-    <state width="1398" height="208" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1604885819168" />
-    <state width="1398" height="259" key="GridCell.Tab.1.bottom" timestamp="1604510808192">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="208" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1605099823940" />
+    <state width="1398" height="253" key="GridCell.Tab.0.right/0.25.1440.804@0.25.1440.804" timestamp="1605317569586" />
+    <state width="1398" height="253" key="GridCell.Tab.1.bottom" timestamp="1605317569588">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.bottom/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
-    <state width="1398" height="259" key="GridCell.Tab.1.center" timestamp="1604510808192">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="253" key="GridCell.Tab.1.bottom/0.25.1440.804@0.25.1440.804" timestamp="1605317569588" />
+    <state width="1398" height="253" key="GridCell.Tab.1.center" timestamp="1605317569587">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.center/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
-    <state width="1398" height="259" key="GridCell.Tab.1.left" timestamp="1604510808192">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="253" key="GridCell.Tab.1.center/0.25.1440.804@0.25.1440.804" timestamp="1605317569587" />
+    <state width="1398" height="253" key="GridCell.Tab.1.left" timestamp="1605317569587">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.left/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
-    <state width="1398" height="259" key="GridCell.Tab.1.right" timestamp="1604510808192">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state width="1398" height="253" key="GridCell.Tab.1.left/0.25.1440.804@0.25.1440.804" timestamp="1605317569587" />
+    <state width="1398" height="253" key="GridCell.Tab.1.right" timestamp="1605317569588">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.right/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
+    <state width="1398" height="253" key="GridCell.Tab.1.right/0.25.1440.804@0.25.1440.804" timestamp="1605317569588" />
     <state x="258" y="90" key="Maven.ArtifactSearchDialog" timestamp="1603036633189">
       <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state x="258" y="90" key="Maven.ArtifactSearchDialog/0.23.1440.811@0.23.1440.811" timestamp="1603036633189" />
+    <state x="335" y="135" width="792" height="587" key="NewModule_or_Project.wizard" timestamp="1605045931957">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state x="335" y="135" width="792" height="587" key="NewModule_or_Project.wizard/0.23.1440.811@0.23.1440.811" timestamp="1605045931957" />
     <state x="245" y="169" width="950" height="617" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1600075980273">
       <screen x="0" y="23" width="1440" height="807" />
     </state>
@@ -234,6 +281,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinanceiroResultadoMesModel.java</url>
           <line>38</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/ServicoService.java</url>
+          <line>310</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -42,7 +42,7 @@ public class CustomDate implements Serializable {
 
     @Override
     public String toString() {
-        return "CustomDate{" + day + "/" + mounth + "/" + year +'}';
+        return "" + year + "/" + mounth + "/" + day;
     }
 
     static public CustomDate byLocalDate(LocalDate date){

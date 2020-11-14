@@ -128,7 +128,7 @@ public class ProfissionalService {
 
         //Altera as informações requiridas
         profissional.setNome(pessoa.getNome());
-        profissional.setAnoNascimento(pessoa.getAnoNascimento());
+        profissional.setDataNascimento(pessoa.getDtNascimento());
         profissional.setTelefone(pessoa.getTelefone());
         profissional.setAvatar(pessoa.getAvatar());
 

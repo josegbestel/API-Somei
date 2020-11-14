@@ -4,7 +4,9 @@ import com.somei.apisomei.model.CategoriaMei;
 import com.somei.apisomei.model.ContaBanco;
 import com.somei.apisomei.model.Localizacao;
 import com.somei.apisomei.model.Profissional;
+import com.somei.apisomei.util.CustomDate;
 import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -12,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class ProfissionalModel implements Serializable {
 
@@ -30,6 +33,10 @@ public class ProfissionalModel implements Serializable {
     private String cnpj;
 
     @NotBlank
+    @CPF
+    private String cpf;
+
+    @NotBlank
     @Size(max = 11, min=10)
     private String telefone;
 
@@ -39,7 +46,7 @@ public class ProfissionalModel implements Serializable {
     private String avatar;
 
     @NotNull
-    private int anoNascimento;
+    private LocalDate dtNascimento;
 
     @NotBlank
     private String categoriaTitulo;
@@ -83,6 +90,14 @@ public class ProfissionalModel implements Serializable {
         this.cnpj = cnpj;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getTelefone() {
         return telefone
                 .replace("(", "")
@@ -115,12 +130,12 @@ public class ProfissionalModel implements Serializable {
         this.avatar = avatar;
     }
 
-    public int getAnoNascimento() {
-        return anoNascimento;
+    public CustomDate getDtNascimento() {
+        return CustomDate.byLocalDate(dtNascimento);
     }
 
-    public void setAnoNascimento(int anoNascimento) {
-        this.anoNascimento = anoNascimento;
+    public void setDtNascimento(CustomDate dtNascimento) {
+        this.dtNascimento = dtNascimento.toLocalDate();
     }
 
     public String getCategoriaTitulo() {
@@ -163,11 +178,12 @@ public class ProfissionalModel implements Serializable {
         profissional.setNomeFantasia(this.nomeFantasia);
         profissional.setEmail(this.email);
         profissional.setSenha(this.senha);
-        profissional.setAnoNascimento(this.anoNascimento);
+        profissional.setDataNascimento(this.getDtNascimento());
         profissional.setAvatar(this.avatar);
         profissional.setTelefone(this.telefone);
         profissional.setCategoria(categoriaMei);
         profissional.setLocalizacao(this.localizacao);
+        profissional.setCpf(this.cpf);
 
         return profissional;
     }
