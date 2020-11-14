@@ -1,6 +1,8 @@
 package com.somei.apisomei.service.juno.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.somei.apisomei.model.Servico;
 
 import java.io.Serializable;
@@ -33,5 +35,21 @@ public class ChargesRequest implements Serializable {
 
     public void setBilling(BillingChargesRequest billing) {
         this.billing = billing;
+    }
+
+    public String toJson(){
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            String jsonString = mapper.writeValueAsString(this);
+
+            System.out.println("Json de ChargesRequest: \n" + jsonString);
+            return jsonString;
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

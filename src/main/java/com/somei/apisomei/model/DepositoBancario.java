@@ -1,5 +1,6 @@
 package com.somei.apisomei.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.somei.apisomei.model.enums.StatusDeposito;
 
 import javax.persistence.*;
@@ -71,5 +72,15 @@ public class DepositoBancario implements Serializable {
 
     public void setStatus(StatusDeposito status) {
         this.status = status;
+    }
+
+    @JsonIgnore
+    public Financeiro getFinanceiro() {
+        return financeiro;
+    }
+
+    @JsonIgnore
+    public void setFinanceiro(Financeiro financeiro) {
+        this.financeiro = financeiro;
     }
 }
