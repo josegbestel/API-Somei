@@ -178,10 +178,14 @@ public class ServicoService {
                 .orElseThrow(() -> new NotFoundException("Solicitante não possui orçamentos"));
 
         //Filtrar repostas apenas respondidas
+        List<RespostaOrcamento> respondidas;
         for (Servico s : servicos) {
-            List<RespostaOrcamento> respondidas = s.getRespostas();
+            respondidas = s.getRespostas();
             if(respondidas != null){
                 respondidas = respondidas.stream().filter(r -> r.getDtResposta() != null).collect(Collectors.toList());
+                s.setRespostas(respondidas);
+            }else {
+                respondidas = new ArrayList<>();
                 s.setRespostas(respondidas);
             }
         }
