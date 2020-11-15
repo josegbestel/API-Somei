@@ -136,13 +136,17 @@ public class Servico implements Serializable {
     public List<RespostaOrcamento> getRespostas() {
         List<RespostaOrcamento> respondidas = new ArrayList<>();
 
+        if(this.respostas.size() != 0){
+
+        }
         for(RespostaOrcamento r : this.respostas){
             if(r.getDtResposta() != null){
                 respondidas.add(r);
             }
         }
 
-        return respondidas.size() > 0 ? respostas : null;
+//        return respondidas.size() > 0 ? respostas : null;
+        return respondidas;
     }
 
     public void setRespostas(List<RespostaOrcamento> respostas) {
