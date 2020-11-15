@@ -37,7 +37,7 @@ public class FinanceiroResultadoMesModel {
         float totalDias = LocalDateTime.now().getDayOfMonth();
         float mediaGanhoDiaPrevisao = this.saldoAtual  / totalDias;
         float diasRestantes = finalMes.getDayOfMonth() - totalDias;
-        this.valorPrevisao = mediaGanhoDiaPrevisao * diasRestantes;
+        this.valorPrevisao = (mediaGanhoDiaPrevisao * diasRestantes) + this.saldoAtual;
         this.valorPrevisao = DecimalFormatUtil.format(this.valorPrevisao);
     }
 
