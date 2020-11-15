@@ -12,6 +12,7 @@ public class DecimalFormatUtil {
 
         String number = df.format(valor);
         System.out.println("number1: " + number);
+        number = number.replaceAll("\\.", "");
         number = number.replaceAll(",", "\\.");
         System.out.println("number2: " + number);
         return Float.parseFloat(number);
@@ -23,6 +24,7 @@ public class DecimalFormatUtil {
 
         String number = df.format(valor);
         System.out.println("number1: " + number);
+        number = number.replaceAll("\\.", "");
         number = number.replaceAll(",", "\\.");
         System.out.println("number2: " + number);
         return Double.parseDouble(number);
