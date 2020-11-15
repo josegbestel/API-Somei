@@ -179,8 +179,11 @@ public class ServicoService {
 
         //Filtrar repostas apenas respondidas
         for (Servico s : servicos) {
-            List<RespostaOrcamento> respondidas = s.getRespostas().stream().filter(r -> r.getDtResposta() != null).collect(Collectors.toList());
-            s.setRespostas(respondidas);
+            List<RespostaOrcamento> respondidas = s.getRespostas();
+            if(respondidas != null){
+                respondidas = respondidas.stream().filter(r -> r.getDtResposta() != null).collect(Collectors.toList());
+                s.setRespostas(respondidas);
+            }
         }
 
         return servicos;

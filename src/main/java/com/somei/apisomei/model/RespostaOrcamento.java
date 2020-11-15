@@ -47,7 +47,10 @@ public class RespostaOrcamento implements Serializable {
     }
 
     public LocalDateTime getDtResposta() {
-        return dtResposta == null ? null : dtResposta;
+        if(dtResposta != null)
+            return dtResposta;
+
+        return null;
     }
 
     public void setDtResposta(LocalDateTime dtResposta) {
