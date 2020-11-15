@@ -7,6 +7,7 @@ import com.somei.apisomei.model.representationModel.CartaoModel;
 import com.somei.apisomei.model.representationModel.FinalizacaoServicoModel;
 import com.somei.apisomei.model.representationModel.ServicoNovoModel;
 import com.somei.apisomei.service.ServicoService;
+import com.somei.apisomei.util.DecimalFormatUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,14 @@ public class ServicoResource {
 
     @Autowired
     ServicoService servicoService;
+
+    @GetMapping("/teste")
+    public ResponseEntity<Object> teste(){
+        Float valor = (float) 49.0124312512;
+        valor = DecimalFormatUtil.format(valor);
+        System.out.println("valor format: " + valor);
+        return ResponseEntity.noContent().build();
+    }
 
     //CRIAR
     @PostMapping

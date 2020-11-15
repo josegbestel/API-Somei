@@ -3,6 +3,7 @@ package com.somei.apisomei.model.representationModel;
 import com.somei.apisomei.model.DepositoBancario;
 import com.somei.apisomei.model.Profissional;
 import com.somei.apisomei.model.Servico;
+import com.somei.apisomei.util.DecimalFormatUtil;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -19,9 +20,6 @@ public class FinanceiroResultadoMesModel {
     }
     
     public FinanceiroResultadoMesModel(List<Servico> servicos, Profissional profissional, LocalDateTime finalMes){
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-
         //Meta mensal
         this.metaMensal = profissional.getFinanceiro().getMetaMensal();
 
@@ -30,7 +28,7 @@ public class FinanceiroResultadoMesModel {
         for (Servico s : servicos) {
             saldoAtual += s.getValorContratado();
         }
-        this.saldoAtual = Float.parseFloat(df.format(this.saldoAtual).replace(",", "."));
+        this.saldoAtual = DecimalFormatUtil.format(this.saldoAtual);
 
         //Detalhes
         this.detalhes = new FinanceiroDetalhesResultadoMesModel(servicos, profissional, finalMes);
@@ -40,11 +38,7 @@ public class FinanceiroResultadoMesModel {
         float mediaGanhoDiaPrevisao = this.saldoAtual  / totalDias;
         float diasRestantes = finalMes.getDayOfMonth() - totalDias;
         this.valorPrevisao = mediaGanhoDiaPrevisao * diasRestantes;
-        String number = df.format(this.valorPrevisao);
-        number  = number.replaceAll("\\.", "");
-        number  = number.replace(",", ".");
-
-        this.valorPrevisao = Float.parseFloat(number);
+        this.valorPrevisao = DecimalFormatUtil.format(this.valorPrevisao);
     }
 
     public float getSaldoAtual() {

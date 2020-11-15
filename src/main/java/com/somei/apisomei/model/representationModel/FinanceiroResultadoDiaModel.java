@@ -2,6 +2,7 @@ package com.somei.apisomei.model.representationModel;
 
 import com.somei.apisomei.model.DepositoBancario;
 import com.somei.apisomei.model.Profissional;
+import com.somei.apisomei.util.DecimalFormatUtil;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -24,14 +25,7 @@ public class FinanceiroResultadoDiaModel {
 
     public float getValor() {
 
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-
-        String number = df.format(this.valor);
-        number  = number.replaceAll("\\.", "");
-        number  = number.replace(",", ".");
-
-        return Float.parseFloat(number);
+        return DecimalFormatUtil.format(this.valor);
     }
 
     public void setValor(float valor) {

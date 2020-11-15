@@ -2,6 +2,7 @@ package com.somei.apisomei.model.representationModel;
 
 import com.somei.apisomei.model.Servico;
 import com.somei.apisomei.model.enums.StatusServico;
+import com.somei.apisomei.util.DecimalFormatUtil;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -28,14 +29,7 @@ public class FinanceiroMargemLucroModel {
     }
 
     public double getGanhos() {
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-
-        String number = df.format(this.ganhos);
-        number = number.replaceAll("\\.", "");
-        number = number.replace(",", ".");
-
-        return Double.parseDouble(number);
+        return DecimalFormatUtil.format(this.ganhos);
     }
 
     public void setGanhos(double ganhos) {
@@ -56,16 +50,7 @@ public class FinanceiroMargemLucroModel {
 
     public double getPorcentagem() {
         double margem = ((ganhos-gastos)/ganhos);
-
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-
-        String number = df.format(margem);
-        number  = number.replaceAll("\\.", ",");
-        number  = number.replace(",", ".");
-
-        margem = Double.parseDouble(number);
-        return margem;
+        return DecimalFormatUtil.format(margem);
     }
 }
 

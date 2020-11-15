@@ -1,6 +1,7 @@
 package com.somei.apisomei.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.somei.apisomei.util.DecimalFormatUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -54,13 +55,7 @@ public class RespostaOrcamento implements Serializable {
     }
 
     public double getValor() {
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
-
-        String number = df.format(this.valor);
-        number = number.replaceAll("\\.", "");
-        number = number.replaceAll(",", ".");
-        return Double.parseDouble(number);
+        return DecimalFormatUtil.format(this.valor);
     }
 
     public void setValor(double valor) {

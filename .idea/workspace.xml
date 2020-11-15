@@ -38,18 +38,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="137608c1-4448-44c8-8aa2-ed811f332301" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/util/DecimalFormatUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/DepositoBancario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/DepositoBancario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/Financeiro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinanceiroDepositosModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinanceiroDepositosModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/FinanceiroResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/FinanceiroResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/FinanceiroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/FinanceiroService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/JunoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/JunoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/ChargeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/ChargeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/ChargesRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/ChargesRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/TransferRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/request/TransferRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/BalanceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/BalanceResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/TransferResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/service/juno/response/TransferResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinanceiroDepositoSaldoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinanceiroDepositoSaldoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinanceiroResultadoMesModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/model/representationModel/FinanceiroResultadoMesModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ServicoResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/somei/apisomei/resource/ServicoResource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,8 +54,8 @@
       <list>
         <option value="Enum" />
         <option value="JavaFXApplication" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -172,50 +165,50 @@
       <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state x="100" y="123" width="1240" height="611" key="DiffContextDialog/0.23.1440.811@0.23.1440.811" timestamp="1604351016959" />
-    <state width="1398" height="253" key="GridCell.Tab.0.bottom" timestamp="1605384318545">
+    <state width="1398" height="203" key="GridCell.Tab.0.bottom" timestamp="1605406952341">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.bottom/0.23.1440.807@0.23.1440.807" timestamp="1600169654343" />
     <state width="1398" height="208" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1605099823940" />
-    <state width="1398" height="253" key="GridCell.Tab.0.bottom/0.25.1440.804@0.25.1440.804" timestamp="1605384318545" />
-    <state width="1398" height="253" key="GridCell.Tab.0.center" timestamp="1605384318544">
+    <state width="1398" height="203" key="GridCell.Tab.0.bottom/0.25.1440.804@0.25.1440.804" timestamp="1605406952341" />
+    <state width="1398" height="203" key="GridCell.Tab.0.center" timestamp="1605406952340">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.center/0.23.1440.807@0.23.1440.807" timestamp="1600169654342" />
     <state width="1398" height="208" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1605099823940" />
-    <state width="1398" height="253" key="GridCell.Tab.0.center/0.25.1440.804@0.25.1440.804" timestamp="1605384318544" />
-    <state width="1398" height="253" key="GridCell.Tab.0.left" timestamp="1605384318544">
+    <state width="1398" height="203" key="GridCell.Tab.0.center/0.25.1440.804@0.25.1440.804" timestamp="1605406952340" />
+    <state width="1398" height="203" key="GridCell.Tab.0.left" timestamp="1605406952340">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.left/0.23.1440.807@0.23.1440.807" timestamp="1600169654341" />
     <state width="1398" height="208" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1605099823939" />
-    <state width="1398" height="253" key="GridCell.Tab.0.left/0.25.1440.804@0.25.1440.804" timestamp="1605384318544" />
-    <state width="1398" height="253" key="GridCell.Tab.0.right" timestamp="1605384318544">
+    <state width="1398" height="203" key="GridCell.Tab.0.left/0.25.1440.804@0.25.1440.804" timestamp="1605406952340" />
+    <state width="1398" height="203" key="GridCell.Tab.0.right" timestamp="1605406952341">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="207" key="GridCell.Tab.0.right/0.23.1440.807@0.23.1440.807" timestamp="1600169654342" />
     <state width="1398" height="208" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1605099823940" />
-    <state width="1398" height="253" key="GridCell.Tab.0.right/0.25.1440.804@0.25.1440.804" timestamp="1605384318544" />
-    <state width="1398" height="253" key="GridCell.Tab.1.bottom" timestamp="1605384337210">
+    <state width="1398" height="203" key="GridCell.Tab.0.right/0.25.1440.804@0.25.1440.804" timestamp="1605406952341" />
+    <state width="1398" height="253" key="GridCell.Tab.1.bottom" timestamp="1605384593781">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.bottom/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
-    <state width="1398" height="253" key="GridCell.Tab.1.bottom/0.25.1440.804@0.25.1440.804" timestamp="1605384337210" />
-    <state width="1398" height="253" key="GridCell.Tab.1.center" timestamp="1605384337210">
+    <state width="1398" height="253" key="GridCell.Tab.1.bottom/0.25.1440.804@0.25.1440.804" timestamp="1605384593781" />
+    <state width="1398" height="253" key="GridCell.Tab.1.center" timestamp="1605384593780">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.center/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
-    <state width="1398" height="253" key="GridCell.Tab.1.center/0.25.1440.804@0.25.1440.804" timestamp="1605384337210" />
-    <state width="1398" height="253" key="GridCell.Tab.1.left" timestamp="1605384337209">
+    <state width="1398" height="253" key="GridCell.Tab.1.center/0.25.1440.804@0.25.1440.804" timestamp="1605384593780" />
+    <state width="1398" height="253" key="GridCell.Tab.1.left" timestamp="1605384593779">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.left/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
-    <state width="1398" height="253" key="GridCell.Tab.1.left/0.25.1440.804@0.25.1440.804" timestamp="1605384337209" />
-    <state width="1398" height="253" key="GridCell.Tab.1.right" timestamp="1605384337210">
+    <state width="1398" height="253" key="GridCell.Tab.1.left/0.25.1440.804@0.25.1440.804" timestamp="1605384593779" />
+    <state width="1398" height="253" key="GridCell.Tab.1.right" timestamp="1605384593780">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1398" height="259" key="GridCell.Tab.1.right/0.23.1440.811@0.23.1440.811" timestamp="1604510808192" />
-    <state width="1398" height="253" key="GridCell.Tab.1.right/0.25.1440.804@0.25.1440.804" timestamp="1605384337210" />
+    <state width="1398" height="253" key="GridCell.Tab.1.right/0.25.1440.804@0.25.1440.804" timestamp="1605384593780" />
     <state x="258" y="90" key="Maven.ArtifactSearchDialog" timestamp="1603036633189">
       <screen x="0" y="23" width="1440" height="811" />
     </state>
@@ -233,6 +226,10 @@
       <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state x="417" y="183" width="604" height="490" key="find.popup/0.23.1440.811@0.23.1440.811" timestamp="1603066329261" />
+    <state x="385" y="192" key="run.anything.popup" timestamp="1605406926245">
+      <screen x="0" y="25" width="1440" height="804" />
+    </state>
+    <state x="385" y="192" key="run.anything.popup/0.25.1440.804@0.25.1440.804" timestamp="1605406926245" />
     <state x="385" y="158" width="670" height="676" key="search.everywhere.popup" timestamp="1603037193134">
       <screen x="0" y="23" width="1440" height="811" />
     </state>
