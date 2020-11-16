@@ -156,6 +156,8 @@ public class ServicoService {
         //Se o profissional já avaliou, finalizar
         if(servico.getAvaliacaoProfissional() != null){
             servico.setStatus(StatusServico.FINALIZADO);
+            servico.setDtConcluido(LocalDateTime.now());
+            servico = this.emitirNFSe(servico);
         }
 
         servico = servicoRepository.save(servico);
