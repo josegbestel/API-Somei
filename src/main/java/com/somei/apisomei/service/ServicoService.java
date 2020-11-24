@@ -98,7 +98,7 @@ public class ServicoService {
 
         //Instancia a avaliação
         Avaliacao avaliacao = new Avaliacao(criador, destinatario, servico,
-                avaliacaoModel.getNota(), avaliacaoModel.getComentario());
+                avaliacaoModel.getNota(), avaliacaoModel.getComentario(), avaliacaoModel.getTipo());
         servico.addAvaliacao(avaliacao);
 
         //Inserir infos de finalizacao
@@ -150,7 +150,7 @@ public class ServicoService {
 
         //Instancia a avaliação
         Avaliacao avaliacao = new Avaliacao(criador, destinatario, servico,
-                avaliacaoModel.getNota(), avaliacaoModel.getComentario());
+                avaliacaoModel.getNota(), avaliacaoModel.getComentario(), avaliacaoModel.getTipo());
         servico.addAvaliacao(avaliacao);
 
         //Se o profissional já avaliou, finalizar

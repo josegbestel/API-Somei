@@ -9,6 +9,7 @@ public class ComentarioModel implements Serializable {
     private String pessoaNome;
     private String descricao;
     private int rating;
+    private String tipo;
 
     public String getPessoaNome() {
         return pessoaNome;
@@ -34,11 +35,20 @@ public class ComentarioModel implements Serializable {
         this.rating = rating;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public static ComentarioModel toModel(Avaliacao avaliacao){
         ComentarioModel comentarioModel = new ComentarioModel();
         comentarioModel.setDescricao(avaliacao.getComentario());
         comentarioModel.setPessoaNome(avaliacao.getCriador().getNome());
         comentarioModel.setRating(avaliacao.getNota());
+        comentarioModel.setTipo(avaliacao.getTipo());
 
         return comentarioModel;
     }

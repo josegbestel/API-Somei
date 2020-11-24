@@ -43,13 +43,14 @@ public class Avaliacao implements Serializable {
     public Avaliacao() {
     }
 
-    public Avaliacao(Pessoa criador, Pessoa destinatario, Servico servico, int nota, String comentario){
+    public Avaliacao(Pessoa criador, Pessoa destinatario, Servico servico, int nota, String comentario, String tipo){
         this.criador = criador;
         this.destinatario = destinatario;
         this.setServico(servico);
         this.nota = nota;
         this.comentario = comentario;
         this.dtCriacao = LocalDateTime.now();
+        this.tipo = tipo;
     }
 
     public long getId() {
@@ -106,5 +107,15 @@ public class Avaliacao implements Serializable {
 
     public void setServico(Servico servico) {
         this.servico = servico;
+    }
+
+    //TODO: DEFESA
+    @NotNull
+    private String tipo;
+    public String getTipo() {
+        return tipo;
+    }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

@@ -37,4 +37,13 @@ public class AvaliacaoModel implements Serializable {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
+
+    //TODO: DEFESA
+    private String tipo;
+    public String getTipo() {
+        return tipo;
+    }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }
